@@ -39,8 +39,8 @@ namespace AcessoSIGA
             ticket.dsChamado = txtDescricao.Text; //Descrição do chamado
 
             //Gera o XML de envio para o webservice
-            GravarXML gravarXML = new GravarXML();
-            string caminhoXML = gravarXML.XML_addTicketByData(ticket);
+            WSTicket wSTicket = new WSTicket();
+            string caminhoXML = wSTicket.XML_addTicketByData(ticket);
 
             //Lê o arquivo XML gerado
             XmlDocument doc = new XmlDocument();
@@ -52,7 +52,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);            
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            ticket = XML.retornarChamado(wService.RequisicaoPOST());
+            ticket = RetornarXML.retornarChamado(wService.RequisicaoPOST());
 
             if (ticket.cdChamado > 0)
             {

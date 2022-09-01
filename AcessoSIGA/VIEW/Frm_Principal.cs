@@ -24,7 +24,7 @@ namespace AcessoSIGA
             string token = "";
 
             WService wService = new WService("getAuthToken", "wsgeneral", WSGeneral.XML_getAutToken(contato));
-            token = XML.retornarToken(wService.RequisicaoPOST());
+            token = RetornarXML.retornarToken(wService.RequisicaoPOST());
 
             Process.Start(new ProcessStartInfo("http://siga820.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true }); //GOVSUL
             //Process.Start(new ProcessStartInfo("http://siga_hml.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true });

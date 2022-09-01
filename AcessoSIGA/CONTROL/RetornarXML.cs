@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace AcessoSIGA
 {
-    public class XML
+    public class RetornarXML
     {
         public static string retornarToken(string xml)
         {
@@ -44,7 +44,7 @@ namespace AcessoSIGA
 
         public static Ticket retornarChamado(string xml)
         {
-            Ticket ticket = new Ticket();            
+            Ticket ticket = new Ticket();
 
             try
             {
@@ -57,7 +57,7 @@ namespace AcessoSIGA
                 settings.IgnoreWhitespace = true;
 
                 while (xmlReader.Read())
-                {                    
+                {
 
                     if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dataitem")
                     {
@@ -70,7 +70,7 @@ namespace AcessoSIGA
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmsituacao")
                                 ticket.nmSituacao = xmlReader.ReadElementContentAsString();
                             break;
-                        }                        
+                        }
                     }
                 }
                 return ticket;
@@ -80,14 +80,14 @@ namespace AcessoSIGA
                 MessageBox.Show("Erro: " + ex.Message, "Erro ao obter chamado!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
             }
             return ticket;
-        }    
+        }
 
         public static List<Ticket> retornarListaChamados(string xml)
         {
             List<Ticket> lista = new List<Ticket>();
 
             try
-            {               
+            {
 
                 XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -115,7 +115,7 @@ namespace AcessoSIGA
 
                         lista.Add(ticket);
                     }
-                    
+
                 }
 
                 return lista;

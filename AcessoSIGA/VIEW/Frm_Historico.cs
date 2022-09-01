@@ -66,7 +66,7 @@ namespace AcessoSIGA
 
             WService wService = new WService(operacao, wsdl_file, WSTicket.XML_getTicket(ticket));
 
-            lista = XML.retornarListaChamados(wService.RequisicaoPOST());
+            lista = RetornarXML.retornarListaChamados(wService.RequisicaoPOST());
 
             foreach (Ticket t in lista)
             {
@@ -89,7 +89,7 @@ namespace AcessoSIGA
 
             WService wService = new WService(operacao, wsdl_file, WSTicket.XML_getTicketHistoryData(cdChamado));
 
-            lista = XML.retornarHistoricoChamado(wService.RequisicaoPOST());
+            lista = RetornarXML.retornarHistoricoChamado(wService.RequisicaoPOST());
 
             Frm_Historico_Detalhe f = new Frm_Historico_Detalhe(lista, cdChamado);
             f.ShowDialog();

@@ -33,7 +33,7 @@ namespace AcessoSIGA
 
             WService wService = new WService(operacao, wsdl_file, WSGeneral.XML_getCustomer(CpfCnpj));
 
-            cliente = XML.retornarEmpresa(wService.RequisicaoPOST());
+            cliente = RetornarXML.retornarEmpresa(wService.RequisicaoPOST());
 
             txtCodEmpresa.Text = cliente.cdCliente.ToString();
             txtNomeEmpresa.Text = cliente.nmCliente;
@@ -53,12 +53,24 @@ namespace AcessoSIGA
 
             WService wService = new WService(operacao, wsdl_file, WSGeneral.XML_getCustomerContact(cdCliente, nmContato));
 
-            contato = XML.retornarContatoEmpresa(wService.RequisicaoPOST());
+            contato = RetornarXML.retornarContatoEmpresa(wService.RequisicaoPOST());
 
             txtCodUsuario.Text = contato.cdContato.ToString();
             txtNomeUsuario.Text = contato.nmContato;
             txtEmail.Text = contato.email;
             
+        }
+
+        private void btnTestarConexao_Click(object sender, EventArgs e)
+        {
+            ConexaoSQL.ConectarBancoSQL();
+
+            if (ConexaoSQL.sqlConnection.State.Equals(ConnectionState.Open))
+            {
+                MessageBox.Show("Conexão realizada com sucesso! ", "Ok!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                ConexaoSQL.FecharConexaoSQL();
+            }
         }
     }
 }

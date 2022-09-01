@@ -29,7 +29,7 @@ namespace AcessoSIGA
                 "<wsqualitor>" +
                 "<contents>" +
                 "<data>" +
-                "<nrcpfcnpj>"+cpfCnpj+"</nrcpfcnpj>" +
+                "<nrcpfcnpj>" + cpfCnpj + "</nrcpfcnpj>" +
                 "</data>" +
                 "</contents>" +
                 "</wsqualitor>";
@@ -43,8 +43,8 @@ namespace AcessoSIGA
                 "<wsqualitor>" +
                 "<contents>" +
                 "<data>" +
-                "<cdcliente>"+cdCliente+"</cdcliente>" +
-                "<nmloginweb>"+nmLogin+"</nmloginweb>" +
+                "<cdcliente>" + cdCliente + "</cdcliente>" +
+                "<nmloginweb>" + nmLogin + "</nmloginweb>" +
                 "</data>" +
                 "</contents>" +
                 "</wsqualitor>";
