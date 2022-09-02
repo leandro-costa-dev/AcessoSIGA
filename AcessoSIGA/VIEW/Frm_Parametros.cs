@@ -63,13 +63,16 @@ namespace AcessoSIGA
 
         private void btnTestarConexao_Click(object sender, EventArgs e)
         {
-            ConexaoSQL.ConectarBancoSQL();
+            ConexaoSQL.ConectarBancoSQL(true);
 
             if (ConexaoSQL.sqlConnection.State.Equals(ConnectionState.Open))
             {
                 MessageBox.Show("Conexão realizada com sucesso! ", "Ok!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 ConexaoSQL.FecharConexaoSQL();
+
+                ConexaoSQL.CriarBancoSQL();
+                ConexaoSQL.CriarTabelasSQL();
+             
             }
         }
     }

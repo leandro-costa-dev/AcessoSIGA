@@ -11,11 +11,15 @@ namespace AcessoSIGA
     {
         public string XML_addTicketByData(Ticket ticket)
         {
+            string arquivoXML;
             string path = Util.criarDiretorios();
 
-            string arquivoXML = path + @"\XML\Envio\" + Util.limparString(DateTime.Now.ToString()) + "-Envio.xml";
+            arquivoXML = path + @"\XML\Envio\" + Util.limparString(DateTime.Now.ToString()) + "-Envio.xml";
 
             XmlWriter xmlWriter = XmlWriter.Create(arquivoXML);
+
+            //StringWriter sw = new StringWriter();            
+            //XmlWriter xmlWriter = XmlWriter.Create(sw);
 
             xmlWriter.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"ISO-8859-1\"");
             xmlWriter.WriteStartElement("wsqualitor");
@@ -69,7 +73,9 @@ namespace AcessoSIGA
 
             xmlWriter.Close();
 
-            return arquivoXML;
+            //arquivoXML = sw.ToString();
+
+            return arquivoXML;            
 
         }
 
