@@ -40,13 +40,7 @@ namespace AcessoSIGA
 
             //Gera o XML de envio para o webservice
             WSTicket wSTicket = new WSTicket();
-            string caminhoXML = wSTicket.XML_addTicketByData(ticket);
-
-            //Lê o arquivo XML gerado
-            XmlDocument doc = new XmlDocument();
-            doc.Load(caminhoXML);
-
-            string xml = doc.InnerXml;
+            string xml = wSTicket.XML_addTicketByData(ticket);
 
             //Instancia o webservice passando os dados
             WService wService = new WService(operacao, wsdl_file, xml);            

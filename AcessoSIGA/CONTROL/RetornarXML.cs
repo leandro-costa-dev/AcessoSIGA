@@ -7,6 +7,9 @@ namespace AcessoSIGA
     {
         public static string retornarToken(string xml)
         {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
             string token = "";
 
             try
@@ -44,6 +47,9 @@ namespace AcessoSIGA
 
         public static Ticket retornarChamado(string xml)
         {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
             Ticket ticket = new Ticket();
 
             try
@@ -84,6 +90,9 @@ namespace AcessoSIGA
 
         public static List<Ticket> retornarListaChamados(string xml)
         {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
             List<Ticket> lista = new List<Ticket>();
 
             try
@@ -129,6 +138,9 @@ namespace AcessoSIGA
 
         public static List<Historico> retornarHistoricoChamado(string xml)
         {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
             List<Historico> lista = new List<Historico>();
 
             try
@@ -177,6 +189,9 @@ namespace AcessoSIGA
         }
         public static Cliente retornarEmpresa(string xml)
         {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
             Cliente cliente = new Cliente();
 
             try
@@ -214,6 +229,9 @@ namespace AcessoSIGA
 
         public static Contato retornarContatoEmpresa(string xml)
         {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
             Contato contato = new Contato();
 
             try

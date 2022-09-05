@@ -11,15 +11,10 @@ namespace AcessoSIGA
     {
         public string XML_addTicketByData(Ticket ticket)
         {
-            string arquivoXML;
-            string path = Util.criarDiretorios();
+            string xml;
 
-            arquivoXML = path + @"\XML\Envio\" + Util.limparString(DateTime.Now.ToString()) + "-Envio.xml";
-
-            XmlWriter xmlWriter = XmlWriter.Create(arquivoXML);
-
-            //StringWriter sw = new StringWriter();            
-            //XmlWriter xmlWriter = XmlWriter.Create(sw);
+            StringWriter sw = new StringWriter();            
+            XmlWriter xmlWriter = XmlWriter.Create(sw);
 
             xmlWriter.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"ISO-8859-1\"");
             xmlWriter.WriteStartElement("wsqualitor");
@@ -73,40 +68,73 @@ namespace AcessoSIGA
 
             xmlWriter.Close();
 
-            //arquivoXML = sw.ToString();
+            xml = sw.ToString();
 
-            return arquivoXML;            
+            //Gravar XML
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Envio(xml);
 
+            return xml;            
         }
 
         public static string XML_getTicket(Ticket ticket)
         {
-            string xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" +
-                "<wsqualitor>" +
-                "<contents>" +
-                "<data>" +
-                "<cdchamado>" + ticket.cdChamado + "</cdchamado>" +
-                "<cdcliente>" + ticket.cdCliente + "</cdcliente>" +
-                "<cdcontato>" + ticket.cdContato + "</cdcontato>" +
-                "<Idtipoperiodo>" + ticket.idTIpoPeriodo + "</Idtipoperiodo>" +
-                "<dtperiodo>" + ticket.dtPeriodo1 + "</dtperiodo>" +
-                "<dtperiodo2>" + ticket.dtPeriodo2 + "</dtperiodo2>" +
-                "</data></contents>" +
-                "</wsqualitor>";
+            string xml;
+
+            StringWriter sw = new StringWriter();
+            XmlWriter xmlWriter = XmlWriter.Create(sw);
+
+            xmlWriter.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"ISO-8859-1\"");
+            xmlWriter.WriteStartElement("wsqualitor");
+            xmlWriter.WriteStartElement("contents");
+            xmlWriter.WriteStartElement("data");
+            xmlWriter.WriteElementString("cdchamado", ticket.cdChamado.ToString());
+            xmlWriter.WriteElementString("cdcliente", ticket.cdCliente.ToString());
+            xmlWriter.WriteElementString("cdcontato", ticket.cdContato.ToString());
+            xmlWriter.WriteElementString("Idtipoperiodo", ticket.idTIpoPeriodo.ToString());
+            xmlWriter.WriteElementString("dtperiodo", ticket.dtPeriodo1);
+            xmlWriter.WriteElementString("dtperiodo2", ticket.dtPeriodo2);
+            xmlWriter.WriteElementString("cdlocalidade", ticket.cdLocalidade.ToString());
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndDocument();
+
+            xmlWriter.Close();
+
+            xml = sw.ToString();
+
+            //Gravar XML
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Envio(xml);
 
             return xml;
         }
 
         public static string XML_getTicketHistoryData(int cdChamado)
         {
-            string xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" +
-                "<wsqualitor>" +
-                "<contents>" +
-                "<data>" +
-                "<cdchamado>" + cdChamado + "</cdchamado>" +
-                "</data>" +
-                "</contents>" +
-                "</wsqualitor>";
+            string xml;
+
+            StringWriter sw = new StringWriter();
+            XmlWriter xmlWriter = XmlWriter.Create(sw);
+
+            xmlWriter.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"ISO-8859-1\"");
+            xmlWriter.WriteStartElement("wsqualitor");
+            xmlWriter.WriteStartElement("contents");
+            xmlWriter.WriteStartElement("data");
+            xmlWriter.WriteElementString("cdchamado", cdChamado.ToString());
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndDocument();
+
+            xmlWriter.Close();
+
+            xml = sw.ToString();
+
+            //Gravar XML
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Envio(xml);
 
             return xml;
         }

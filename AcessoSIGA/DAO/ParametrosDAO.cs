@@ -9,5 +9,6 @@ namespace AcessoSIGA
     public class ParametrosDAO
     {
 
+
     }
 }

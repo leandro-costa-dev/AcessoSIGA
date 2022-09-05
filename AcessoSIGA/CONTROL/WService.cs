@@ -17,6 +17,7 @@ namespace AcessoSIGA
         string senhaADM = "bc@FLv4r";
         string empresaADM = "2";
 
+        //GOV SUL
         //string usuarioADM = "leandro.costa";
         //string senhaADM = "123456";
         //string empresaADM = "1";
@@ -68,8 +69,6 @@ namespace AcessoSIGA
                     streamDados.Close();
                     resposta.Close();
                 }
-
-                Console.ReadLine();
             }
             catch (Exception ex)
             {

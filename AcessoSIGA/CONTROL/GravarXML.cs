@@ -11,26 +11,76 @@ namespace AcessoSIGA
     {
         public void gravarXML_Banco()
         {
+            //XmlWriter xmlWriter = XmlWriter.Create(arquivo);
 
+            //Lê o arquivo XML gerado
+            //XmlDocument doc = new XmlDocument();
+            //doc.Load(caminhoXML);
 
+            //string xml = doc.InnerXml;
 
 
         }
 
-
-        public void gravarXML_Arquivo()
+        //Gerar o XML envio em arquivo
+        public void gravarXML_Envio(string xml)
         {
-            // Create the XmlDocument.
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml("<item><name>wrench</name></item>");
+            string arquivo;
+            string path = Util.criarDiretorios();
 
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-            settings.OmitXmlDeclaration = true;
+            arquivo = path + @"\XML\Envio\" + Util.limparString(DateTime.Now.ToString()) + "-Envio.xml";
+            try
+            {
+                // Criar o documento XML
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xml);
 
-            // Save the document to a file and auto-indent the output.
-            XmlWriter writer = XmlWriter.Create("data.xml", settings);
-            doc.Save(writer);
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                // Salvar o documento no arquivo e auto-indenta a saida.
+                XmlWriter writer = XmlWriter.Create(arquivo, settings);
+                doc.Save(writer);
+
+                writer.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message, "Ocorreu erro ao gerar o XML de envio!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+            }
+
+        }
+
+        //Gerar o XML retorno em arquivo
+        public void gravarXML_Retorno(string xml)
+        {
+            string arquivo;
+            string path = Util.criarDiretorios();
+
+            arquivo = path + @"\XML\Retorno\" + Util.limparString(DateTime.Now.ToString()) + "-Retorno.xml";
+
+            try
+            {
+                // Criar o documento XML
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(xml);
+
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+
+                // Salvar o documento no arquivo e auto-indenta a saida.
+                XmlWriter writer = XmlWriter.Create(arquivo, settings);
+                doc.Save(writer);
+
+                writer.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message, "Ocorreu erro ao gerar o XML de retorno!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+            }
+
         }
 
     }
