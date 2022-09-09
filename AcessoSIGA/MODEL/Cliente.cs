@@ -10,5 +10,6 @@ namespace AcessoSIGA
     {
         public int cdCliente { get; set; }
         public string nmCliente { get; set; }
+        public string cnpj { get; set; }
     }
 }

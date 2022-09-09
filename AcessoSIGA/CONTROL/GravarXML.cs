@@ -9,7 +9,7 @@ namespace AcessoSIGA
 {
     public class GravarXML
     {
-        public void gravarXML_Banco()
+        public void gravarXML_Banco(string xml)
         {
             //XmlWriter xmlWriter = XmlWriter.Create(arquivo);
 

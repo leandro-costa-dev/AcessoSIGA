@@ -13,22 +13,30 @@ namespace AcessoSIGA
     public partial class Frm_Historico_Detalhe : Form
     {
         int cdChamado;
+        string descricao;
+        string data;
+
         List<Historico> listaHistorico = new List<Historico>();
-        public Frm_Historico_Detalhe(List<Historico> historico, int cdChamado)
+        public Frm_Historico_Detalhe(List<Historico> historico, int cdChamado, string descricao, string data)
         {
             InitializeComponent();
             this.cdChamado = cdChamado;
+            this.descricao = descricao;
+            this.data = data;
             this.listaHistorico = historico;
         }
 
         private void Frm_Historico_Detalhe_Load(object sender, EventArgs e)
         {
-            lblChamado.Text = "Chamado nº: " + cdChamado.ToString();
+            lblChamado.Text = "CHAMADO Nº: " + cdChamado.ToString();
+            lblData.Text = "DATA ABERTURA: " + data;
+            richTextBox.Text = descricao;
 
             foreach (Historico h in listaHistorico)
             {
                 ListViewItem item = new ListViewItem(h.cdchamado.ToString());
-                item.SubItems.Add(h.dsacompanhamento);                
+                item.SubItems.Add(h.dsacompanhamento);
+                
                 listViewHistorico.Items.Add(item);
             }
         }

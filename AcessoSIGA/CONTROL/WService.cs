@@ -8,7 +8,8 @@ using System.Xml;
 
 namespace AcessoSIGA
 {
-    public class WService //Acesso ao WebService no modo STATELESS
+    //Acesso ao WebService no modo STATELESS
+    public class WService 
     {
         //string UrlService = "http://siga820.govbr.com.br/ws/statelessws.php?"; //GOVSUL
         string UrlService = "http://siga_hml.govbr.com.br/ws/statelessws.php?";
@@ -34,6 +35,8 @@ namespace AcessoSIGA
         }
         public string RequisicaoPOST()
         {
+            string xmlRetorno = "";
+
             //Dados requisição Auth
             string dadosPOST = "user=" + usuarioADM + "&password=" + senhaADM + "&company=" + empresaADM +
                 "&wsdl_file=" + wsdl + ".wsdl&operation=" + operacao + "&input_xml=" + xml;
@@ -57,24 +60,27 @@ namespace AcessoSIGA
                     stream.Close();
                 }
 
-                //Obten a resposta da requisição
+                //Obtem a resposta da requisição
                 using (var resposta = requisicaoWeb.GetResponse())
                 {
-                    var streamDados = resposta.GetResponseStream();
-                    StreamReader reader = new StreamReader(streamDados);
-                    var xmlRetorno = reader.ReadToEnd();
+                    Stream streamDados = resposta.GetResponseStream();
 
-                    return xmlRetorno;
+                    Encoding encode = Encoding.GetEncoding("utf-8");
+
+                    StreamReader reader = new StreamReader(streamDados, encode);
+                    xmlRetorno = reader.ReadToEnd();
 
                     streamDados.Close();
                     resposta.Close();
+
+                    return xmlRetorno;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ocorreu erro na conexão: " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return null;
+            return xmlRetorno;
         }
     }
 }

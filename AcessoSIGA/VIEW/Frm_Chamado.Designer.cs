@@ -33,6 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSelecionar = new System.Windows.Forms.Button();
+            this.txtAnexo = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.txtTitulo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -58,6 +61,7 @@
             this.btnHistorico = new System.Windows.Forms.ToolStripButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtDescricao = new System.Windows.Forms.RichTextBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -90,6 +94,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSelecionar);
+            this.groupBox1.Controls.Add(this.txtAnexo);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtTitulo);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label9);
@@ -117,9 +124,35 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados do Chamado";
             // 
+            // btnSelecionar
+            // 
+            this.btnSelecionar.Location = new System.Drawing.Point(580, 222);
+            this.btnSelecionar.Name = "btnSelecionar";
+            this.btnSelecionar.Size = new System.Drawing.Size(75, 23);
+            this.btnSelecionar.TabIndex = 18;
+            this.btnSelecionar.Text = "Selecionar";
+            this.btnSelecionar.UseVisualStyleBackColor = true;
+            this.btnSelecionar.Click += new System.EventHandler(this.btnSelecionar_Click);
+            // 
+            // txtAnexo
+            // 
+            this.txtAnexo.Location = new System.Drawing.Point(84, 222);
+            this.txtAnexo.Name = "txtAnexo";
+            this.txtAnexo.Size = new System.Drawing.Size(476, 23);
+            this.txtAnexo.TabIndex = 17;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(35, 225);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(44, 15);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Anexo:";
+            // 
             // txtTitulo
             // 
-            this.txtTitulo.Location = new System.Drawing.Point(84, 207);
+            this.txtTitulo.Location = new System.Drawing.Point(84, 193);
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(583, 23);
             this.txtTitulo.TabIndex = 10;
@@ -137,7 +170,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(42, 210);
+            this.label9.Location = new System.Drawing.Point(42, 196);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 15);
             this.label9.TabIndex = 9;
@@ -396,5 +429,9 @@
         private GroupBox groupBox2;
         private RichTextBox txtDescricao;
         private ToolStripButton btnHistorico;
+        private Button btnSelecionar;
+        private TextBox txtAnexo;
+        private Label label10;
+        private OpenFileDialog openFileDialog;
     }
 }

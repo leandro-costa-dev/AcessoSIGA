@@ -24,56 +24,156 @@ namespace AcessoSIGA
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtCpfCnpj.Text))
+            {
+                MessageBox.Show("O campo CPF/CNPJ deve ser preenchido! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (String.IsNullOrEmpty(txtLoginContato.Text) && String.IsNullOrEmpty(txtEmail.Text))
+            {
+                MessageBox.Show("O campo Login ou e-mail devem ser preenchidos! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Cliente cliente = new Cliente();
 
             string CpfCnpj = txtCpfCnpj.Text;
             string operacao = "getCustomer";
             string wsdl_file = "WSGeneral";
 
+            //Gera o XML de envio para o webservice
+            WSGeneral wSGeneral = new WSGeneral();
+            string xml = wSGeneral.XML_getCustomer(CpfCnpj);
 
-            WService wService = new WService(operacao, wsdl_file, WSGeneral.XML_getCustomer(CpfCnpj));
+            //Instancia o webservice passando os dados
+            WService wService = new WService(operacao, wsdl_file, xml);
 
-            cliente = RetornarXML.retornarEmpresa(wService.RequisicaoPOST());
+            //Envia a requisição POST e faz a leitura do XML de retorno
+            string wsRetorno = wService.RequisicaoPOST();
 
-            txtCodEmpresa.Text = cliente.cdCliente.ToString();
-            txtNomeEmpresa.Text = cliente.nmCliente;
+            if (String.IsNullOrEmpty(wsRetorno))
+            {
+                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                //Lê XML de retorno e devolve os dados
+                cliente = RetornarXML.retornarEmpresa(wsRetorno);
 
-            buscarContato(cliente.cdCliente);
+                txtCodCliente.Text = cliente.cdCliente.ToString();
+                txtNomeCliente.Text = cliente.nmCliente;
 
+                buscarContato(cliente.cdCliente);
+            }
         }
 
         private void buscarContato(int cdCliente)
         {
             Contato contato = new Contato();
 
-            string nmContato = txtLoginUsuario.Text;
+            string nmContato = txtLoginContato.Text;
+            string email = txtEmail.Text;
             
             string operacao = "getCustomerContact";
             string wsdl_file = "WSGeneral";
 
-            WService wService = new WService(operacao, wsdl_file, WSGeneral.XML_getCustomerContact(cdCliente, nmContato));
+            //Se login não for informado busca o contato pelo e-mail informado
+            if (String.IsNullOrEmpty(txtLoginContato.Text))
+            {
+                //Gera o XML de envio para o webservice
+                WSGeneral wSGeneral = new WSGeneral();
+                string xml = wSGeneral.XML_getCustomerContactEmail(cdCliente, email);
 
-            contato = RetornarXML.retornarContatoEmpresa(wService.RequisicaoPOST());
+                //Instancia o webservice passando os dados
+                WService wService = new WService(operacao, wsdl_file, xml);
 
-            txtCodUsuario.Text = contato.cdContato.ToString();
-            txtNomeUsuario.Text = contato.nmContato;
+                //Envia a requisição POST e faz a leitura do XML de retorno
+                string wsRetorno = wService.RequisicaoPOST();
+
+                //Lê XML de retorno e devolve os dados
+                contato = RetornarXML.retornarContatoEmpresa(wsRetorno);
+            }
+            else
+            {
+                //Gera o XML de envio para o webservice
+                WSGeneral wSGeneral = new WSGeneral();
+                string xml = wSGeneral.XML_getCustomerContactLogin(cdCliente, nmContato);
+
+                //Instancia o webservice passando os dados
+                WService wService = new WService(operacao, wsdl_file, xml);
+
+                //Envia a requisição POST e faz a leitura do XML de retorno
+                string wsRetorno = wService.RequisicaoPOST();
+
+                //Lê XML de retorno e devolve os dados
+                contato = RetornarXML.retornarContatoEmpresa(wsRetorno);
+            }
+
+            txtCodContato.Text = contato.cdContato.ToString();
+            txtNomeContato.Text = contato.nmContato;
             txtEmail.Text = contato.email;
+            txtLoginContato.Text = contato.login;
             
         }
 
         private void btnTestarConexao_Click(object sender, EventArgs e)
         {
-            ConexaoSQL.ConectarBancoSQL(true);
+            ConexaoSQL.banco = txtBanco.Text;
+            ConexaoSQL.servidor = txtServidor.Text;
+            ConexaoSQL.usuario = txtUsuario.Text;
+            ConexaoSQL.senha = txtSenha.Text;
+
+            ConexaoSQL.ConectarBancoSQL(false);
 
             if (ConexaoSQL.sqlConnection.State.Equals(ConnectionState.Open))
             {
                 MessageBox.Show("Conexão realizada com sucesso! ", "Ok!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ConexaoSQL.FecharConexaoSQL();
-
-                ConexaoSQL.CriarBancoSQL();
-                ConexaoSQL.CriarTabelasSQL();
-             
             }
+            else
+            {
+                MessageBox.Show("Ocorreu erro na conexão. Verifique os dados informados! ", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ConexaoSQL.FecharConexaoSQL();
+            }
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (verificarCampos())
+            {
+                MessageBox.Show("Todos os campos devem ser preenchidos! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Cliente cliente = new Cliente();
+            cliente.cdCliente = int.Parse(txtCodCliente.Text);
+            cliente.nmCliente = txtNomeCliente.Text;
+
+            Contato contato = new Contato();
+            contato.cdContato = int.Parse(txtCodContato.Text);
+            contato.nmContato = txtNomeContato.Text;
+
+            Parametros parametros = new Parametros();
+            parametros.Cliente = cliente;
+            parametros.Contato = contato;
+
+            //teste
+            MessageBox.Show(parametros.Cliente.cdCliente.ToString());
+
+        }
+
+        private bool verificarCampos()
+        {
+            bool situacao = false;
+
+            if (String.IsNullOrEmpty(txtCodCliente.Text) || String.IsNullOrEmpty(txtNomeCliente.Text) ||
+                String.IsNullOrEmpty(txtCodContato.Text) || String.IsNullOrEmpty(txtNomeContato.Text) ||
+                String.IsNullOrEmpty(txtServidor.Text) || String.IsNullOrEmpty(txtBanco.Text) ||
+                String.IsNullOrEmpty(txtUsuario.Text) || String.IsNullOrEmpty(txtSenha.Text))
+            {                
+                situacao = true;
+            }
+            return situacao;
         }
     }
 }

@@ -85,6 +85,13 @@ namespace AcessoSIGA
                 try
                 {
                     cmd.CommandText = ("CREATE TABLE PARAMETROS(" +
+                        "cdCliente int, " +
+                        "nmCliente VarChar (100), " +
+                        "cnpj VarChar (14), " +
+                        "cdUsuario int, " +
+                        "nmUsuario VarChar (100), " +
+                        "email VarChar (100), " +
+                        "login VarChar (50), " +
                         "servidor VarChar (100), " +
                         "banco VarChar(40), " +
                         "usuario VarChar(20), " +
@@ -179,6 +186,40 @@ namespace AcessoSIGA
                 con.Close();
             }
 
+        }
+
+        //Verifica se existe informações na tabela
+        public static bool ExisteInformacoes(string tabelaBanco)
+        {
+            bool resultado = false;
+
+            SqlDataAdapter da = null;
+            DataTable dt = new DataTable();
+
+            var con = ConectarBancoSQL(false);
+            var cmd = con.CreateCommand();
+
+            cmd.CommandText = "SELECT * FROM " + tabelaBanco;
+
+            try
+            {
+                da = new SqlDataAdapter(cmd.CommandText, con);
+                da.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu erro consultar informações da tabela no banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return resultado;            
         }
 
         //Fechar conexão com banco de dados

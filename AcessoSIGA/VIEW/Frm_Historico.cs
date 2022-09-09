@@ -64,17 +64,33 @@ namespace AcessoSIGA
             string operacao = "getTicket";
             string wsdl_file = "WSTicket";
 
-            WService wService = new WService(operacao, wsdl_file, WSTicket.XML_getTicket(ticket));
+            //Gera o XML de envio para o webservice
+            WSTicket wSTicket = new WSTicket();
+            string xml = wSTicket.XML_getTicket(ticket);
 
-            lista = RetornarXML.retornarListaChamados(wService.RequisicaoPOST());
+            //Instancia o webservice passando os dados
+            WService wService = new WService(operacao, wsdl_file, xml);
 
-            foreach (Ticket t in lista)
+            //Envia a requisição POST e faz a leitura do XML de retorno
+            string wsRetorno = wService.RequisicaoPOST();
+
+            if (String.IsNullOrEmpty(wsRetorno))
             {
-                ListViewItem item = new ListViewItem(t.cdChamado.ToString());
-                item.SubItems.Add(t.titChamado);
-                item.SubItems.Add(t.nmSituacao);
-                listViewChamados.Items.Add(item);                
-            }          
+                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                //Lê XML de retorno e devolve os dados
+                lista = RetornarXML.retornarListaChamados(wsRetorno);
+
+                foreach (Ticket t in lista)
+                {
+                    ListViewItem item = new ListViewItem(t.cdChamado.ToString());
+                    item.SubItems.Add(t.titChamado);
+                    item.SubItems.Add(t.nmSituacao);
+                    listViewChamados.Items.Add(item);
+                }
+            }
 
         }
 
@@ -84,16 +100,64 @@ namespace AcessoSIGA
 
             Historico historico = new Historico();
             
+            Ticket ticket = new Ticket();
+            
             string operacao = "getTicketHistoryData";
             string wsdl_file = "WSTicket";
 
-            WService wService = new WService(operacao, wsdl_file, WSTicket.XML_getTicketHistoryData(cdChamado));
+            //Gera o XML de envio para o webservice
+            WSTicket wSTicket = new WSTicket();
+            string xml = wSTicket.XML_getTicketHistoryData(cdChamado);
 
-            lista = RetornarXML.retornarHistoricoChamado(wService.RequisicaoPOST());
+            //Instancia o webservice passando os dados
+            WService wService = new WService(operacao, wsdl_file, xml);
 
-            Frm_Historico_Detalhe f = new Frm_Historico_Detalhe(lista, cdChamado);
-            f.ShowDialog();
+            //Envia a requisição POST e faz a leitura do XML de retorno
+            string wsRetorno = wService.RequisicaoPOST();
 
+            if (String.IsNullOrEmpty(wsRetorno))
+            {
+                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                //Lê XML de retorno e devolve os dados
+                lista = RetornarXML.retornarHistoricoChamado(wsRetorno);
+
+                ticket = consultarDadosChamado(cdChamado);
+
+                Frm_Historico_Detalhe f = new Frm_Historico_Detalhe(lista, cdChamado, ticket.dsChamado, ticket.dataChamado);
+                f.ShowDialog();
+            }
+        }
+
+        public Ticket consultarDadosChamado(int cdChamado)
+        {
+            Ticket ticket = new Ticket();
+
+            string operacao = "getTicketData";
+            string wsdl_file = "WSTicket";
+
+            //Gera o XML de envio para o webservice
+            WSTicket wSTicket = new WSTicket();
+            string xml = wSTicket.XML_getTicketData(cdChamado);
+
+            //Instancia o webservice passando os dados
+            WService wService = new WService(operacao, wsdl_file, xml);
+
+            //Envia a requisição POST e faz a leitura do XML de retorno
+            string wsRetorno = wService.RequisicaoPOST();
+
+            if (String.IsNullOrEmpty(wsRetorno))
+            {
+                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                //Lê XML de retorno e devolve os dados
+                ticket = RetornarXML.retornarDadosChamado(wsRetorno);                
+            }
+            return ticket;
         }
     }
 }

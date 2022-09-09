@@ -38,7 +38,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewChamados = new System.Windows.Forms.ListView();
             this.clCodigo = new System.Windows.Forms.ColumnHeader();
-            this.clDescricao = new System.Windows.Forms.ColumnHeader();
+            this.clTitulo = new System.Windows.Forms.ColumnHeader();
             this.clSituacao = new System.Windows.Forms.ColumnHeader();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -126,7 +126,7 @@
             this.listViewChamados.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listViewChamados.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clCodigo,
-            this.clDescricao,
+            this.clTitulo,
             this.clSituacao});
             this.listViewChamados.FullRowSelect = true;
             this.listViewChamados.GridLines = true;
@@ -145,10 +145,10 @@
             this.clCodigo.Text = "Código";
             this.clCodigo.Width = 80;
             // 
-            // clDescricao
+            // clTitulo
             // 
-            this.clDescricao.Text = "Descrição do Chamado";
-            this.clDescricao.Width = 440;
+            this.clTitulo.Text = "Titulo do Chamado";
+            this.clTitulo.Width = 440;
             // 
             // clSituacao
             // 
@@ -188,7 +188,7 @@
         private GroupBox groupBox2;
         private ListView listViewChamados;
         private ColumnHeader clCodigo;
-        private ColumnHeader clDescricao;
+        private ColumnHeader clTitulo;
         private ColumnHeader clSituacao;
     }
 }

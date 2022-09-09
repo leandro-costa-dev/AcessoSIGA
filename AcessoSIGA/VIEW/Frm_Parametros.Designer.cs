@@ -30,33 +30,33 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtCodEmpresa = new System.Windows.Forms.TextBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtNomeEmpresa = new System.Windows.Forms.TextBox();
+            this.txtCodCliente = new System.Windows.Forms.TextBox();
+            this.txtNomeCliente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCpfCnpj = new System.Windows.Forms.TextBox();
+            this.btnConsultar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtCodUsuario = new System.Windows.Forms.TextBox();
-            this.txtLoginUsuario = new System.Windows.Forms.TextBox();
+            this.txtCodContato = new System.Windows.Forms.TextBox();
+            this.txtLoginContato = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtNomeUsuario = new System.Windows.Forms.TextBox();
+            this.txtNomeContato = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.txtSenha = new System.Windows.Forms.MaskedTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.txtBanco = new System.Windows.Forms.TextBox();
+            this.txtServidor = new System.Windows.Forms.TextBox();
             this.btnTestarConexao = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnSalvar = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -76,53 +76,42 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtCodEmpresa);
-            this.groupBox1.Controls.Add(this.btnBuscar);
-            this.groupBox1.Controls.Add(this.txtNomeEmpresa);
+            this.groupBox1.Controls.Add(this.txtCodCliente);
+            this.groupBox1.Controls.Add(this.txtNomeCliente);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtCpfCnpj);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(509, 113);
+            this.groupBox1.Size = new System.Drawing.Size(509, 90);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados Cliente";
             // 
-            // txtCodEmpresa
+            // txtCodCliente
             // 
-            this.txtCodEmpresa.Enabled = false;
-            this.txtCodEmpresa.Location = new System.Drawing.Point(79, 19);
-            this.txtCodEmpresa.Name = "txtCodEmpresa";
-            this.txtCodEmpresa.Size = new System.Drawing.Size(73, 23);
-            this.txtCodEmpresa.TabIndex = 5;
+            this.txtCodCliente.Enabled = false;
+            this.txtCodCliente.Location = new System.Drawing.Point(79, 19);
+            this.txtCodCliente.Name = "txtCodCliente";
+            this.txtCodCliente.Size = new System.Drawing.Size(73, 23);
+            this.txtCodCliente.TabIndex = 5;
             // 
-            // btnBuscar
+            // txtNomeCliente
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(224, 77);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 4;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // txtNomeEmpresa
-            // 
-            this.txtNomeEmpresa.Enabled = false;
-            this.txtNomeEmpresa.Location = new System.Drawing.Point(158, 19);
-            this.txtNomeEmpresa.Name = "txtNomeEmpresa";
-            this.txtNomeEmpresa.Size = new System.Drawing.Size(337, 23);
-            this.txtNomeEmpresa.TabIndex = 2;
+            this.txtNomeCliente.Enabled = false;
+            this.txtNomeCliente.Location = new System.Drawing.Point(158, 19);
+            this.txtNomeCliente.Name = "txtNomeCliente";
+            this.txtNomeCliente.Size = new System.Drawing.Size(337, 23);
+            this.txtNomeCliente.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 22);
+            this.label2.Location = new System.Drawing.Point(26, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 15);
+            this.label2.Size = new System.Drawing.Size(47, 15);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Empresa:";
+            this.label2.Text = "Cliente:";
             // 
             // txtCpfCnpj
             // 
@@ -132,16 +121,26 @@
             this.txtCpfCnpj.TabIndex = 0;
             this.txtCpfCnpj.Text = "11111111111";
             // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Location = new System.Drawing.Point(237, 234);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(75, 23);
+            this.btnConsultar.TabIndex = 4;
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtEmail);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.txtCodUsuario);
-            this.groupBox2.Controls.Add(this.txtLoginUsuario);
+            this.groupBox2.Controls.Add(this.txtCodContato);
+            this.groupBox2.Controls.Add(this.txtLoginContato);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txtNomeUsuario);
+            this.groupBox2.Controls.Add(this.txtNomeContato);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(13, 125);
+            this.groupBox2.Location = new System.Drawing.Point(13, 102);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(509, 126);
             this.groupBox2.TabIndex = 2;
@@ -150,7 +149,6 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Enabled = false;
             this.txtEmail.Location = new System.Drawing.Point(63, 51);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(356, 23);
@@ -159,101 +157,103 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 54);
+            this.label5.Location = new System.Drawing.Point(17, 54);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 15);
             this.label5.TabIndex = 6;
             this.label5.Text = "E-mail:";
             // 
-            // txtCodUsuario
+            // txtCodContato
             // 
-            this.txtCodUsuario.Enabled = false;
-            this.txtCodUsuario.Location = new System.Drawing.Point(63, 22);
-            this.txtCodUsuario.Name = "txtCodUsuario";
-            this.txtCodUsuario.Size = new System.Drawing.Size(73, 23);
-            this.txtCodUsuario.TabIndex = 3;
+            this.txtCodContato.Enabled = false;
+            this.txtCodContato.Location = new System.Drawing.Point(63, 22);
+            this.txtCodContato.Name = "txtCodContato";
+            this.txtCodContato.Size = new System.Drawing.Size(73, 23);
+            this.txtCodContato.TabIndex = 3;
             // 
-            // txtLoginUsuario
+            // txtLoginContato
             // 
-            this.txtLoginUsuario.Location = new System.Drawing.Point(63, 80);
-            this.txtLoginUsuario.Name = "txtLoginUsuario";
-            this.txtLoginUsuario.Size = new System.Drawing.Size(236, 23);
-            this.txtLoginUsuario.TabIndex = 3;
-            this.txtLoginUsuario.Text = "leandro.costa";
+            this.txtLoginContato.Location = new System.Drawing.Point(63, 80);
+            this.txtLoginContato.Name = "txtLoginContato";
+            this.txtLoginContato.Size = new System.Drawing.Size(236, 23);
+            this.txtLoginContato.TabIndex = 3;
+            this.txtLoginContato.Text = "leandro.costa";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 83);
+            this.label4.Location = new System.Drawing.Point(21, 83);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "Login:";
             // 
-            // txtNomeUsuario
+            // txtNomeContato
             // 
-            this.txtNomeUsuario.Enabled = false;
-            this.txtNomeUsuario.Location = new System.Drawing.Point(142, 22);
-            this.txtNomeUsuario.Name = "txtNomeUsuario";
-            this.txtNomeUsuario.Size = new System.Drawing.Size(353, 23);
-            this.txtNomeUsuario.TabIndex = 1;
+            this.txtNomeContato.Enabled = false;
+            this.txtNomeContato.Location = new System.Drawing.Point(142, 22);
+            this.txtNomeContato.Name = "txtNomeContato";
+            this.txtNomeContato.Size = new System.Drawing.Size(353, 23);
+            this.txtNomeContato.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 25);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 15);
+            this.label3.Size = new System.Drawing.Size(53, 15);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Usuário:";
+            this.label3.Text = "Contato:";
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 28);
+            this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(541, 315);
+            this.tabControl1.Size = new System.Drawing.Size(564, 303);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.btnConsultar);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(533, 287);
+            this.tabPage1.Size = new System.Drawing.Size(556, 275);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dados SIGA";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.maskedTextBox1);
+            this.tabPage2.Controls.Add(this.txtSenha);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.txtUsuario);
+            this.tabPage2.Controls.Add(this.txtBanco);
+            this.tabPage2.Controls.Add(this.txtServidor);
             this.tabPage2.Controls.Add(this.btnTestarConexao);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(533, 287);
+            this.tabPage2.Size = new System.Drawing.Size(556, 275);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Conexão Banco";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // maskedTextBox1
+            // txtSenha
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(86, 148);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(154, 23);
-            this.maskedTextBox1.TabIndex = 9;
+            this.txtSenha.Location = new System.Drawing.Point(86, 148);
+            this.txtSenha.Name = "txtSenha";
+            this.txtSenha.Size = new System.Drawing.Size(154, 23);
+            this.txtSenha.TabIndex = 9;
+            this.txtSenha.Text = "12345678";
             // 
             // label9
             // 
@@ -291,30 +291,33 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "Servidor:";
             // 
-            // textBox3
+            // txtUsuario
             // 
-            this.textBox3.Location = new System.Drawing.Point(86, 119);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(154, 23);
-            this.textBox3.TabIndex = 3;
+            this.txtUsuario.Location = new System.Drawing.Point(86, 119);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(154, 23);
+            this.txtUsuario.TabIndex = 3;
+            this.txtUsuario.Text = "leandro";
             // 
-            // textBox2
+            // txtBanco
             // 
-            this.textBox2.Location = new System.Drawing.Point(86, 90);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(282, 23);
-            this.textBox2.TabIndex = 2;
+            this.txtBanco.Location = new System.Drawing.Point(86, 90);
+            this.txtBanco.Name = "txtBanco";
+            this.txtBanco.Size = new System.Drawing.Size(282, 23);
+            this.txtBanco.TabIndex = 2;
+            this.txtBanco.Text = "SIGA";
             // 
-            // textBox1
+            // txtServidor
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 61);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(420, 23);
-            this.textBox1.TabIndex = 1;
+            this.txtServidor.Location = new System.Drawing.Point(86, 61);
+            this.txtServidor.Name = "txtServidor";
+            this.txtServidor.Size = new System.Drawing.Size(420, 23);
+            this.txtServidor.TabIndex = 1;
+            this.txtServidor.Text = "LEANDRO-PC\\MSSQLSERVER2019";
             // 
             // btnTestarConexao
             // 
-            this.btnTestarConexao.Location = new System.Drawing.Point(122, 177);
+            this.btnTestarConexao.Location = new System.Drawing.Point(109, 177);
             this.btnTestarConexao.Name = "btnTestarConexao";
             this.btnTestarConexao.Size = new System.Drawing.Size(99, 23);
             this.btnTestarConexao.TabIndex = 0;
@@ -325,27 +328,28 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.btnSalvar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(564, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btnSalvar
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::AcessoSIGA.Properties.Resources.salve_;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.btnSalvar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSalvar.Image = global::AcessoSIGA.Properties.Resources.salve_;
+            this.btnSalvar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(23, 22);
+            this.btnSalvar.Text = "toolStripButton1";
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // Frm_Parametros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 353);
+            this.ClientSize = new System.Drawing.Size(564, 331);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -374,16 +378,16 @@
 
         private Label label1;
         private GroupBox groupBox1;
-        private TextBox txtCodEmpresa;
-        private Button btnBuscar;
-        private TextBox txtNomeEmpresa;
+        private TextBox txtCodCliente;
+        private Button btnConsultar;
+        private TextBox txtNomeCliente;
         private Label label2;
         private TextBox txtCpfCnpj;
         private GroupBox groupBox2;
-        private TextBox txtCodUsuario;
-        private TextBox txtLoginUsuario;
+        private TextBox txtCodContato;
+        private TextBox txtLoginContato;
         private Label label4;
-        private TextBox txtNomeUsuario;
+        private TextBox txtNomeContato;
         private Label label3;
         private TextBox txtEmail;
         private Label label5;
@@ -392,14 +396,14 @@
         private TabPage tabPage2;
         private Button btnTestarConexao;
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private ToolStripButton btnSalvar;
+        private TextBox txtUsuario;
+        private TextBox txtBanco;
+        private TextBox txtServidor;
         private Label label9;
         private Label label8;
         private Label label7;
         private Label label6;
-        private MaskedTextBox maskedTextBox1;
+        private MaskedTextBox txtSenha;
     }
 }
