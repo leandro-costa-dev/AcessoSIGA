@@ -91,7 +91,5 @@ namespace AcessoSIGA
                 MessageBox.Show("Ocorreu erro na leitura do arquivo! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
 }
