@@ -153,6 +153,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(356, 23);
             this.txtEmail.TabIndex = 5;
+            this.txtEmail.Text = "leandro.costa@govbr.com.br";
             // 
             // label5
             // 
@@ -251,6 +252,7 @@
             // 
             this.txtSenha.Location = new System.Drawing.Point(86, 148);
             this.txtSenha.Name = "txtSenha";
+            this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(154, 23);
             this.txtSenha.TabIndex = 9;
             this.txtSenha.Text = "12345678";

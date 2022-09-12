@@ -148,17 +148,24 @@ namespace AcessoSIGA
             Cliente cliente = new Cliente();
             cliente.cdCliente = int.Parse(txtCodCliente.Text);
             cliente.nmCliente = txtNomeCliente.Text;
+            cliente.cnpj = txtCpfCnpj.Text;
 
             Contato contato = new Contato();
             contato.cdContato = int.Parse(txtCodContato.Text);
             contato.nmContato = txtNomeContato.Text;
+            contato.email = txtEmail.Text;
+            contato.login = txtLoginContato.Text;
 
             Parametros parametros = new Parametros();
             parametros.Cliente = cliente;
             parametros.Contato = contato;
+            parametros.servidor = txtServidor.Text;
+            parametros.banco = txtBanco.Text;
+            parametros.usuario = txtUsuario.Text;
+            parametros.senha = txtSenha.Text;
 
-            //teste
-            MessageBox.Show(parametros.Cliente.cdCliente.ToString());
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
+            parametrosDAO.GravarParametros(parametros);
 
         }
 

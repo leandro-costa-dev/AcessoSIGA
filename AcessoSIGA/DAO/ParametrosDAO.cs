@@ -23,8 +23,8 @@ namespace AcessoSIGA
                         "cdCliente = @cdCliente, " +
                         "nmCliente = @nmCliente, " +
                         "cnpj = @cnpj, " +
-                        "cdUsuario = @cdUsuario, " +
-                        "nmUsuario = @nmUsuario, " +
+                        "cdContato = @cdContato, " +
+                        "nmContato = @nmContato, " +
                         "email = @email, " +
                         "login = @login, " +
                         "servidor = @servidor, " +
@@ -35,8 +35,8 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@cdCliente", p.Cliente.cdCliente);
                     cmd.Parameters.AddWithValue("@nmCliente", p.Cliente.nmCliente);
                     cmd.Parameters.AddWithValue("@cnpj", p.Cliente.cnpj);
-                    cmd.Parameters.AddWithValue("@cdUsuario", p.Contato.cdContato);
-                    cmd.Parameters.AddWithValue("@nmUsuario", p.Contato.nmContato);
+                    cmd.Parameters.AddWithValue("@cdContato", p.Contato.cdContato);
+                    cmd.Parameters.AddWithValue("@nmContato", p.Contato.nmContato);
                     cmd.Parameters.AddWithValue("@email", p.Contato.email);
                     cmd.Parameters.AddWithValue("@login", p.Contato.login);
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);
@@ -67,24 +67,14 @@ namespace AcessoSIGA
 
                 try
                 {
-                    cmd.CommandText = "INSERT INTO PARAMETROS(" +
-                        "cdCliente = @cdCliente, " +
-                        "nmCliente = @nmCliente, " +
-                        "cnpj = @cnpj, " +
-                        "cdUsuario = @cdUsuario, " +
-                        "nmUsuario = @nmUsuario, " +
-                        "email = @email, " +
-                        "login = @login, " +
-                        "servidor = @servidor, " +
-                        "banco = @banco, " +
-                        "usuario = @usuario, " +
-                        "senha = @senha) VALUES (@cdCliente, @nmCliente, @cnpj, @cdUsuario, @nmUsuario, @email, @login, @servidor, @banco, @usuario, @senha)";
+                    cmd.CommandText = "INSERT INTO PARAMETROS(cdCliente, nmCliente, cnpj, cdContato, nmContato, email, login, servidor, banco, usuario, senha) " +
+                                                    "VALUES (@cdCliente, @nmCliente, @cnpj, @cdContato, @nmContato, @email, @login, @servidor, @banco, @usuario, @senha)";
 
                     cmd.Parameters.AddWithValue("@cdCliente", p.Cliente.cdCliente);
                     cmd.Parameters.AddWithValue("@nmCliente", p.Cliente.nmCliente);
                     cmd.Parameters.AddWithValue("@cnpj", p.Cliente.cnpj);
-                    cmd.Parameters.AddWithValue("@cdUsuario", p.Contato.cdContato);
-                    cmd.Parameters.AddWithValue("@nmUsuario", p.Contato.nmContato);
+                    cmd.Parameters.AddWithValue("@cdContato", p.Contato.cdContato);
+                    cmd.Parameters.AddWithValue("@nmContato", p.Contato.nmContato);
                     cmd.Parameters.AddWithValue("@email", p.Contato.email);
                     cmd.Parameters.AddWithValue("@login", p.Contato.login);
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);

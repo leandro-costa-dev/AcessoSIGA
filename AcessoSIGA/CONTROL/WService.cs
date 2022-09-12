@@ -39,7 +39,7 @@ namespace AcessoSIGA
 
             //Dados requisição Auth
             string dadosPOST = "user=" + usuarioADM + "&password=" + senhaADM + "&company=" + empresaADM +
-                "&wsdl_file=" + wsdl + ".wsdl&operation=" + operacao + "&input_xml=" + xml;
+                "&wsdl_file=" + wsdl + "&wsdloperation=" + operacao + "&input_xml=" + xml;
 
             try
             {

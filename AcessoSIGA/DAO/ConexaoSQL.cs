@@ -88,8 +88,8 @@ namespace AcessoSIGA
                         "cdCliente int, " +
                         "nmCliente VarChar (100), " +
                         "cnpj VarChar (14), " +
-                        "cdUsuario int, " +
-                        "nmUsuario VarChar (100), " +
+                        "cdContato int, " +
+                        "nmContato VarChar (100), " +
                         "email VarChar (100), " +
                         "login VarChar (50), " +
                         "servidor VarChar (100), " +
