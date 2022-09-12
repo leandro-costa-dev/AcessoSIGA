@@ -16,13 +16,16 @@ namespace AcessoSIGA
             ConexaoSQL.CriarTabelasSQL();
 
             //Posicionar o botão na tela inicial
-            pictureBox.Location = new Point(this.Width - 110, this.Height - 140);
+            pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
         }
 
         private void acessoSIGAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Contato contato = new Contato();
-            
+
+            string operacao = "getAuthToken";
+            string wsdl_file = "WSGeneral.wsdl";
+
             contato.login = "leandro.costa";
             contato.cdCliente = 2;
 
@@ -33,7 +36,7 @@ namespace AcessoSIGA
             string xml = wSGeneral.XML_getAutToken(contato);
 
             //Instancia o webservice passando os dados
-            WService wService = new WService("getAuthToken", "wsgeneral", xml);
+            WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
             string wsRetorno = wService.RequisicaoPOST();
@@ -63,6 +66,12 @@ namespace AcessoSIGA
         {
             Frm_Chamado f = new Frm_Chamado();
             f.ShowDialog();
+        }
+
+        private void Frm_Principal_Resize(object sender, EventArgs e)
+        {
+            //Posicionar o botão na tela inicial
+            pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
         }
     }
 }

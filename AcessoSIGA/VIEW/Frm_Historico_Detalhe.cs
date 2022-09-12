@@ -28,6 +28,11 @@ namespace AcessoSIGA
 
         private void Frm_Historico_Detalhe_Load(object sender, EventArgs e)
         {
+            mostrarDetalhes();
+        }
+
+        private void mostrarDetalhes()
+        {
             lblChamado.Text = "CHAMADO Nº: " + cdChamado.ToString();
             lblData.Text = "DATA ABERTURA: " + data;
             richTextBox.Text = descricao;
@@ -36,7 +41,7 @@ namespace AcessoSIGA
             {
                 ListViewItem item = new ListViewItem(h.cdchamado.ToString());
                 item.SubItems.Add(h.dsacompanhamento);
-                
+
                 listViewHistorico.Items.Add(item);
             }
         }

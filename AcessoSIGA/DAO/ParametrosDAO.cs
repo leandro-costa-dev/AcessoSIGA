@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +48,7 @@ namespace AcessoSIGA
 
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Configurações gravadas com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+                    MessageBox.Show("Configurações gravadas com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
                 catch (Exception ex)
@@ -84,7 +86,7 @@ namespace AcessoSIGA
 
                     cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Configurações gravadas com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+                    MessageBox.Show("Configurações gravadas com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
                 catch (Exception ex)
@@ -96,6 +98,59 @@ namespace AcessoSIGA
                     con.Close();
                 }
             }
+        }
+
+        public Parametros consultarParametros()
+        {
+            Parametros parametros = new Parametros();
+
+            SqlDataAdapter da = null;
+            DataTable dt = new DataTable();
+
+            var con = ConexaoSQL.ConectarBancoSQL(false);
+            var cmd = con.CreateCommand();
+
+            cmd.CommandText = "SELECT * FROM PARAMETROS";
+
+            try
+            {
+                Cliente cliente = new Cliente();
+                Contato contato = new Contato();
+
+                da = new SqlDataAdapter(cmd.CommandText, con);
+                da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    cliente.cdCliente = Convert.ToInt32(row["cdCliente"]);
+                    cliente.nmCliente = Convert.ToString(row["nmCliente"]);
+                    cliente.cnpj = Convert.ToString(row["cnpj"]);
+
+                    contato.cdContato = Convert.ToInt32(row["cdContato"]);
+                    contato.nmContato = Convert.ToString(row["nmContato"]);
+                    contato.email = Convert.ToString(row["email"]);
+                    contato.login = Convert.ToString(row["login"]);
+
+                    parametros.servidor = Convert.ToString(row["servidor"]);
+                    parametros.banco = Convert.ToString(row["banco"]);
+                    parametros.usuario = Convert.ToString(row["usuario"]);
+                    parametros.senha = Convert.ToString(row["senha"]);
+
+                    parametros.Cliente = cliente;
+                    parametros.Contato = contato;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao consultar os dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return parametros;
         }
     }
 }

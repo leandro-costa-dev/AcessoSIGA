@@ -119,7 +119,6 @@
             this.txtCpfCnpj.Name = "txtCpfCnpj";
             this.txtCpfCnpj.Size = new System.Drawing.Size(135, 23);
             this.txtCpfCnpj.TabIndex = 0;
-            this.txtCpfCnpj.Text = "11111111111";
             // 
             // btnConsultar
             // 
@@ -153,7 +152,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(356, 23);
             this.txtEmail.TabIndex = 5;
-            this.txtEmail.Text = "leandro.costa@govbr.com.br";
             // 
             // label5
             // 
@@ -178,7 +176,6 @@
             this.txtLoginContato.Name = "txtLoginContato";
             this.txtLoginContato.Size = new System.Drawing.Size(236, 23);
             this.txtLoginContato.TabIndex = 3;
-            this.txtLoginContato.Text = "leandro.costa";
             // 
             // label4
             // 

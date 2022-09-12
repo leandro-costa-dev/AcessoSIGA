@@ -19,7 +19,34 @@ namespace AcessoSIGA
 
         private void Frm_Parametros_Load(object sender, EventArgs e)
         {
+            carregarParametros();
+        }
 
+        private void carregarParametros()
+        {
+            ParametrosDAO parametrosDAO = new ParametrosDAO();            
+            Parametros p = parametrosDAO.consultarParametros();
+
+            if (p.Cliente == null)
+            {
+                return;
+            }
+            else
+            {
+                txtCodCliente.Text = p.Cliente.cdCliente.ToString();
+                txtNomeCliente.Text = p.Cliente.nmCliente.ToString();
+                txtCpfCnpj.Text = p.Cliente.cnpj.ToString();
+
+                txtCodContato.Text = p.Contato.cdContato.ToString();
+                txtNomeContato.Text = p.Contato.nmContato.ToString();
+                txtEmail.Text = p.Contato.email.ToString();
+                txtLoginContato.Text = p.Contato.login.ToString();
+
+                txtServidor.Text = p.servidor.ToString();
+                txtBanco.Text = p.banco.ToString();
+                txtUsuario.Text = p.usuario.ToString();
+                txtSenha.Text = p.senha.ToString();
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -39,7 +66,7 @@ namespace AcessoSIGA
 
             string CpfCnpj = txtCpfCnpj.Text;
             string operacao = "getCustomer";
-            string wsdl_file = "WSGeneral";
+            string wsdl_file = "WSGeneral.wsdl";
 
             //Gera o XML de envio para o webservice
             WSGeneral wSGeneral = new WSGeneral();
@@ -75,7 +102,7 @@ namespace AcessoSIGA
             string email = txtEmail.Text;
             
             string operacao = "getCustomerContact";
-            string wsdl_file = "WSGeneral";
+            string wsdl_file = "WSGeneral.wsdl";
 
             //Se login não for informado busca o contato pelo e-mail informado
             if (String.IsNullOrEmpty(txtLoginContato.Text))

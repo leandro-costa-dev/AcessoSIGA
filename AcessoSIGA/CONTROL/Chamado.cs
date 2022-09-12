@@ -49,7 +49,7 @@ namespace AcessoSIGA
         public void EnviarAnexo(Ticket ticket)
         {
             string operacao = "addAttachment";
-            string wsdl_file = "WSTicket";
+            string wsdl_file = "WSTicket.wsdl";
 
             //Gera o XML de envio para o webservice
             WSTicket wSTicket = new WSTicket();
@@ -80,7 +80,7 @@ namespace AcessoSIGA
             ticket.dtPeriodo2 = dtFim;
 
             string operacao = "getTicket";
-            string wsdl_file = "WSTicket";
+            string wsdl_file = "WSTicket.wsdl";
 
             //Gera o XML de envio para o webservice
             WSTicket wSTicket = new WSTicket();
@@ -114,7 +114,7 @@ namespace AcessoSIGA
             Ticket ticket = new Ticket();
 
             string operacao = "getTicketHistoryData";
-            string wsdl_file = "WSTicket";
+            string wsdl_file = "WSTicket.wsdl";
 
             //Gera o XML de envio para o webservice
             WSTicket wSTicket = new WSTicket();
@@ -148,7 +148,7 @@ namespace AcessoSIGA
             Ticket ticket = new Ticket();
 
             string operacao = "getTicketData";
-            string wsdl_file = "WSTicket";
+            string wsdl_file = "WSTicket.wsdl";
 
             //Gera o XML de envio para o webservice
             WSTicket wSTicket = new WSTicket();
