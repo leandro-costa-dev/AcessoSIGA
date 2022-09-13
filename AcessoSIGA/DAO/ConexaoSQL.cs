@@ -80,24 +80,62 @@ namespace AcessoSIGA
             if (!ConsultarTabelaSQL("SIGA", "parametros"))
             {
                 SqlConnection con = ConectarBancoSQL(false);
-                SqlCommand cmd = con.CreateCommand();
+                SqlCommand cmd_parametros = con.CreateCommand();
+                SqlCommand cmd_chamados = con.CreateCommand();
+                SqlCommand cmd_historico = con.CreateCommand();
 
                 try
                 {
-                    cmd.CommandText = ("CREATE TABLE PARAMETROS(" +
-                        "cdCliente int, " +
-                        "nmCliente VarChar (100), " +
-                        "cnpj VarChar (14), " +
-                        "cdContato int, " +
-                        "nmContato VarChar (100), " +
-                        "email VarChar (100), " +
-                        "login VarChar (50), " +
-                        "servidor VarChar (100), " +
-                        "banco VarChar(40), " +
-                        "usuario VarChar(20), " +
-                        "senha VarChar(20));");
+                    cmd_parametros.CommandText = ("CREATE TABLE PARAMETROS(" +
+                        "cdCliente INT, " +
+                        "nmCliente VARCHAR (100), " +
+                        "cnpj VARCHAR (14), " +
+                        "cdContato INT, " +
+                        "nmContato VARCHAR(100), " +
+                        "email VARCHAR(100), " +
+                        "login VARCHAR(50), " +
+                        "servidor VARCHAR(100), " +
+                        "banco VARCHAR(40), " +
+                        "usuario VARCHAR(20), " +
+                        "senha VARCHAR(20));");
 
-                    cmd.ExecuteNonQuery();
+                    cmd_chamados.CommandText = ("CREATE TABLE CHAMADO(" +
+                        "cdChamado int NOT NULL PRIMARY KEY, " +
+                        "idChamado int NOT NULL, " +
+                        "titChamado VARCHAR (100), " +
+                        "dsChamado VARCHAR(500), " +
+                        "cdCliente INT, " +
+                        "nmCliente VARCHAR(100), " +
+                        "cdContato INT, " +
+                        "nmContato VARCHAR(100), " +
+                        "sitChamado VARCHAR(10), " +
+                        "nmSituacao VARCHAR(50), " +
+                        "dataChamado VARCHAR(20), " +
+                        "anexo NVARCHAR(MAX), " +
+                        "dsAnexo VARCHAR(100))");
+
+
+                    cmd_historico.CommandText = ("CREATE TABLE HISTORICO(" +
+                        "id INT IDENTITY(1, 1) PRIMARY KEY, " +
+                        "cdChamado INT NOT NULL, " +
+                        "cdAcompanhamento INT NOT NULL, " +
+                        "nmTipoacompanhamento VARCHAR(100), " +
+                        "dsAcompanhamento VARCHAR(500), " +
+                        "nmUsuario VARCHAR(100), " +
+                        "dtAcompanhamento VARCHAR(50), " +
+                        "CONSTRAINT fk_cdChamado FOREIGN KEY(cdChamado) " +
+                        "REFERENCES CHAMADO(cdChamado) " +
+                        "ON DELETE CASCADE " +
+                        "ON UPDATE CASCADE)");
+
+                    cmd_parametros.ExecuteNonQuery();
+                    Console.WriteLine("Tabela parâmetros criada com sucesso!");
+
+                    cmd_chamados.ExecuteNonQuery();
+                    Console.WriteLine("Tabela chamados criada com sucesso!");
+
+                    cmd_historico.ExecuteNonQuery();
+                    Console.WriteLine("Tabela historico criada com sucesso!");
 
                 }
                 catch (Exception ex)

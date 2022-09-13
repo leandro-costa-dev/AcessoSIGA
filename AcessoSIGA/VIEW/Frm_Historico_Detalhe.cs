@@ -39,8 +39,8 @@ namespace AcessoSIGA
 
             foreach (Historico h in listaHistorico)
             {
-                ListViewItem item = new ListViewItem(h.cdchamado.ToString());
-                item.SubItems.Add(h.dsacompanhamento);
+                ListViewItem item = new ListViewItem(h.cdChamado.ToString());
+                item.SubItems.Add(h.dsAcompanhamento);
 
                 listViewHistorico.Items.Add(item);
             }

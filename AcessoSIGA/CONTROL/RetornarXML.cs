@@ -76,6 +76,8 @@ namespace AcessoSIGA
                                 ticket.sitChamado = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmsituacao")
                                 ticket.nmSituacao = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dtchamado")
+                                ticket.dataChamado = xmlReader.ReadElementContentAsString();
                             break;
                         }
                     }
@@ -209,15 +211,15 @@ namespace AcessoSIGA
                         while (xmlReader.Read())
                         {
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdchamado")
-                                historico.cdchamado = int.Parse(xmlReader.ReadElementContentAsString());
+                                historico.cdChamado = int.Parse(xmlReader.ReadElementContentAsString());
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdacompanhamento")
-                                historico.cdacompanhamento = int.Parse(xmlReader.ReadElementContentAsString());
+                                historico.cdaCompanhamento = int.Parse(xmlReader.ReadElementContentAsString());
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmtipoacompanhamento")
                                 historico.nmtipoacompanhamento = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dsacompanhamento")
-                                historico.dsacompanhamento = xmlReader.ReadElementContentAsString();
+                                historico.dsAcompanhamento = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmusuario")
-                                historico.nmusuario = xmlReader.ReadElementContentAsString();
+                                historico.nmUsuario = xmlReader.ReadElementContentAsString();
                             break;
                         }
 

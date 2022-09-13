@@ -37,9 +37,11 @@ namespace AcessoSIGA
             ticket.severidade = 3; //Normal
             ticket.animo = 4; //Normal
             ticket.cdOrigem = 9; //Telefone
+            ticket.anexo = arquivoAnexo; //Arquivo anexo
+            ticket.dsAnexo = descAnexo; //Descrição do anexo
 
             Chamado chamado = new Chamado();
-            chamado.GravarChamado(ticket, arquivoAnexo, descAnexo);
+            chamado.GravarChamado(ticket);
              
         }
 
