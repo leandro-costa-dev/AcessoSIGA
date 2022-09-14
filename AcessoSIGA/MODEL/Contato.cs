@@ -8,10 +8,10 @@ namespace AcessoSIGA
 {
     public class Contato
     {        
-        public string nmContato { get; set; }
+        public string nmContato { get; set; } = string.Empty;
         public int cdContato { get; set; }
         public int cdCliente { get; set; }
-        public string login { get; set; }
-        public string email { get; set; }
+        public string login { get; set; } = string.Empty;
+        public string email { get; set; } = string.Empty;
     }
 }

@@ -9,7 +9,7 @@ namespace AcessoSIGA
 {
     public class WSTicket
     {
-        public string XML_addTicketByData(Ticket ticket)
+        public string XML_addTicketByEndUser(Ticket ticket)
         {
             string xml;
 
@@ -152,7 +152,7 @@ namespace AcessoSIGA
             xmlWriter.WriteStartElement("contents");
             xmlWriter.WriteStartElement("data");
             xmlWriter.WriteElementString("cdchamado", cdChamado.ToString());
-            xmlWriter.WriteElementString("campos", "cdchamado, dtchamado, dschamado");
+            xmlWriter.WriteElementString("campos", "cdchamado, nmtitulochamado, nmresponsavel, cdcliente, nmcliente, cdcontato, nmcontato, cdsituacao, nmsituacao, dtchamado, dschamado, cdcategoria");
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();

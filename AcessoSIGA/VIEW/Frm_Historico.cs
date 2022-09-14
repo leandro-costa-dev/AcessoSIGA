@@ -35,8 +35,8 @@ namespace AcessoSIGA
             string dataInicial = DateTime.Parse(dtInicial) .ToString("yyyy-MM-dd");
             string dataFinal = DateTime.Parse(dtFinal).ToString("yyyy-MM-dd");
            
-            Chamado chamado = new Chamado();
-            lista = chamado.consultarChamados(dataInicial, dataFinal);
+            GravarChamado gravarChamado = new GravarChamado();
+            lista = gravarChamado.consultarChamados(dataInicial, dataFinal);
 
             foreach (Ticket t in lista)
             {
@@ -50,12 +50,20 @@ namespace AcessoSIGA
 
         private void listViewChamados_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            List<Historico> lista = new List<Historico>();
+
+            Ticket ticket = new Ticket();
+
+            //Obtem o código do chamado da linha selecionada
             int linha = listViewChamados.SelectedItems[0].Index;
+            int cdChamado = int.Parse(listViewChamados.Items[linha].SubItems[0].Text);
 
-            int idChamado = int.Parse(listViewChamados.Items[linha].SubItems[0].Text);
+            GravarChamado gravarChamado = new GravarChamado();
+            lista = gravarChamado.consultarHistoricoChamado(cdChamado);
+            ticket = gravarChamado.consultarDadosChamado(cdChamado);
 
-            Chamado chamado = new Chamado();
-            chamado.consultarHistoricoChamado(idChamado);
+            Frm_Historico_Detalhe f = new Frm_Historico_Detalhe(lista, cdChamado, ticket.dsChamado, ticket.dataChamado);
+            f.ShowDialog();
 
         }
     }

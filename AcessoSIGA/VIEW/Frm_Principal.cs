@@ -9,11 +9,16 @@ namespace AcessoSIGA
             InitializeComponent();
         }
 
+        bool executar = true; //Contrle execução da thread
         private void Form1_Load(object sender, EventArgs e)
         {
             //Criar banco e tabelas se não existir
             ConexaoSQL.CriarBancoSQL();
             ConexaoSQL.CriarTabelasSQL();
+
+            //Executa thread do historico
+            Thread t = new Thread(AtualizarHistorico);
+            t.Start();
 
             //Posicionar o botão na tela inicial
             pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
@@ -72,6 +77,49 @@ namespace AcessoSIGA
         {
             //Posicionar o botão na tela inicial
             pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
+        }
+
+        private void AtualizarHistorico()
+        {           
+            GravarHistorico gravarHistorico = new GravarHistorico();            
+
+            while (executar)
+            {
+                Thread.Sleep(10000); //Aguarda 10 segundos
+
+                if (executar)
+                {
+                    List<Ticket> listaTicket = new List<Ticket>();
+
+                    GravarHistorico gravar = new GravarHistorico();
+                    listaTicket = gravar.AtualizaHistoricoChamados();
+
+                    foreach (Ticket t in listaTicket)
+                    {
+                        notifyIcon1.Icon = SystemIcons.Application;
+                        notifyIcon1.BalloonTipTitle = "Chamado Atualizado!";
+                        notifyIcon1.BalloonTipText = "Há uma nova atualização no chamado nº: " + t.cdChamado;
+                        notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+
+                        notifyIcon1.Visible = true;
+                        notifyIcon1.ShowBalloonTip(30000);
+                    }
+                }
+            }
+        }
+
+        private void Frm_Principal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            executar = false;
+        }
+
+        private void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)
+        {
+            string n = notifyIcon1.BalloonTipText;
+            int cdChamado = int.Parse(n.Substring(n.IndexOf(":") + 1).Trim());
+
+            Frm_Acompanhamento f = new Frm_Acompanhamento(cdChamado);
+            f.ShowDialog();
         }
     }
 }

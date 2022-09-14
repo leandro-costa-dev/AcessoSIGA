@@ -40,9 +40,14 @@ namespace AcessoSIGA
             ticket.anexo = arquivoAnexo; //Arquivo anexo
             ticket.dsAnexo = descAnexo; //Descrição do anexo
 
-            Chamado chamado = new Chamado();
-            chamado.GravarChamado(ticket);
-             
+            GravarChamado gravarChamado = new GravarChamado();
+            ticket = gravarChamado.GravarChamados(ticket);
+
+            if (ticket.cdChamado > 0)
+            {
+                MessageBox.Show("Chamado nº " + ticket.cdChamado + " cadastrado com sucesso!", "Sucesso!: ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         private void btnNovo_Click(object sender, EventArgs e)

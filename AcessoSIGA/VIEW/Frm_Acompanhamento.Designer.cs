@@ -1,6 +1,6 @@
 ﻿namespace AcessoSIGA
 {
-    partial class Frm_Historico_Detalhe
+    partial class Frm_Acompanhamento
     {
         /// <summary>
         /// Required designer variable.
@@ -28,52 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.lblData = new System.Windows.Forms.Label();
             this.lblChamado = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewHistorico = new System.Windows.Forms.ListView();
             this.clDataAcompanhamento = new System.Windows.Forms.ColumnHeader();
             this.clDesAcompanhamento = new System.Windows.Forms.ColumnHeader();
-            this.lblData = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDescricao = new System.Windows.Forms.RichTextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtDetalhes = new System.Windows.Forms.RichTextBox();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // lblData
             // 
-            this.groupBox1.Controls.Add(this.richTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(12, 49);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(632, 79);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Descrição do Chamado";
-            // 
-            // richTextBox
-            // 
-            this.richTextBox.Location = new System.Drawing.Point(6, 22);
-            this.richTextBox.Name = "richTextBox";
-            this.richTextBox.Size = new System.Drawing.Size(620, 51);
-            this.richTextBox.TabIndex = 0;
-            this.richTextBox.Text = "";
+            this.lblData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblData.Location = new System.Drawing.Point(331, 9);
+            this.lblData.Name = "lblData";
+            this.lblData.Size = new System.Drawing.Size(301, 23);
+            this.lblData.TabIndex = 8;
+            this.lblData.Text = "DATA ABERTURA:";
             // 
             // lblChamado
             // 
             this.lblChamado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblChamado.Location = new System.Drawing.Point(18, 9);
+            this.lblChamado.Location = new System.Drawing.Point(12, 9);
             this.lblChamado.Name = "lblChamado";
             this.lblChamado.Size = new System.Drawing.Size(203, 23);
-            this.lblChamado.TabIndex = 3;
+            this.lblChamado.TabIndex = 7;
             this.lblChamado.Text = "CHAMADO Nº :";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.listViewHistorico);
-            this.groupBox2.Location = new System.Drawing.Point(12, 134);
+            this.groupBox2.Location = new System.Drawing.Point(6, 134);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(632, 285);
-            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
             // listViewHistorico
@@ -90,6 +84,7 @@
             this.listViewHistorico.TabIndex = 0;
             this.listViewHistorico.UseCompatibleStateImageBehavior = false;
             this.listViewHistorico.View = System.Windows.Forms.View.Details;
+            this.listViewHistorico.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewHistorico_MouseClick);
             // 
             // clDataAcompanhamento
             // 
@@ -99,22 +94,50 @@
             // clDesAcompanhamento
             // 
             this.clDesAcompanhamento.Text = "Descrição do Acompanhamento";
-            this.clDesAcompanhamento.Width = 5000;
+            this.clDesAcompanhamento.Width = 480;
             // 
-            // lblData
+            // groupBox1
             // 
-            this.lblData.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblData.Location = new System.Drawing.Point(337, 9);
-            this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(301, 23);
-            this.lblData.TabIndex = 4;
-            this.lblData.Text = "DATA ABERTURA:";
+            this.groupBox1.Controls.Add(this.txtDescricao);
+            this.groupBox1.Location = new System.Drawing.Point(6, 49);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(632, 79);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Descrição do Chamado";
             // 
-            // Frm_Historico_Detalhe
+            // txtDescricao
+            // 
+            this.txtDescricao.Location = new System.Drawing.Point(6, 22);
+            this.txtDescricao.Name = "txtDescricao";
+            this.txtDescricao.Size = new System.Drawing.Size(620, 51);
+            this.txtDescricao.TabIndex = 0;
+            this.txtDescricao.Text = "";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtDetalhes);
+            this.groupBox3.Location = new System.Drawing.Point(6, 425);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(632, 113);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Detalhes do Acompanhamento";
+            // 
+            // txtDetalhes
+            // 
+            this.txtDetalhes.Location = new System.Drawing.Point(6, 22);
+            this.txtDetalhes.Name = "txtDetalhes";
+            this.txtDetalhes.Size = new System.Drawing.Size(620, 85);
+            this.txtDetalhes.TabIndex = 0;
+            this.txtDetalhes.Text = "";
+            // 
+            // Frm_Acompanhamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 431);
+            this.ClientSize = new System.Drawing.Size(645, 561);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblData);
             this.Controls.Add(this.lblChamado);
             this.Controls.Add(this.groupBox2);
@@ -122,24 +145,28 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Frm_Historico_Detalhe";
+            this.Name = "Frm_Acompanhamento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Historico do Chamado";
-            this.Load += new System.EventHandler(this.Frm_Historico_Detalhe_Load);
-            this.groupBox1.ResumeLayout(false);
+            this.Text = "Acompanhamento do Chamado";
+            this.Load += new System.EventHandler(this.Frm_Acompanhamento_Load);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private GroupBox groupBox1;
+
+        private Label lblData;
+        private Label lblChamado;
         private GroupBox groupBox2;
         private ListView listViewHistorico;
         private ColumnHeader clDataAcompanhamento;
         private ColumnHeader clDesAcompanhamento;
-        private Label lblChamado;
-        private RichTextBox richTextBox;
-        private Label lblData;
+        private GroupBox groupBox1;
+        private RichTextBox txtDescricao;
+        private GroupBox groupBox3;
+        private RichTextBox txtDetalhes;
     }
 }

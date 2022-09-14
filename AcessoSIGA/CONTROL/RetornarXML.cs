@@ -73,7 +73,7 @@ namespace AcessoSIGA
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdchamado")
                                 ticket.cdChamado = int.Parse(xmlReader.ReadElementContentAsString());
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdsituacao")
-                                ticket.sitChamado = xmlReader.ReadElementContentAsString();
+                                ticket.cdSituacao = int.Parse(xmlReader.ReadElementContentAsString());
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmsituacao")
                                 ticket.nmSituacao = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dtchamado")
@@ -118,10 +118,29 @@ namespace AcessoSIGA
                         {
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdchamado")
                                 ticket.cdChamado = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmtitulochamado")
+                                ticket.titChamado = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmresponsavel")
+                                ticket.nmResponsacel = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdcliente")
+                                ticket.cdCliente = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmcliente")
+                                ticket.nmCliente = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdcontato")
+                                ticket.cdContato = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmcontato")
+                                ticket.nmContato = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdsituacao")
+                                ticket.cdSituacao = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmsituacao")
+                                ticket.nmSituacao = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dtchamado")
                                 ticket.dataChamado = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dschamado")
                                 ticket.dsChamado = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdcategoria")
+                                ticket.cdCategoria = int.Parse(xmlReader.ReadElementContentAsString());
+
                             break;
                         }
                     }
@@ -213,13 +232,16 @@ namespace AcessoSIGA
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdchamado")
                                 historico.cdChamado = int.Parse(xmlReader.ReadElementContentAsString());
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdacompanhamento")
-                                historico.cdaCompanhamento = int.Parse(xmlReader.ReadElementContentAsString());
+                                historico.cdAcompanhamento = int.Parse(xmlReader.ReadElementContentAsString());
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmtipoacompanhamento")
-                                historico.nmtipoacompanhamento = xmlReader.ReadElementContentAsString();
+                                historico.nmTipoacompanhamento = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dsacompanhamento")
                                 historico.dsAcompanhamento = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmusuario")
                                 historico.nmUsuario = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dtacompanhamento")
+                                historico.dtAcompanhamento = xmlReader.ReadElementContentAsString();
+                            
                             break;
                         }
 

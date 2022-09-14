@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace AcessoSIGA
 {
-    public class Chamado
+    public class GravarChamado
     {
         //Abertura de chamado
-        public void GravarChamado(Ticket ticket)
+        public Ticket GravarChamados(Ticket ticket)
         {
-            string operacao = "addTicketByData";
+            string operacao = "addTicketByEndUser";
             string wsdl_file = "WSTicket";
 
             //Gera o XML de envio para o webservice
             WSTicket wSTicket = new WSTicket();
-            string xml = wSTicket.XML_addTicketByData(ticket);
+            string xml = wSTicket.XML_addTicketByEndUser(ticket);
 
             //Instancia o webservice passando os dados
             WService wService = new WService(operacao, wsdl_file, xml);
@@ -36,7 +36,7 @@ namespace AcessoSIGA
 
                 //Atualiza dados do retorno do chamado
                 ticket.cdChamado = ticket_ret.cdChamado;
-                ticket.sitChamado = ticket_ret.sitChamado;
+                ticket.cdSituacao = ticket_ret.cdSituacao;
                 ticket.nmSituacao = ticket_ret.nmSituacao;
                 ticket.dataChamado = ticket_ret.dataChamado;
 
@@ -46,12 +46,9 @@ namespace AcessoSIGA
                 //Gravar chamado no banco de dados
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
                 chamadoDAO.GravarChamado(ticket);
-
-                if (ticket.cdChamado > 0)
-                {
-                    MessageBox.Show("Chamado nº " + ticket.cdChamado + " cadastrado com sucesso!", "Sucesso!: ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
+
+            return ticket;
         }
 
         //Enviar o arquivo anexo para o chamado
@@ -117,7 +114,7 @@ namespace AcessoSIGA
         }
 
         //Consultar histórico do chamado informado
-        public void consultarHistoricoChamado(int cdChamado)
+        public List<Historico> consultarHistoricoChamado(int cdChamado)
         {
             List<Historico> lista = new List<Historico>();
 
@@ -146,12 +143,9 @@ namespace AcessoSIGA
             {
                 //Lê XML de retorno e devolve os dados
                 lista = RetornarXML.retornarHistoricoChamado(wsRetorno);
-
-                ticket = consultarDadosChamado(cdChamado);
-
-                Frm_Historico_Detalhe f = new Frm_Historico_Detalhe(lista, cdChamado, ticket.dsChamado, ticket.dataChamado);
-                f.ShowDialog();
             }
+
+            return lista;
         }
 
         //Consulta dados adicionais do chamado informado
