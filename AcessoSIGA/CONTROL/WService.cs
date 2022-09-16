@@ -78,7 +78,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro na conexão: " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Conexão WebService ", "Ocorreu erro na conexão com WebService! " + ex.Message);                               
             }
             return xmlRetorno;
         }

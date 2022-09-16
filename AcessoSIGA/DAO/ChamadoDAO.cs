@@ -58,7 +58,7 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu erro ao gravar o chamado no banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao atualizar as informações do chamado no banco de dados! " + ex.Message);                    
                 }
                 finally
                 {
@@ -98,7 +98,7 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu erro ao gravar o chamado no banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao gravar chamado no banco de dados! " + ex.Message);                    
                 }
                 finally
                 {
@@ -132,7 +132,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar chamado! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o chamado no banco de dados! " + ex.Message);                
             }
             finally
             {
@@ -170,7 +170,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar o chamado! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar os chamados ativos no banco de dados! " + ex.Message);                
             }
             finally
             {
@@ -217,7 +217,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar os dados do chamado! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar informações do chamado no banco de dados! " + ex.Message);                
             }
             finally
             {

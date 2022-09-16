@@ -53,7 +53,7 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu um erro ao gravar as configurações " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao atualizar as configurações no banco de dados! " + ex.Message);                    
                 }
                 finally
                 {
@@ -91,7 +91,7 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu um erro ao gravar as configurações " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao gravar as configurações no banco de dados! " + ex.Message);                    
                 }
                 finally
                 {
@@ -143,7 +143,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu um erro ao consultar os dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar os parâmetros no banco de dados! " + ex.Message);                
             }
             finally
             {

@@ -40,7 +40,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter o token!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do Token! " + ex.Message);                
             }
             return token;
         }
@@ -86,7 +86,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter chamado!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do Chamado! " + ex.Message);                
             }
             return ticket;
         }
@@ -149,7 +149,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter dados do chamado!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML de dados do Chamado! " + ex.Message);                
             }
             return ticket;
         }
@@ -198,7 +198,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter lista de chamados!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML da lista de chamados! " + ex.Message);                
             }
             return lista;
         }
@@ -254,7 +254,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter histórico do chamado!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do histórico do chamado! " + ex.Message);                
             }
             return lista;
         }
@@ -295,7 +295,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter empresa!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML dos dados do cliente! " + ex.Message);                
             }
             return cliente;
         }
@@ -341,7 +341,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter contato!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do contato! " + ex.Message);                
             }
             return contato;
         }
@@ -384,7 +384,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Erro ao obter anexo!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do anexo! " + ex.Message);                
             }
             return resposta;
         }

@@ -137,14 +137,13 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Util.GravarLog("Consulta histórico do chamado ", "XML de retorno vazio ou nulo!");                
             }
             else
             {
                 //Lê XML de retorno e devolve os dados
                 lista = RetornarXML.retornarHistoricoChamado(wsRetorno);
             }
-
             return lista;
         }
 
@@ -168,7 +167,7 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Util.GravarLog("Consulta dados do chamado ", "XML de retorno vazio ou nulo!");                
             }
             else
             {
@@ -177,6 +176,5 @@ namespace AcessoSIGA
             }
             return ticket;
         }
-
     }
 }

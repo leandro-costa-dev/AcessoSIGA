@@ -47,7 +47,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Ocorreu erro ao gerar o XML de envio!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Gravar XML ", "Ocorreu erro ao gravar o XML de envio! " + ex.Message);                
             }
 
         }
@@ -78,7 +78,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro: " + ex.Message, "Ocorreu erro ao gerar o XML de retorno!", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                Util.GravarLog("Gravar XML ", "Ocorreu erro ao gravar o XML de retorno! " + ex.Message);                
             }
 
         }

@@ -47,7 +47,7 @@ namespace AcessoSIGA
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Ocorreu erro ao gravar o histórico no banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Util.GravarLog("Banco de Dados ", "Ocorreu erro ao gravar o histórico do chamado no banco de dados! " + ex.Message);                        
                     }
                     finally
                     {
@@ -84,7 +84,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar historico! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o histórico de acompanhamento do chamado no banco de dados! " + ex.Message);                
             }
             finally
             {
@@ -126,7 +126,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar o histórico! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o histórico do chamado no banco de dados! " + ex.Message);                
             }
             finally
             {

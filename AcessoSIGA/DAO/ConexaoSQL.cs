@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace AcessoSIGA
 {
@@ -39,7 +36,7 @@ namespace AcessoSIGA
 
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu erro na conexão com banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro na conexão com banco de dados! " + ex.Message);                    
                 }
             }
             return sqlConnection;
@@ -64,7 +61,7 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu erro criar o banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao criar o banco de dados! " + ex.Message);                   
                 }
                 finally
                 {
@@ -140,7 +137,7 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ocorreu erro ao criar as tabelas no banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao criar as tabelas no banco de dados! " + ex.Message);                    
                 }
                 finally
                 {
@@ -172,19 +169,17 @@ namespace AcessoSIGA
                 {
                     Console.WriteLine("Banco de dados existente!");
                     resultado = true;
-                }
-
-                return resultado;
+                }                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar o banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return resultado;
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o banco de dados! " + ex.Message);
             }
             finally
             {
                 con.Close();
             }
+            return resultado;
         }
 
         //Consultar se existe a tabela no banco de dados
@@ -210,20 +205,17 @@ namespace AcessoSIGA
                 {
                     Console.WriteLine("Tabela existente!");
                     resultado = true;
-                }
-                
-                return resultado;
+                }                                
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar o banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return resultado;
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar a tabela no banco de dados! " + ex.Message);
             }
             finally
             {
                 con.Close();
             }
-
+            return resultado;
         }
 
         //Verifica se existe informações na tabela
@@ -251,7 +243,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu erro consultar informações da tabela no banco de dados! " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar informações na tabela no banco de dados! " + ex.Message);                
             }
             finally
             {

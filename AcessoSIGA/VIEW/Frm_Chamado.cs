@@ -47,6 +47,10 @@ namespace AcessoSIGA
             {
                 MessageBox.Show("Chamado nº " + ticket.cdChamado + " cadastrado com sucesso!", "Sucesso!: ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            else
+            {
+                MessageBox.Show("Ocorreu erro na abertura do chamado! ", "Erro!: ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
