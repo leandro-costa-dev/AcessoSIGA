@@ -42,10 +42,13 @@ namespace AcessoSIGA
 
             foreach (Historico h in listaHistorico)
             {
-                ListViewItem item = new ListViewItem(h.dtAcompanhamento);
-                item.SubItems.Add(h.dsAcompanhamento);
+                if (h.idPrivado == "N")
+                {
+                    ListViewItem item = new ListViewItem(h.dtAcompanhamento);
+                    item.SubItems.Add(h.dsAcompanhamento);
 
-                listViewHistorico.Items.Add(item);
+                    listViewHistorico.Items.Add(item);
+                }
             }
         }
 

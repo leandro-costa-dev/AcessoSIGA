@@ -21,7 +21,7 @@ namespace AcessoSIGA
         public int tipoChamado { get; set; } //Tipo de chamado definido na tabela do SIGA
         public int cdCategoria { get; set; }//Tipo de categoria definido na tabela do SIGA
         public string nmCategoria { get; set; } = string.Empty; //Nome da categoria
-        public string nmResponsacel { get; set; } = string.Empty; //Nome do responsável
+        public string nmResponsavel { get; set; } = string.Empty; //Nome do responsável
         public int cdLocalidade { get; set; } //Localidade do CRC do cliente
         public int severidade { get; set; } //Severidade definido na tabela do SIGA
         public int cdOrigem { get; set; } //Tipo de origem definido na tabela do SIGA

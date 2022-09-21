@@ -7,7 +7,7 @@ namespace AcessoSIGA
 {
     public static class ConexaoSQL
     {
-        public static string servidor = @"LEANDRO-PC\MSSQLSERVER2019";
+        public static string servidor = @"LEANDRO-PC";
         public static string banco_master = "master";
         public static string banco = "SIGA";
         public static string usuario = "leandro";
@@ -89,6 +89,8 @@ namespace AcessoSIGA
                         "cnpj VARCHAR (14), " +
                         "cdContato INT, " +
                         "nmContato VARCHAR(100), " +
+                        "cdLocalidade INT, " +
+                        "nmLocalidade VARCHAR(40), " +
                         "email VARCHAR(100), " +
                         "login VARCHAR(50), " +
                         "servidor VARCHAR(100), " +
@@ -120,6 +122,8 @@ namespace AcessoSIGA
                         "dsAcompanhamento VARCHAR(500), " +
                         "nmUsuario VARCHAR(100), " +
                         "dtAcompanhamento VARCHAR(50), " +
+                        "idPrivado VARCHAR(10), " +
+                        "controle VARCHAR(2), " +
                         "CONSTRAINT fk_cdChamado FOREIGN KEY(cdChamado) " +
                         "REFERENCES CHAMADO(cdChamado) " +
                         "ON DELETE CASCADE " +

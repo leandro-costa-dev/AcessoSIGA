@@ -9,7 +9,7 @@ namespace AcessoSIGA
 {
     public class WSGeneral
     {
-        public string XML_getAutToken(Contato usuario)
+        public string XML_getAutTokenContact(Contato usuario)
         {
             string xml;
 
@@ -21,7 +21,7 @@ namespace AcessoSIGA
             xmlWriter.WriteStartElement("contents");
             xmlWriter.WriteStartElement("data");
             xmlWriter.WriteElementString("nmusuario", usuario.login);
-            xmlWriter.WriteElementString("cdempresa", usuario.cdCliente.ToString());
+            xmlWriter.WriteElementString("cdcliente", usuario.cdCliente.ToString());
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
@@ -108,6 +108,35 @@ namespace AcessoSIGA
             xmlWriter.WriteStartElement("data");
             xmlWriter.WriteElementString("cdcliente", cdCliente.ToString());
             xmlWriter.WriteElementString("dsemail", email);
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndDocument();
+
+            xmlWriter.Close();
+
+            xml = sw.ToString();
+
+            //Gravar XML
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Envio(xml);
+
+            return xml;
+        }
+
+        public string XML_getCustomerContactData(int cdCliente, int cdContato)
+        {
+            string xml;
+
+            StringWriter sw = new StringWriter();
+            XmlWriter xmlWriter = XmlWriter.Create(sw);
+
+            xmlWriter.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"ISO-8859-1\"");
+            xmlWriter.WriteStartElement("wsqualitor");
+            xmlWriter.WriteStartElement("contents");
+            xmlWriter.WriteStartElement("data");
+            xmlWriter.WriteElementString("cdcliente", cdCliente.ToString());
+            xmlWriter.WriteElementString("cdcontato", cdContato.ToString());
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();

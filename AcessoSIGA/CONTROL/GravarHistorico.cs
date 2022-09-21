@@ -8,6 +8,7 @@ namespace AcessoSIGA
 {
     public class GravarHistorico
     {
+        //Atualiza o registro de históricos no banco de dados
         public List<Ticket> AtualizaHistoricoChamados()
         {
             List<Ticket> listaTicket_ret = new List<Ticket>();
@@ -32,9 +33,10 @@ namespace AcessoSIGA
                 //Atualiza informações do chamado
                 chamadoDAO.GravarChamado(ticket);
 
-                //Verifica se existe novo registro e grava históricos do chamado 
+                //Verifica se existe novo registro e grava histórico do chamado 
                 if (historicoDAO.GravarHistorico(listaHistorico))
                 {
+
                     listaTicket_ret.Add(t);
                 }
             }

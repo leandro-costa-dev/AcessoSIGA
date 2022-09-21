@@ -43,7 +43,6 @@ namespace AcessoSIGA
 
             try
             {
-
                 var dados = Encoding.UTF8.GetBytes(dadosPOST);
 
                 var requisicaoWeb = HttpWebRequest.CreateHttp(UrlService);

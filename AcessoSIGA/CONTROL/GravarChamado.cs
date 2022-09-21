@@ -12,6 +12,7 @@ namespace AcessoSIGA
         public Ticket GravarChamados(Ticket ticket)
         {
             string operacao = "addTicketByEndUser";
+            //string operacao = "addTicketByData";
             string wsdl_file = "WSTicket";
 
             //Gera o XML de envio para o webservice
@@ -26,7 +27,7 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Util.GravarLog("Gravar chamado ", "XML de retorno vazio ou nulo!");
             }
             else
             {
@@ -83,7 +84,7 @@ namespace AcessoSIGA
             Ticket ticket = new Ticket();
 
             ticket.cdCliente = 2; //Codigo do Cliente Ex: GOVSUL=106941 ou 1726182 GOVBR=2
-            ticket.cdContato = 47; //Codigo do Contato Ex: GOVSUL=23 ou 444 GOVBR=47
+            ticket.cdContato = 48; //Codigo do Contato Ex: GOVSUL=23 ou 444 GOVBR=47
             ticket.idTIpoPeriodo = 1; //1-data de abertura, 2-data de término, 3-data de previsão de resposta, 4-data de previsão de término.
             ticket.dtPeriodo1 = dtInicio;
             ticket.dtPeriodo2 = dtFim;
@@ -103,7 +104,7 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Util.GravarLog("Consulta do chamado ", "XML de retorno vazio ou nulo!");
             }
             else
             {

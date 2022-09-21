@@ -284,7 +284,7 @@
             this.txtCodContato.Name = "txtCodContato";
             this.txtCodContato.Size = new System.Drawing.Size(68, 23);
             this.txtCodContato.TabIndex = 6;
-            this.txtCodContato.Text = "47";
+            this.txtCodContato.Text = "48";
             // 
             // label2
             // 

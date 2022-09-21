@@ -28,7 +28,7 @@ namespace AcessoSIGA
         {
             Contato contato = new Contato();
 
-            string operacao = "getAuthToken";
+            string operacao = "getAuthTokenContact";
             string wsdl_file = "WSGeneral.wsdl";
 
             contato.login = "leandro.costa";
@@ -38,7 +38,7 @@ namespace AcessoSIGA
 
             //Gera o XML de envio para o webservice
             WSGeneral wSGeneral = new WSGeneral();
-            string xml = wSGeneral.XML_getAutToken(contato);
+            string xml = wSGeneral.XML_getAutTokenContact(contato);
 
             //Instancia o webservice passando os dados
             WService wService = new WService(operacao, wsdl_file, xml);
@@ -114,6 +114,15 @@ namespace AcessoSIGA
         }
 
         private void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)
+        {
+            string n = notifyIcon1.BalloonTipText;
+            int cdChamado = int.Parse(n.Substring(n.IndexOf(":") + 1).Trim());
+
+            Frm_Acompanhamento f = new Frm_Acompanhamento(cdChamado);
+            f.ShowDialog();
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             string n = notifyIcon1.BalloonTipText;
             int cdChamado = int.Parse(n.Substring(n.IndexOf(":") + 1).Trim());

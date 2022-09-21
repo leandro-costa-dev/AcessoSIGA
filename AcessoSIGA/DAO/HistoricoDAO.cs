@@ -19,13 +19,15 @@ namespace AcessoSIGA
             {
                 if (!ExisteHistorico(h.cdChamado, h.cdAcompanhamento))
                 {
+                    h.controle = 0; //Flag novo histórico
+
                     var con = ConexaoSQL.ConectarBancoSQL(false);
                     var cmd = con.CreateCommand();
 
                     try
                     {
-                        cmd.CommandText = "INSERT INTO HISTORICO(cdChamado, cdAcompanhamento, nmTipoacompanhamento, dsAcompanhamento, nmUsuario, dtAcompanhamento)" +
-                                           "VALUES(@cdChamado, @cdAcompanhamento, @nmTipoacompanhamento, @dsAcompanhamento, @nmUsuario, @dtAcompanhamento)";
+                        cmd.CommandText = "INSERT INTO HISTORICO(cdChamado, cdAcompanhamento, nmTipoacompanhamento, dsAcompanhamento, nmUsuario, dtAcompanhamento, idPrivado, controle)" +
+                                           "VALUES(@cdChamado, @cdAcompanhamento, @nmTipoacompanhamento, @dsAcompanhamento, @nmUsuario, @dtAcompanhamento, @idPrivado, @controle)";
 
                         cmd.Parameters.AddWithValue("@cdChamado", h.cdChamado);
                         cmd.Parameters.AddWithValue("@cdAcompanhamento", h.cdAcompanhamento);
@@ -33,6 +35,8 @@ namespace AcessoSIGA
                         cmd.Parameters.AddWithValue("@dsAcompanhamento", h.dsAcompanhamento);
                         cmd.Parameters.AddWithValue("@nmUsuario", h.nmUsuario);
                         cmd.Parameters.AddWithValue("@dtAcompanhamento", h.dtAcompanhamento);
+                        cmd.Parameters.AddWithValue("@idPrivado", h.idPrivado);
+                        cmd.Parameters.AddWithValue("@controle", h.controle);
 
                         cmd.ExecuteNonQuery();
 
@@ -120,6 +124,8 @@ namespace AcessoSIGA
                     historico.dsAcompanhamento = Convert.ToString(row["dsAcompanhamento"]);
                     historico.nmUsuario = Convert.ToString(row["nmUsuario"]);
                     historico.dtAcompanhamento = Convert.ToString(row["dtAcompanhamento"]);
+                    historico.idPrivado = Convert.ToString(row["idPrivado"]);
+                    historico.controle = Convert.ToInt32(row["controle"]);
 
                     lista.Add(historico);
                 }

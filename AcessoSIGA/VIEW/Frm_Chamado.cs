@@ -34,7 +34,7 @@ namespace AcessoSIGA
             ticket.tipoChamado = 8; //Suporte
             ticket.cdCategoria = 70000338; //Código da categoria (AR - Administração de Receitas)
             ticket.cdLocalidade = 12; //CAC
-            ticket.severidade = 3; //Normal
+            ticket.severidade = 12; //Media
             ticket.animo = 4; //Normal
             ticket.cdOrigem = 9; //Telefone
             ticket.anexo = arquivoAnexo; //Arquivo anexo

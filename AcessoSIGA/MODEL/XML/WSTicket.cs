@@ -25,7 +25,7 @@ namespace AcessoSIGA
             xmlWriter.WriteElementString("idchamado", ticket.idChamado.ToString());
             xmlWriter.WriteElementString("nmtitulochamado", ticket.titChamado);
             xmlWriter.WriteElementString("cdtipochamado", ticket.tipoChamado.ToString());
-            xmlWriter.WriteElementString("cdcategoria", ticket.cdCategoria.ToString());
+            xmlWriter.WriteElementString("cdcategoria", ticket.cdCategoria.ToString());            
             xmlWriter.WriteElementString("cdlocalidade", ticket.cdLocalidade.ToString());
             xmlWriter.WriteElementString("cdseveridade", ticket.severidade.ToString());
             xmlWriter.WriteElementString("dschamado", ticket.dsChamado);

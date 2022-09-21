@@ -121,7 +121,7 @@ namespace AcessoSIGA
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmtitulochamado")
                                 ticket.titChamado = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmresponsavel")
-                                ticket.nmResponsacel = xmlReader.ReadElementContentAsString();
+                                ticket.nmResponsavel = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdcliente")
                                 ticket.cdCliente = int.Parse(xmlReader.ReadElementContentAsString());
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmcliente")
@@ -241,7 +241,17 @@ namespace AcessoSIGA
                                 historico.nmUsuario = xmlReader.ReadElementContentAsString();
                             if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dtacompanhamento")
                                 historico.dtAcompanhamento = xmlReader.ReadElementContentAsString();
-                            
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdusuario")
+                                historico.cdUsuario = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "idsolicitante")
+                                historico.idSolicitante = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "idemail")
+                                historico.idEmail = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "idsolucao")
+                                historico.idSolucao = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "idprivado")
+                                historico.idPrivado = xmlReader.ReadElementContentAsString();
+
                             break;
                         }
 
@@ -342,6 +352,54 @@ namespace AcessoSIGA
             catch (Exception ex)
             {
                 Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do contato! " + ex.Message);                
+            }
+            return contato;
+        }
+
+        //Lê o XML com retorno do contato da empresa pelo login
+        public static Contato retornarDadosContato(string xml)
+        {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
+            Contato contato = new Contato();
+
+            try
+            {
+                XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
+                XmlReaderSettings settings = new XmlReaderSettings();
+
+                settings.IgnoreComments = true;
+                settings.IgnoreProcessingInstructions = true;
+                settings.IgnoreWhitespace = true;
+
+                while (xmlReader.Read())
+                {
+                    if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dataitem")
+                    {
+                        while (xmlReader.Read())
+                        {
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdcliente")
+                                contato.cdCliente = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmcliente")
+                                contato.nmCliente = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdcontato")
+                                contato.cdContato = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmcontato")
+                                contato.nmContato = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdlocalidade")
+                                contato.cdLocalidade = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nmlocalidade")
+                                contato.nmLocalidade = xmlReader.ReadElementContentAsString();
+                        }
+                    }
+                }
+
+                return contato;
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML dos dados do contato! " + ex.Message);
             }
             return contato;
         }

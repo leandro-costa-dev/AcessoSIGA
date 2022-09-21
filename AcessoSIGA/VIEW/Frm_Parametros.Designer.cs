@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtLocalidade = new System.Windows.Forms.TextBox();
             this.txtCodCliente = new System.Windows.Forms.TextBox();
             this.txtNomeCliente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,6 +59,7 @@
             this.btnTestarConexao = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSalvar = new System.Windows.Forms.ToolStripButton();
+            this.txtCdLocalidade = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -76,6 +79,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCdLocalidade);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.txtLocalidade);
             this.groupBox1.Controls.Add(this.txtCodCliente);
             this.groupBox1.Controls.Add(this.txtNomeCliente);
             this.groupBox1.Controls.Add(this.label2);
@@ -87,6 +93,22 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados Cliente";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(220, 51);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(67, 15);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Localidade:";
+            // 
+            // txtLocalidade
+            // 
+            this.txtLocalidade.Location = new System.Drawing.Point(338, 48);
+            this.txtLocalidade.Name = "txtLocalidade";
+            this.txtLocalidade.Size = new System.Drawing.Size(157, 23);
+            this.txtLocalidade.TabIndex = 6;
             // 
             // txtCodCliente
             // 
@@ -344,6 +366,13 @@
             this.btnSalvar.Text = "toolStripButton1";
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
+            // txtCdLocalidade
+            // 
+            this.txtCdLocalidade.Location = new System.Drawing.Point(293, 48);
+            this.txtCdLocalidade.Name = "txtCdLocalidade";
+            this.txtCdLocalidade.Size = new System.Drawing.Size(39, 23);
+            this.txtCdLocalidade.TabIndex = 7;
+            // 
             // Frm_Parametros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -404,5 +433,8 @@
         private Label label7;
         private Label label6;
         private MaskedTextBox txtSenha;
+        private Label label10;
+        private TextBox txtLocalidade;
+        private TextBox txtCdLocalidade;
     }
 }

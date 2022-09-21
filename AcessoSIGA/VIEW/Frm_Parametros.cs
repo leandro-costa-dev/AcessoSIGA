@@ -39,6 +39,8 @@ namespace AcessoSIGA
 
                 txtCodContato.Text = p.Contato.cdContato.ToString();
                 txtNomeContato.Text = p.Contato.nmContato.ToString();
+                txtCdLocalidade.Text = p.Contato.cdLocalidade.ToString();
+                txtLocalidade.Text = p.Contato.nmLocalidade;
                 txtEmail.Text = p.Contato.email.ToString();
                 txtLoginContato.Text = p.Contato.login.ToString();
 
@@ -63,87 +65,29 @@ namespace AcessoSIGA
             }
 
             Cliente cliente = new Cliente();
+            Contato contato = new Contato();            
 
-            string CpfCnpj = txtCpfCnpj.Text;
-            string operacao = "getCustomer";
-            string wsdl_file = "WSGeneral.wsdl";
+            cliente.cnpj = txtCpfCnpj.Text;
+            contato.login = txtLoginContato.Text;
+            contato.email = txtEmail.Text;
 
-            //Gera o XML de envio para o webservice
-            WSGeneral wSGeneral = new WSGeneral();
-            string xml = wSGeneral.XML_getCustomer(CpfCnpj);
+            GravarParametros gravarParametros = new GravarParametros();
+            cliente = gravarParametros.ConsultarEmpresa(cliente);
+            txtCodCliente.Text = cliente.cdCliente.ToString();
+            txtNomeCliente.Text = cliente.nmCliente;
 
-            //Instancia o webservice passando os dados
-            WService wService = new WService(operacao, wsdl_file, xml);
-
-            //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
-
-            if (String.IsNullOrEmpty(wsRetorno))
-            {
-                MessageBox.Show("Ocorreu erro na conexão com WebService, verifique!", "Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                //Lê XML de retorno e devolve os dados
-                cliente = RetornarXML.retornarEmpresa(wsRetorno);
-
-                txtCodCliente.Text = cliente.cdCliente.ToString();
-                txtNomeCliente.Text = cliente.nmCliente;
-
-                buscarContato(cliente.cdCliente);
-            }
-        }
-
-        private void buscarContato(int cdCliente)
-        {
-            Contato contato = new Contato();
-
-            string nmContato = txtLoginContato.Text;
-            string email = txtEmail.Text;
-            
-            string operacao = "getCustomerContact";
-            string wsdl_file = "WSGeneral.wsdl";
-
-            //Se login não for informado busca o contato pelo e-mail informado
-            if (String.IsNullOrEmpty(txtLoginContato.Text))
-            {
-                //Gera o XML de envio para o webservice
-                WSGeneral wSGeneral = new WSGeneral();
-                string xml = wSGeneral.XML_getCustomerContactEmail(cdCliente, email);
-
-                //Instancia o webservice passando os dados
-                WService wService = new WService(operacao, wsdl_file, xml);
-
-                //Envia a requisição POST e faz a leitura do XML de retorno
-                string wsRetorno = wService.RequisicaoPOST();
-
-                //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.retornarContatoEmpresa(wsRetorno);
-            }
-            else
-            {
-                //Gera o XML de envio para o webservice
-                WSGeneral wSGeneral = new WSGeneral();
-                string xml = wSGeneral.XML_getCustomerContactLogin(cdCliente, nmContato);
-
-                //Instancia o webservice passando os dados
-                WService wService = new WService(operacao, wsdl_file, xml);
-
-                //Envia a requisição POST e faz a leitura do XML de retorno
-                string wsRetorno = wService.RequisicaoPOST();
-
-                //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.retornarContatoEmpresa(wsRetorno);
-            }
-
+            contato = gravarParametros.BuscarContato(cliente, contato);
             txtCodContato.Text = contato.cdContato.ToString();
             txtNomeContato.Text = contato.nmContato;
             txtEmail.Text = contato.email;
             txtLoginContato.Text = contato.login;
-            
-        }
 
-        private void btnTestarConexao_Click(object sender, EventArgs e)
+            contato = gravarParametros.BuscarDadosContato(cliente, contato);
+            txtCdLocalidade.Text = contato.cdLocalidade.ToString();
+            txtLocalidade.Text = contato.nmLocalidade;
+
+        }
+            private void btnTestarConexao_Click(object sender, EventArgs e)
         {
             ConexaoSQL.banco = txtBanco.Text;
             ConexaoSQL.servidor = txtServidor.Text;
@@ -180,6 +124,8 @@ namespace AcessoSIGA
             Contato contato = new Contato();
             contato.cdContato = int.Parse(txtCodContato.Text);
             contato.nmContato = txtNomeContato.Text;
+            contato.cdLocalidade = int.Parse(txtCdLocalidade.Text);
+            contato.nmLocalidade = txtLocalidade.Text;
             contato.email = txtEmail.Text;
             contato.login = txtLoginContato.Text;
 
