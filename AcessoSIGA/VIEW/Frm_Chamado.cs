@@ -36,12 +36,12 @@ namespace AcessoSIGA
             ticket.cdLocalidade = 12; //CAC
             ticket.severidade = 12; //Media
             ticket.animo = 4; //Normal
-            ticket.cdOrigem = 9; //Telefone
+            ticket.cdOrigem = 88; //WebService
             ticket.anexo = arquivoAnexo; //Arquivo anexo
             ticket.dsAnexo = descAnexo; //Descrição do anexo
 
-            GravarChamado gravarChamado = new GravarChamado();
-            ticket = gravarChamado.GravarChamados(ticket);
+            CtrChamado ctrChamado = new CtrChamado();
+            ticket = ctrChamado.GravarChamados(ticket);
 
             if (ticket.cdChamado > 0)
             {

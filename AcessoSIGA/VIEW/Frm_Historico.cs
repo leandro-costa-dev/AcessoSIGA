@@ -24,28 +24,37 @@ namespace AcessoSIGA
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
+            listViewChamados.Items.Clear();
+
             List<Ticket> lista = new List<Ticket>();
 
             DateTime dtInicio = dtPicker_dataInicio.Value;
             DateTime dtFim = dtPicker_dtFim.Value;
 
-            string dtInicial = dtInicio.ToString();
-            string dtFinal = dtFim.ToString();
+            string dtInicial = DateTime.Parse(dtInicio.ToString()).ToShortDateString();
+            string dtFinal = DateTime.Parse(dtFim.ToString()).ToShortDateString();
 
-            string dataInicial = DateTime.Parse(dtInicial) .ToString("yyyy-MM-dd");
-            string dataFinal = DateTime.Parse(dtFinal).ToString("yyyy-MM-dd");
-           
-            GravarChamado gravarChamado = new GravarChamado();
-            lista = gravarChamado.consultarChamados(dataInicial, dataFinal);
+            DateTime dataInicial = DateTime.Parse(dtInicial);
+            DateTime dataFinal = DateTime.Parse(dtFinal);
+
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
+            Parametros parametros = parametrosDAO.ConsultarParametros();
+
+            ChamadoDAO chamadoDAO = new ChamadoDAO();
+            lista = chamadoDAO.ConsultaChamadosContato(parametros);
 
             foreach (Ticket t in lista)
             {
-                ListViewItem item = new ListViewItem(t.cdChamado.ToString());
-                item.SubItems.Add(t.titChamado);
-                item.SubItems.Add(t.nmSituacao);
-                listViewChamados.Items.Add(item);
-            }
+                DateTime dtChamado = DateTime.Parse(t.dataChamado.Substring(0, 10));
 
+                if (dtChamado >= dataInicial && dtChamado <= dataFinal)
+                {
+                    ListViewItem item = new ListViewItem(t.cdChamado.ToString());
+                    item.SubItems.Add(t.titChamado);
+                    item.SubItems.Add(t.nmSituacao);
+                    listViewChamados.Items.Add(item);
+                }
+            }
         }
 
         private void listViewChamados_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -58,13 +67,8 @@ namespace AcessoSIGA
             int linha = listViewChamados.SelectedItems[0].Index;
             int cdChamado = int.Parse(listViewChamados.Items[linha].SubItems[0].Text);
 
-            GravarChamado gravarChamado = new GravarChamado();
-            lista = gravarChamado.consultarHistoricoChamado(cdChamado);
-            ticket = gravarChamado.consultarDadosChamado(cdChamado);
-
-            Frm_Historico_Detalhe f = new Frm_Historico_Detalhe(lista, cdChamado, ticket.dsChamado, ticket.dataChamado);
+            Frm_Acompanhamento f = new Frm_Acompanhamento(cdChamado);
             f.ShowDialog();
-
         }
     }
 }

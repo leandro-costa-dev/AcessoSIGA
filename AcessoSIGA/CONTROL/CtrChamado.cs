@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AcessoSIGA
 {
-    public class GravarChamado
+    public class CtrChamado
     {
-        //Abertura de chamado
+        //Abertura de chamado via webservice
         public Ticket GravarChamados(Ticket ticket)
         {
             string operacao = "addTicketByEndUser";
@@ -27,7 +27,7 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                Util.GravarLog("Gravar chamado ", "XML de retorno vazio ou nulo!");
+                Util.GravarLog("WS gravar chamado ", "XML de retorno vazio ou nulo!");
             }
             else
             {
@@ -52,7 +52,7 @@ namespace AcessoSIGA
             return ticket;
         }
 
-        //Enviar o arquivo anexo para o chamado
+        //Enviar para webservice o arquivo anexo do chamado
         public void EnviarAnexo(Ticket ticket)
         {
             if (String.IsNullOrEmpty(ticket.anexo))
@@ -76,18 +76,12 @@ namespace AcessoSIGA
             }
         }
 
-        //Consulta geral de chamados
-        public List<Ticket> consultarChamados(string dtInicio, string dtFim)
+        //Consulta geral de chamados webservice
+        public List<Ticket> ConsultaChamados()
         {
             List<Ticket> lista = new List<Ticket>();
 
-            Ticket ticket = new Ticket();
-
-            ticket.cdCliente = 2; //Codigo do Cliente Ex: GOVSUL=106941 ou 1726182 GOVBR=2
-            ticket.cdContato = 48; //Codigo do Contato Ex: GOVSUL=23 ou 444 GOVBR=47
-            ticket.idTIpoPeriodo = 1; //1-data de abertura, 2-data de término, 3-data de previsão de resposta, 4-data de previsão de término.
-            ticket.dtPeriodo1 = dtInicio;
-            ticket.dtPeriodo2 = dtFim;
+            Ticket ticket = new Ticket();         
 
             string operacao = "getTicket";
             string wsdl_file = "WSTicket.wsdl";
@@ -104,7 +98,7 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                Util.GravarLog("Consulta do chamado ", "XML de retorno vazio ou nulo!");
+                Util.GravarLog("WS consulta geral de chamados ", "XML de retorno vazio ou nulo!");
             }
             else
             {
@@ -114,8 +108,8 @@ namespace AcessoSIGA
             return lista;
         }
 
-        //Consultar histórico do chamado informado
-        public List<Historico> consultarHistoricoChamado(int cdChamado)
+        //Consultar webservice de histórico do chamado informado
+        public List<Historico> ConsultarHistoricoChamado(int cdChamado)
         {
             List<Historico> lista = new List<Historico>();
 
@@ -138,7 +132,7 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                Util.GravarLog("Consulta histórico do chamado ", "XML de retorno vazio ou nulo!");                
+                Util.GravarLog("WS consulta histórico do chamado ", "XML de retorno vazio ou nulo!");                
             }
             else
             {
@@ -148,7 +142,7 @@ namespace AcessoSIGA
             return lista;
         }
 
-        //Consulta dados adicionais do chamado informado
+        //Consulta webservice de dados adicionais do chamado informado
         public Ticket consultarDadosChamado(int cdChamado)
         {
             Ticket ticket = new Ticket();
@@ -168,7 +162,7 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                Util.GravarLog("Consulta dados do chamado ", "XML de retorno vazio ou nulo!");                
+                Util.GravarLog("WS consulta dados do chamado ", "XML de retorno vazio ou nulo!");                
             }
             else
             {

@@ -10,7 +10,7 @@ namespace AcessoSIGA
 {
     public class ChamadoDAO
     {
-        //-------------Gravar chamado no banco----------
+        //Grava/Atualiza chamado no banco de dados
         public void GravarChamado(Ticket t)
         {
             if (ExisteChamado(t.cdChamado))
@@ -107,7 +107,7 @@ namespace AcessoSIGA
             }
         }
 
-        //Verifica se existe chamado
+        //Verifica no BD se existe chamado
         public bool ExisteChamado(int cdChamado)
         {
             bool resultado = false;
@@ -141,7 +141,7 @@ namespace AcessoSIGA
             return resultado;
         }
 
-        //Consulta de chamados com situação diferente de encerrado
+        //Consulta no BD de chamados com situação diferente de encerrado
         public List<Ticket> ConsultaChamadosAtivos()
         {
             List<Ticket> lista = new List<Ticket>();
@@ -179,7 +179,7 @@ namespace AcessoSIGA
             return lista;
         }
 
-        //Consulta informações do chamado
+        //Consulta no BD informações do chamado
         public Ticket ConsultaChamado(int cdChamado)
         {
             Ticket ticket = new Ticket();
@@ -224,6 +224,56 @@ namespace AcessoSIGA
                 con.Close();
             }
             return ticket;
+        }
+
+        //Consulta no BD todos os chamados do contato informado
+        public List<Ticket> ConsultaChamadosContato(Parametros p)
+        {
+            List<Ticket> listaTicket = new List<Ticket>();
+
+            SqlDataAdapter da = null;
+            DataTable dt = new DataTable();
+
+            var con = ConexaoSQL.ConectarBancoSQL(false);
+            var cmd = con.CreateCommand();
+
+            try
+            {
+                cmd.CommandText = "SELECT * FROM CHAMADO WHERE cdContato=" + p.Contato.cdContato;
+
+                da = new SqlDataAdapter(cmd.CommandText, con);
+                da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    Ticket ticket = new Ticket();
+
+                    ticket.cdChamado = Convert.ToInt32(row["cdChamado"]);
+                    ticket.idChamado = Convert.ToInt32(row["idChamado"]);
+                    ticket.titChamado = Convert.ToString(row["titChamado"]);
+                    ticket.dsChamado = Convert.ToString(row["dsChamado"]);
+                    ticket.cdCliente = Convert.ToInt32(row["cdCliente"]);
+                    ticket.nmCliente = Convert.ToString(row["nmCliente"]);
+                    ticket.cdContato = Convert.ToInt32(row["cdContato"]);
+                    ticket.nmContato = Convert.ToString(row["nmContato"]);
+                    ticket.cdSituacao = Convert.ToInt32(row["sitChamado"]);
+                    ticket.nmSituacao = Convert.ToString(row["nmSituacao"]);
+                    ticket.dataChamado = Convert.ToString(row["dataChamado"]);
+                    ticket.anexo = Convert.ToString(row["anexo"]);
+                    ticket.dsAnexo = Convert.ToString(row["dsAnexo"]);
+
+                    listaTicket.Add(ticket);
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar chamdos do contato no banco de dados! " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return listaTicket;
         }
     }
 }

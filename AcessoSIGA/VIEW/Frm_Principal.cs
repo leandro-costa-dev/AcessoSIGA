@@ -16,9 +16,9 @@ namespace AcessoSIGA
             ConexaoSQL.CriarBancoSQL();
             ConexaoSQL.CriarTabelasSQL();
 
-            //Executa thread do historico
-            Thread t = new Thread(AtualizarHistorico);
-            t.Start();
+            //Executa thread de atualização do historico
+            Thread t1 = new Thread(AtualizarHistorico);
+            t1.Start();
 
             //Posicionar o botão na tela inicial
             pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
@@ -26,32 +26,8 @@ namespace AcessoSIGA
 
         private void acessoSIGAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Contato contato = new Contato();
-
-            string operacao = "getAuthTokenContact";
-            string wsdl_file = "WSGeneral.wsdl";
-
-            contato.login = "leandro.costa";
-            contato.cdCliente = 2;
-
-            string token = "";
-
-            //Gera o XML de envio para o webservice
-            WSGeneral wSGeneral = new WSGeneral();
-            string xml = wSGeneral.XML_getAutTokenContact(contato);
-
-            //Instancia o webservice passando os dados
-            WService wService = new WService(operacao, wsdl_file, xml);
-
-            //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
-
-            //Lê XML de retorno e devolve os dados
-            token = RetornarXML.retornarToken(wsRetorno);
-
-            //Abre o navegador web com usuario logado
-            //Process.Start(new ProcessStartInfo("http://siga820.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true }); //GOVSUL
-            Process.Start(new ProcessStartInfo("http://siga_hml.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true });
+            CtrParametros ctrParametros = new CtrParametros();
+            ctrParametros.AcessoSigaContato();
 
         }
 
@@ -80,9 +56,7 @@ namespace AcessoSIGA
         }
 
         private void AtualizarHistorico()
-        {           
-            GravarHistorico gravarHistorico = new GravarHistorico();            
-
+        {                 
             while (executar)
             {
                 Thread.Sleep(10000); //Aguarda 10 segundos
@@ -91,20 +65,37 @@ namespace AcessoSIGA
                 {
                     List<Ticket> listaTicket = new List<Ticket>();
 
-                    GravarHistorico gravar = new GravarHistorico();
-                    listaTicket = gravar.AtualizaHistoricoChamados();
+                    CtrHistorico ctrHistorico = new CtrHistorico();
+                    ctrHistorico.AtualizaHistoricoChamados();
 
-                    foreach (Ticket t in listaTicket)
-                    {
-                        notifyIcon1.Icon = SystemIcons.Application;
-                        notifyIcon1.BalloonTipTitle = "Chamado Atualizado!";
-                        notifyIcon1.BalloonTipText = "Há uma nova atualização no chamado nº: " + t.cdChamado;
-                        notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-
-                        notifyIcon1.Visible = true;
-                        notifyIcon1.ShowBalloonTip(30000);
-                    }
+                    ExibirNotificacao();
                 }
+            }
+        }
+
+        private void ExibirNotificacao()
+        {
+            List<Historico> listHistorico = new List<Historico>();
+
+            CtrHistorico ctrHistorico = new CtrHistorico();
+            listHistorico = ctrHistorico.ConsultaNovoHistorico();
+
+            foreach (Historico h in listHistorico)
+            {
+                notifyIcon1.Icon = SystemIcons.Application;
+                notifyIcon1.BalloonTipTitle = "Chamado Atualizado!";
+                notifyIcon1.BalloonTipText = "Há uma nova atualização no chamado nº: " + h.cdChamado;
+                notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+
+                notifyIcon1.Visible = true;
+                notifyIcon1.ShowBalloonTip(30000);
+
+                Thread.Sleep(5000);
+
+                //Atualiza flag de controle histórico após notificação ser exibida
+                HistoricoDAO historicoDAO = new HistoricoDAO();
+                historicoDAO.AtualizaHistorico(h);
+
             }
         }
 
@@ -130,5 +121,6 @@ namespace AcessoSIGA
             Frm_Acompanhamento f = new Frm_Acompanhamento(cdChamado);
             f.ShowDialog();
         }
+
     }
 }

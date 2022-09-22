@@ -77,7 +77,7 @@ namespace AcessoSIGA
             return xml;            
         }
 
-
+        //revisar
         public string XML_getTicket(Ticket ticket)
         {
             string xml;

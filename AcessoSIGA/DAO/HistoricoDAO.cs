@@ -10,16 +10,21 @@ namespace AcessoSIGA
 {
     public class HistoricoDAO
     {
-        //-------------Gravar histórico do chamado no banco----------
-        public bool GravarHistorico(List<Historico> listHistorico)
+        //Grava histórico do chamado no banco de dados
+        public void GravarHistorico(List<Historico> listHistorico)
         {
-            bool resultado = false;
-
             foreach (Historico h in listHistorico)
             {
                 if (!ExisteHistorico(h.cdChamado, h.cdAcompanhamento))
                 {
-                    h.controle = 0; //Flag novo histórico
+                    if (h.cdAcompanhamento == 1)
+                    {
+                        h.controle = 1; //Marca a flag de histórico como lida quando for rascunho
+                    }
+                    else
+                    {
+                        h.controle = 0; //Flag novo histórico não visualizado
+                    }
 
                     var con = ConexaoSQL.ConectarBancoSQL(false);
                     var cmd = con.CreateCommand();
@@ -42,12 +47,6 @@ namespace AcessoSIGA
 
                         Console.WriteLine("Histórico gravado com sucesso!");
 
-                        //Retorna true se um novo histórico for adicionado e diferente de rascunho
-                        if (h.cdAcompanhamento != 1)
-                        {
-                            resultado = true;
-                        }
-
                     }
                     catch (Exception ex)
                     {
@@ -59,7 +58,36 @@ namespace AcessoSIGA
                     }
                 }
             }
-            return resultado;
+        }
+
+        //Atualiza o flag do histórico no banco de dados
+        public void AtualizaHistorico(Historico h)
+        {
+            var con = ConexaoSQL.ConectarBancoSQL(false);
+            var cmd = con.CreateCommand();
+
+            try
+            {
+                cmd.CommandText = "UPDATE HISTORICO SET " +
+                                "controle=@controle " +
+                                "WHERE cdChamado=@cdChamado " +
+                                "AND cdAcompanhamento=@cdAcompanhamento";
+
+                cmd.Parameters.AddWithValue("@cdChamado", h.cdChamado);
+                cmd.Parameters.AddWithValue("@cdAcompanhamento", h.cdAcompanhamento);
+                cmd.Parameters.AddWithValue("@controle", 1);
+
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao atualizar o histórico do chamado no banco de dados! " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         //Verifica se existe histórico do chamado

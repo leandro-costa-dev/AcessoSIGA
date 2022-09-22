@@ -106,7 +106,7 @@ namespace AcessoSIGA
             }
         }
 
-        public Parametros consultarParametros()
+        public Parametros ConsultarParametros()
         {
             Parametros parametros = new Parametros();
 

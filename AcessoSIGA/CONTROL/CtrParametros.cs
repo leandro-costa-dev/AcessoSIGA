@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AcessoSIGA
 {
-    public class GravarParametros
+    public class CtrParametros
     {
         public Cliente ConsultarEmpresa(Cliente cliente)
         {
@@ -100,6 +101,33 @@ namespace AcessoSIGA
             }
 
             return contato;
+        }
+
+        public void AcessoSigaContato()
+        {
+            string operacao = "getAuthTokenContact";
+            string wsdl_file = "WSGeneral.wsdl";
+
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
+            Parametros parametros = parametrosDAO.ConsultarParametros();
+
+            //Gera o XML de envio para o webservice
+            WSGeneral wSGeneral = new WSGeneral();
+            string xml = wSGeneral.XML_getAutTokenContact(parametros);
+
+            //Instancia o webservice passando os dados
+            WService wService = new WService(operacao, wsdl_file, xml);
+
+            //Envia a requisição POST e faz a leitura do XML de retorno
+            string wsRetorno = wService.RequisicaoPOST();
+
+            //Lê XML de retorno e devolve os dados
+            string token = RetornarXML.retornarToken(wsRetorno);
+
+            //Abre o navegador web com usuario logado
+            //Process.Start(new ProcessStartInfo("http://siga820.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true }); //GOVSUL
+            Process.Start(new ProcessStartInfo("http://siga_hml.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true });
+
         }
     }
 }

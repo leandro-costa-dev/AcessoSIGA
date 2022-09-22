@@ -9,25 +9,25 @@ namespace AcessoSIGA
 {
     public class WSGeneral
     {
-        public string XML_getAutTokenContact(Contato usuario)
+        public string XML_getAutTokenContact(Parametros p)
         {
             string xml;
 
             StringWriter sw = new StringWriter();
             XmlWriter xmlWriter = XmlWriter.Create(sw);
 
-            xmlWriter.WriteProcessingInstruction("xml", "version=\"1.0\" encoding=\"ISO-8859-1\"");
+            xmlWriter.WriteProcessingInstruction("xml", @"version=""1.0"" encoding=""ISO-8859-1""");
             xmlWriter.WriteStartElement("wsqualitor");
             xmlWriter.WriteStartElement("contents");
             xmlWriter.WriteStartElement("data");
-            xmlWriter.WriteElementString("nmusuario", usuario.login);
-            xmlWriter.WriteElementString("cdcliente", usuario.cdCliente.ToString());
+            xmlWriter.WriteElementString("nmusuario", p.Contato.login);
+            xmlWriter.WriteElementString("cdcliente", p.Cliente.cdCliente.ToString());
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndDocument();
 
-            xmlWriter.Close();
+            xmlWriter.Close();           
 
             xml = sw.ToString();
 

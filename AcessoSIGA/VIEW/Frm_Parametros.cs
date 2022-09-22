@@ -25,7 +25,7 @@ namespace AcessoSIGA
         private void carregarParametros()
         {
             ParametrosDAO parametrosDAO = new ParametrosDAO();            
-            Parametros p = parametrosDAO.consultarParametros();
+            Parametros p = parametrosDAO.ConsultarParametros();
 
             if (p.Cliente == null)
             {
@@ -71,18 +71,18 @@ namespace AcessoSIGA
             contato.login = txtLoginContato.Text;
             contato.email = txtEmail.Text;
 
-            GravarParametros gravarParametros = new GravarParametros();
-            cliente = gravarParametros.ConsultarEmpresa(cliente);
+            CtrParametros ctrParametros = new CtrParametros();
+            cliente = ctrParametros.ConsultarEmpresa(cliente);
             txtCodCliente.Text = cliente.cdCliente.ToString();
             txtNomeCliente.Text = cliente.nmCliente;
 
-            contato = gravarParametros.BuscarContato(cliente, contato);
+            contato = ctrParametros.BuscarContato(cliente, contato);
             txtCodContato.Text = contato.cdContato.ToString();
             txtNomeContato.Text = contato.nmContato;
             txtEmail.Text = contato.email;
             txtLoginContato.Text = contato.login;
 
-            contato = gravarParametros.BuscarDadosContato(cliente, contato);
+            contato = ctrParametros.BuscarDadosContato(cliente, contato);
             txtCdLocalidade.Text = contato.cdLocalidade.ToString();
             txtLocalidade.Text = contato.nmLocalidade;
 
