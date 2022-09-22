@@ -157,7 +157,6 @@ namespace AcessoSIGA
             {
                 con.Close();
             }
-
             return parametros;
         }
     }

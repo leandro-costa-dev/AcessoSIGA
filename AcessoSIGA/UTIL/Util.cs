@@ -10,7 +10,7 @@ namespace AcessoSIGA
     {       
 
         //Criar as pastas e retorna o diretório atual da aplicação
-        public static string criarDiretorios()
+        public static string CriarDiretorios()
         {
             string path = Directory.GetCurrentDirectory();
 
@@ -35,7 +35,7 @@ namespace AcessoSIGA
         }
 
         //Limpar caracteres em uma string
-        public static string limparString(string str)
+        public static string LimparString(string str)
 		{
 			string[] charsToRemove = new string[] { "\\"," ", "-", "/", "@", ",", ".", ";", ":", "'", "%", "&", "(", ")" };
 			foreach (var c in charsToRemove)
@@ -66,7 +66,6 @@ namespace AcessoSIGA
                     stWriter.WriteLine($"Evento: " + logMensagem);
                     stWriter.WriteLine("--------------------------------------------------------------");
                 }
-
                 return true;
             }
             catch (Exception ex)

@@ -11,17 +11,11 @@ namespace AcessoSIGA
     //Acesso ao WebService no modo STATELESS
     public class WService 
     {
-        //string UrlService = "http://siga820.govbr.com.br/ws/statelessws.php?"; //GOVSUL
         string UrlService = "http://siga_hml.govbr.com.br/ws/statelessws.php?";
 
         string usuarioADM = "ws_siga";
         string senhaADM = "bc@FLv4r";
         string empresaADM = "2";
-
-        //GOV SUL
-        //string usuarioADM = "leandro.costa";
-        //string senhaADM = "123456";
-        //string empresaADM = "1";
 
         string operacao;
         string wsdl;

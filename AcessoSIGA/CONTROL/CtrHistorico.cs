@@ -28,7 +28,7 @@ namespace AcessoSIGA
             foreach (Ticket t in listaTicket)
             {
                 listaHistorico = ctrChamado.ConsultarHistoricoChamado(t.cdChamado);
-                ticket = ctrChamado.consultarDadosChamado(t.cdChamado);
+                ticket = ctrChamado.ConsultarDadosChamado(t.cdChamado);
 
                 //Atualiza informações do chamado
                 chamadoDAO.GravarChamado(ticket);

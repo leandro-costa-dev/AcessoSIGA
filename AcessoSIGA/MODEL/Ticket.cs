@@ -16,7 +16,7 @@ namespace AcessoSIGA
         public string nmCliente { get; set; } = string.Empty; //Nome do cliente
         public int cdContato { get; set; } //Código do contato
         public string nmContato { get; set; } = string.Empty; //Nome do contato     
-        public int cdSituacao { get; set; } //Código da situação
+        public int cdSituacao { get; set; } //1-Rascunho 2-Aguardando Atendimento 3-Em Atendimento 5-Suspenso 7-Encerrado 10-Enc. Terceiros
         public string nmSituacao { get; set; } = string.Empty; //Nome da situação
         public int tipoChamado { get; set; } //Tipo de chamado definido na tabela do SIGA
         public int cdCategoria { get; set; }//Tipo de categoria definido na tabela do SIGA

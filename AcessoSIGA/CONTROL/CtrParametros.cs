@@ -26,12 +26,12 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                Util.GravarLog("Consulta empresa ", "XML de retorno vazio ou nulo!");
+                Util.GravarLog("WS consulta empresa ", "XML de retorno vazio ou nulo!");
             }
             else
             {               
                 //Lê XML de retorno e devolve os dados
-                cliente = RetornarXML.retornarEmpresa(wsRetorno);
+                cliente = RetornarXML.RetornarEmpresa(wsRetorno);
             }
             return cliente;
         }
@@ -55,7 +55,7 @@ namespace AcessoSIGA
                 string wsRetorno = wService.RequisicaoPOST();
 
                 //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.retornarContatoEmpresa(wsRetorno);
+                contato = RetornarXML.RetornarContatoEmpresa(wsRetorno);
             }
             else
             {
@@ -70,7 +70,7 @@ namespace AcessoSIGA
                 string wsRetorno = wService.RequisicaoPOST();
 
                 //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.retornarContatoEmpresa(wsRetorno);
+                contato = RetornarXML.RetornarContatoEmpresa(wsRetorno);
             }
             return contato;
         }
@@ -92,12 +92,12 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                Util.GravarLog("Consulta dados do contato ", "XML de retorno vazio ou nulo!");
+                Util.GravarLog("WS consulta dados do contato ", "XML de retorno vazio ou nulo!");
             }
             else
             {
                 //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.retornarDadosContato(wsRetorno);
+                contato = RetornarXML.RetornarDadosContato(wsRetorno);
             }
 
             return contato;
@@ -121,13 +121,18 @@ namespace AcessoSIGA
             //Envia a requisição POST e faz a leitura do XML de retorno
             string wsRetorno = wService.RequisicaoPOST();
 
-            //Lê XML de retorno e devolve os dados
-            string token = RetornarXML.retornarToken(wsRetorno);
+            if (String.IsNullOrEmpty(wsRetorno))
+            {
+                Util.GravarLog("WS consulta token do contato ", "XML de retorno vazio ou nulo!");
+            }
+            else
+            {
+                //Lê XML de retorno e devolve os dados
+                string token = RetornarXML.RetornarToken(wsRetorno);
 
-            //Abre o navegador web com usuario logado
-            //Process.Start(new ProcessStartInfo("http://siga820.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true }); //GOVSUL
-            Process.Start(new ProcessStartInfo("http://siga_hml.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true });
-
+                //Abre o navegador web com usuario logado                
+                Process.Start(new ProcessStartInfo("http://siga_hml.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true });
+            }
         }
     }
 }

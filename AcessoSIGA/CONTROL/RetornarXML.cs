@@ -5,7 +5,7 @@ namespace AcessoSIGA
 {
     public class RetornarXML
     {
-        public static string retornarToken(string xml)
+        public static string RetornarToken(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -14,7 +14,6 @@ namespace AcessoSIGA
 
             try
             {
-
                 XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
                 XmlReaderSettings settings = new XmlReaderSettings();
 
@@ -33,9 +32,7 @@ namespace AcessoSIGA
                             break;
                         }
                     }
-
                 }
-
                 return token;
             }
             catch (Exception ex)
@@ -46,7 +43,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do chamado
-        public static Ticket retornarChamado(string xml)
+        public static Ticket RetornarChamado(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -55,7 +52,6 @@ namespace AcessoSIGA
 
             try
             {
-
                 XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
                 XmlReaderSettings settings = new XmlReaderSettings();
 
@@ -65,7 +61,6 @@ namespace AcessoSIGA
 
                 while (xmlReader.Read())
                 {
-
                     if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dataitem")
                     {
                         while (xmlReader.Read())
@@ -92,7 +87,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno dos detalhes do chamado
-        public static Ticket retornarDadosChamado(string xml)
+        public static Ticket RetornarDadosChamado(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -101,7 +96,6 @@ namespace AcessoSIGA
 
             try
             {
-
                 XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
                 XmlReaderSettings settings = new XmlReaderSettings();
 
@@ -188,12 +182,9 @@ namespace AcessoSIGA
                                 ticket.nmSituacao = xmlReader.ReadElementContentAsString();
                             break;
                         }
-
                         lista.Add(ticket);
                     }
-
                 }
-
                 return lista;
             }
             catch (Exception ex)
@@ -204,7 +195,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com lista do histórico do chamado
-        public static List<Historico> retornarHistoricoChamado(string xml)
+        public static List<Historico> RetornarHistoricoChamado(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -213,7 +204,6 @@ namespace AcessoSIGA
 
             try
             {
-
                 XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
                 XmlReaderSettings settings = new XmlReaderSettings();
 
@@ -254,12 +244,9 @@ namespace AcessoSIGA
 
                             break;
                         }
-
                         lista.Add(historico);
                     }
-
                 }
-
                 return lista;
             }
             catch (Exception ex)
@@ -270,7 +257,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com empresa localizada pelo CNPJ
-        public static Cliente retornarEmpresa(string xml)
+        public static Cliente RetornarEmpresa(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -300,7 +287,6 @@ namespace AcessoSIGA
                         }
                     }
                 }
-
                 return cliente;
             }
             catch (Exception ex)
@@ -311,7 +297,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do contato da empresa pelo login
-        public static Contato retornarContatoEmpresa(string xml)
+        public static Contato RetornarContatoEmpresa(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -346,7 +332,6 @@ namespace AcessoSIGA
                         }
                     }
                 }
-
                 return contato;
             }
             catch (Exception ex)
@@ -357,7 +342,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do contato da empresa pelo login
-        public static Contato retornarDadosContato(string xml)
+        public static Contato RetornarDadosContato(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -394,7 +379,6 @@ namespace AcessoSIGA
                         }
                     }
                 }
-
                 return contato;
             }
             catch (Exception ex)
@@ -405,7 +389,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do anexo enviado
-        public static bool retornarRespostaAnexo(string xml)
+        public static bool RetornarRespostaAnexo(string xml)
         {
             bool resposta = false;
             string status = "";

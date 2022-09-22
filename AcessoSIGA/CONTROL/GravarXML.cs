@@ -18,17 +18,15 @@ namespace AcessoSIGA
             //doc.Load(caminhoXML);
 
             //string xml = doc.InnerXml;
-
-
         }
 
         //Gerar o XML envio em arquivo
         public void gravarXML_Envio(string xml)
         {
             string arquivo;
-            string path = Util.criarDiretorios();
+            string path = Util.CriarDiretorios();
 
-            arquivo = path + @"\XML\Envio\" + Util.limparString(DateTime.Now.ToString()) + "-Envio.xml";
+            arquivo = path + @"\XML\Envio\" + Util.LimparString(DateTime.Now.ToString()) + "-Envio.xml";
             try
             {
                 // Criar o documento XML
@@ -56,9 +54,9 @@ namespace AcessoSIGA
         public void gravarXML_Retorno(string xml)
         {
             string arquivo;
-            string path = Util.criarDiretorios();
+            string path = Util.CriarDiretorios();
 
-            arquivo = path + @"\XML\Retorno\" + Util.limparString(DateTime.Now.ToString()) + "-Retorno.xml";
+            arquivo = path + @"\XML\Retorno\" + Util.LimparString(DateTime.Now.ToString()) + "-Retorno.xml";
 
             try
             {
@@ -80,8 +78,6 @@ namespace AcessoSIGA
             {
                 Util.GravarLog("Gravar XML ", "Ocorreu erro ao gravar o XML de retorno! " + ex.Message);                
             }
-
         }
-
     }
 }

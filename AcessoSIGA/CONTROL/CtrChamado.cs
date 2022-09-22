@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AcessoSIGA
 {
@@ -33,7 +30,7 @@ namespace AcessoSIGA
             {
                 //Lê XML de retorno e devolve os dados
                 Ticket ticket_ret = new Ticket();
-                ticket_ret = RetornarXML.retornarChamado(wsRetorno);
+                ticket_ret = RetornarXML.RetornarChamado(wsRetorno);
 
                 //Atualiza dados do retorno do chamado
                 ticket.cdChamado = ticket_ret.cdChamado;
@@ -137,13 +134,13 @@ namespace AcessoSIGA
             else
             {
                 //Lê XML de retorno e devolve os dados
-                lista = RetornarXML.retornarHistoricoChamado(wsRetorno);
+                lista = RetornarXML.RetornarHistoricoChamado(wsRetorno);
             }
             return lista;
         }
 
         //Consulta webservice de dados adicionais do chamado informado
-        public Ticket consultarDadosChamado(int cdChamado)
+        public Ticket ConsultarDadosChamado(int cdChamado)
         {
             Ticket ticket = new Ticket();
 
@@ -167,7 +164,7 @@ namespace AcessoSIGA
             else
             {
                 //Lê XML de retorno e devolve os dados
-                ticket = RetornarXML.retornarDadosChamado(wsRetorno);
+                ticket = RetornarXML.RetornarDadosChamado(wsRetorno);
             }
             return ticket;
         }
