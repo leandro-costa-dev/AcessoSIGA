@@ -44,6 +44,13 @@ namespace AcessoSIGA
                 txtEmail.Text = p.Contato.email.ToString();
                 txtLoginContato.Text = p.Contato.login.ToString();
 
+                txtIdChamado.Text = p.Ticket.idChamado.ToString();
+                txtTipoChamado.Text = p.Ticket.tipoChamado.ToString();
+                txtCdCategoria.Text = p.Ticket.cdCategoria.ToString();
+                txtCdSeveridade.Text = p.Ticket.cdSeveridade.ToString();
+                txtCdAnimo.Text = p.Ticket.cdAnimo.ToString();
+                txtCdOrigem.Text = p.Ticket.cdOrigem.ToString();
+
                 txtServidor.Text = p.servidor.ToString();
                 txtBanco.Text = p.banco.ToString();
                 txtUsuario.Text = p.usuario.ToString();
@@ -129,9 +136,18 @@ namespace AcessoSIGA
             contato.email = txtEmail.Text;
             contato.login = txtLoginContato.Text;
 
+            Ticket ticket = new Ticket();
+            ticket.idChamado = int.Parse(txtIdChamado.Text);
+            ticket.tipoChamado = int.Parse(txtTipoChamado.Text);
+            ticket.cdCategoria = int.Parse(txtCdCategoria.Text);
+            ticket.cdSeveridade = int.Parse(txtCdSeveridade.Text);
+            ticket.cdAnimo = int.Parse(txtCdAnimo.Text);
+            ticket.cdOrigem = int.Parse(txtCdOrigem.Text);
+
             Parametros parametros = new Parametros();
             parametros.Cliente = cliente;
             parametros.Contato = contato;
+            parametros.Ticket = ticket;
             parametros.servidor = txtServidor.Text;
             parametros.banco = txtBanco.Text;
             parametros.usuario = txtUsuario.Text;

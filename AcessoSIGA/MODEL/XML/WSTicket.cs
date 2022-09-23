@@ -27,12 +27,12 @@ namespace AcessoSIGA
             xmlWriter.WriteElementString("cdtipochamado", ticket.tipoChamado.ToString());
             xmlWriter.WriteElementString("cdcategoria", ticket.cdCategoria.ToString());            
             xmlWriter.WriteElementString("cdlocalidade", ticket.cdLocalidade.ToString());
-            xmlWriter.WriteElementString("cdseveridade", ticket.severidade.ToString());
+            xmlWriter.WriteElementString("cdseveridade", ticket.cdSeveridade.ToString());
             xmlWriter.WriteElementString("dschamado", ticket.dsChamado);
             xmlWriter.WriteElementString("dspalavrachave", "");
             xmlWriter.WriteElementString("cdorigem", ticket.cdOrigem.ToString());
             xmlWriter.WriteElementString("cdcomplexidade", "");
-            xmlWriter.WriteElementString("cdanimo", ticket.animo.ToString());
+            xmlWriter.WriteElementString("cdanimo", ticket.cdAnimo.ToString());
             xmlWriter.WriteElementString("idfca", "");
             xmlWriter.WriteStartElement("faturamento");
             xmlWriter.WriteElementString("idtipofaturamento", "1");

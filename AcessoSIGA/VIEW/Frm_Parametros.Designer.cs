@@ -30,6 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCdLocalidade = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtLocalidade = new System.Windows.Forms.TextBox();
             this.txtCodCliente = new System.Windows.Forms.TextBox();
@@ -47,6 +48,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtCdOrigem = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtCdAnimo = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtCdSeveridade = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtCdCategoria = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtTipoChamado = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtIdChamado = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtSenha = new System.Windows.Forms.MaskedTextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -59,11 +74,12 @@
             this.btnTestarConexao = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSalvar = new System.Windows.Forms.ToolStripButton();
-            this.txtCdLocalidade = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +90,7 @@
             this.label1.Location = new System.Drawing.Point(10, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 15);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 6;
             this.label1.Text = "CPF/CNPJ:";
             // 
             // groupBox1
@@ -94,6 +110,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados Cliente";
             // 
+            // txtCdLocalidade
+            // 
+            this.txtCdLocalidade.Location = new System.Drawing.Point(293, 48);
+            this.txtCdLocalidade.Name = "txtCdLocalidade";
+            this.txtCdLocalidade.Size = new System.Drawing.Size(39, 23);
+            this.txtCdLocalidade.TabIndex = 3;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -108,7 +131,7 @@
             this.txtLocalidade.Location = new System.Drawing.Point(338, 48);
             this.txtLocalidade.Name = "txtLocalidade";
             this.txtLocalidade.Size = new System.Drawing.Size(157, 23);
-            this.txtLocalidade.TabIndex = 6;
+            this.txtLocalidade.TabIndex = 4;
             // 
             // txtCodCliente
             // 
@@ -116,7 +139,7 @@
             this.txtCodCliente.Location = new System.Drawing.Point(79, 19);
             this.txtCodCliente.Name = "txtCodCliente";
             this.txtCodCliente.Size = new System.Drawing.Size(73, 23);
-            this.txtCodCliente.TabIndex = 5;
+            this.txtCodCliente.TabIndex = 0;
             // 
             // txtNomeCliente
             // 
@@ -124,7 +147,7 @@
             this.txtNomeCliente.Location = new System.Drawing.Point(158, 19);
             this.txtNomeCliente.Name = "txtNomeCliente";
             this.txtNomeCliente.Size = new System.Drawing.Size(337, 23);
-            this.txtNomeCliente.TabIndex = 2;
+            this.txtNomeCliente.TabIndex = 1;
             // 
             // label2
             // 
@@ -132,7 +155,7 @@
             this.label2.Location = new System.Drawing.Point(26, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 15);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 5;
             this.label2.Text = "Cliente:";
             // 
             // txtCpfCnpj
@@ -140,14 +163,14 @@
             this.txtCpfCnpj.Location = new System.Drawing.Point(79, 48);
             this.txtCpfCnpj.Name = "txtCpfCnpj";
             this.txtCpfCnpj.Size = new System.Drawing.Size(135, 23);
-            this.txtCpfCnpj.TabIndex = 0;
+            this.txtCpfCnpj.TabIndex = 2;
             // 
             // btnConsultar
             // 
             this.btnConsultar.Location = new System.Drawing.Point(237, 234);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(75, 23);
-            this.btnConsultar.TabIndex = 4;
+            this.btnConsultar.TabIndex = 0;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
             this.btnConsultar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -173,7 +196,7 @@
             this.txtEmail.Location = new System.Drawing.Point(63, 51);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(356, 23);
-            this.txtEmail.TabIndex = 5;
+            this.txtEmail.TabIndex = 2;
             // 
             // label5
             // 
@@ -181,7 +204,7 @@
             this.label5.Location = new System.Drawing.Point(17, 54);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 15);
-            this.label5.TabIndex = 6;
+            this.label5.TabIndex = 5;
             this.label5.Text = "E-mail:";
             // 
             // txtCodContato
@@ -190,7 +213,7 @@
             this.txtCodContato.Location = new System.Drawing.Point(63, 22);
             this.txtCodContato.Name = "txtCodContato";
             this.txtCodContato.Size = new System.Drawing.Size(73, 23);
-            this.txtCodContato.TabIndex = 3;
+            this.txtCodContato.TabIndex = 0;
             // 
             // txtLoginContato
             // 
@@ -205,7 +228,7 @@
             this.label4.Location = new System.Drawing.Point(21, 83);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 15);
-            this.label4.TabIndex = 4;
+            this.label4.TabIndex = 6;
             this.label4.Text = "Login:";
             // 
             // txtNomeContato
@@ -222,21 +245,23 @@
             this.label3.Location = new System.Drawing.Point(10, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 15);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Contato:";
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(564, 303);
-            this.tabControl1.TabIndex = 3;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.btnConsultar);
             this.tabPage1.Controls.Add(this.groupBox2);
@@ -245,11 +270,139 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(556, 275);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Dados SIGA";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Text = "Login SIGA";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(556, 275);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Chamado SIGA";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtCdOrigem);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.txtCdAnimo);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.txtCdSeveridade);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Controls.Add(this.txtCdCategoria);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.txtTipoChamado);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.txtIdChamado);
+            this.groupBox3.Location = new System.Drawing.Point(8, 29);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(540, 214);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Parâmetros do Chamado";
+            // 
+            // txtCdOrigem
+            // 
+            this.txtCdOrigem.Location = new System.Drawing.Point(118, 169);
+            this.txtCdOrigem.Name = "txtCdOrigem";
+            this.txtCdOrigem.Size = new System.Drawing.Size(67, 23);
+            this.txtCdOrigem.TabIndex = 5;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(36, 172);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(78, 15);
+            this.label16.TabIndex = 11;
+            this.label16.Text = "Cód. Origem:";
+            // 
+            // txtCdAnimo
+            // 
+            this.txtCdAnimo.Location = new System.Drawing.Point(118, 140);
+            this.txtCdAnimo.Name = "txtCdAnimo";
+            this.txtCdAnimo.Size = new System.Drawing.Size(67, 23);
+            this.txtCdAnimo.TabIndex = 4;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(40, 143);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(74, 15);
+            this.label15.TabIndex = 10;
+            this.label15.Text = "Cód. Ânimo:";
+            // 
+            // txtCdSeveridade
+            // 
+            this.txtCdSeveridade.Location = new System.Drawing.Point(118, 111);
+            this.txtCdSeveridade.Name = "txtCdSeveridade";
+            this.txtCdSeveridade.Size = new System.Drawing.Size(67, 23);
+            this.txtCdSeveridade.TabIndex = 3;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 114);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(95, 15);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "Cód. Severidade:";
+            // 
+            // txtCdCategoria
+            // 
+            this.txtCdCategoria.Location = new System.Drawing.Point(118, 82);
+            this.txtCdCategoria.Name = "txtCdCategoria";
+            this.txtCdCategoria.Size = new System.Drawing.Size(67, 23);
+            this.txtCdCategoria.TabIndex = 2;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(25, 85);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(89, 15);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Cód. Categoria:";
+            // 
+            // txtTipoChamado
+            // 
+            this.txtTipoChamado.Location = new System.Drawing.Point(118, 53);
+            this.txtTipoChamado.Name = "txtTipoChamado";
+            this.txtTipoChamado.Size = new System.Drawing.Size(67, 23);
+            this.txtTipoChamado.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 56);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(104, 15);
+            this.label12.TabIndex = 7;
+            this.label12.Text = "Tipo de Chamado:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(21, 27);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(93, 15);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "ID do Chamado:";
+            // 
+            // txtIdChamado
+            // 
+            this.txtIdChamado.Location = new System.Drawing.Point(118, 24);
+            this.txtIdChamado.Name = "txtIdChamado";
+            this.txtIdChamado.Size = new System.Drawing.Size(67, 23);
+            this.txtIdChamado.TabIndex = 0;
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.Controls.Add(this.txtSenha);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label8);
@@ -265,7 +418,6 @@
             this.tabPage2.Size = new System.Drawing.Size(556, 275);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Conexão Banco";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtSenha
             // 
@@ -273,7 +425,7 @@
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(154, 23);
-            this.txtSenha.TabIndex = 9;
+            this.txtSenha.TabIndex = 3;
             this.txtSenha.Text = "12345678";
             // 
             // label9
@@ -317,7 +469,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(86, 119);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(154, 23);
-            this.txtUsuario.TabIndex = 3;
+            this.txtUsuario.TabIndex = 2;
             this.txtUsuario.Text = "leandro";
             // 
             // txtBanco
@@ -325,7 +477,7 @@
             this.txtBanco.Location = new System.Drawing.Point(86, 90);
             this.txtBanco.Name = "txtBanco";
             this.txtBanco.Size = new System.Drawing.Size(282, 23);
-            this.txtBanco.TabIndex = 2;
+            this.txtBanco.TabIndex = 1;
             this.txtBanco.Text = "SIGA";
             // 
             // txtServidor
@@ -333,7 +485,7 @@
             this.txtServidor.Location = new System.Drawing.Point(86, 61);
             this.txtServidor.Name = "txtServidor";
             this.txtServidor.Size = new System.Drawing.Size(420, 23);
-            this.txtServidor.TabIndex = 1;
+            this.txtServidor.TabIndex = 0;
             this.txtServidor.Text = "LEANDRO-PC\\MSSQLSERVER2019";
             // 
             // btnTestarConexao
@@ -341,7 +493,7 @@
             this.btnTestarConexao.Location = new System.Drawing.Point(109, 177);
             this.btnTestarConexao.Name = "btnTestarConexao";
             this.btnTestarConexao.Size = new System.Drawing.Size(99, 23);
-            this.btnTestarConexao.TabIndex = 0;
+            this.btnTestarConexao.TabIndex = 4;
             this.btnTestarConexao.Text = "Testar Conexão";
             this.btnTestarConexao.UseVisualStyleBackColor = true;
             this.btnTestarConexao.Click += new System.EventHandler(this.btnTestarConexao_Click);
@@ -366,13 +518,6 @@
             this.btnSalvar.Text = "toolStripButton1";
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
-            // txtCdLocalidade
-            // 
-            this.txtCdLocalidade.Location = new System.Drawing.Point(293, 48);
-            this.txtCdLocalidade.Name = "txtCdLocalidade";
-            this.txtCdLocalidade.Size = new System.Drawing.Size(39, 23);
-            this.txtCdLocalidade.TabIndex = 7;
-            // 
             // Frm_Parametros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -393,6 +538,9 @@
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -436,5 +584,19 @@
         private Label label10;
         private TextBox txtLocalidade;
         private TextBox txtCdLocalidade;
+        private TabPage tabPage3;
+        private GroupBox groupBox3;
+        private TextBox txtCdOrigem;
+        private Label label16;
+        private TextBox txtCdAnimo;
+        private Label label15;
+        private TextBox txtCdSeveridade;
+        private Label label14;
+        private TextBox txtCdCategoria;
+        private Label label13;
+        private TextBox txtTipoChamado;
+        private Label label12;
+        private Label label11;
+        private TextBox txtIdChamado;
     }
 }

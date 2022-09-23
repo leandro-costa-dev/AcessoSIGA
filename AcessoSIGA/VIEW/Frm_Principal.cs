@@ -115,11 +115,11 @@ namespace AcessoSIGA
 
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
-            string n = notifyIcon1.BalloonTipText;
-            int cdChamado = int.Parse(n.Substring(n.IndexOf(":") + 1).Trim());
+            //string n = notifyIcon1.BalloonTipText;
+            //int cdChamado = int.Parse(n.Substring(n.IndexOf(":") + 1).Trim());
 
-            Frm_Acompanhamento f = new Frm_Acompanhamento(cdChamado);
-            f.ShowDialog();
+            //Frm_Acompanhamento f = new Frm_Acompanhamento(cdChamado);
+            //f.ShowDialog();
         }
 
     }

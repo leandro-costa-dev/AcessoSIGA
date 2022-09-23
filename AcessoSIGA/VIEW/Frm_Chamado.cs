@@ -23,20 +23,25 @@ namespace AcessoSIGA
         }
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            Ticket ticket = new Ticket();       
+            Ticket ticket = new Ticket();
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
+            Parametros parametros = parametrosDAO.ConsultarParametros();
 
             //Dados para abertura do chamado
-            ticket.cdCliente = int.Parse(txtCodCliente.Text); //Codigo do Cliente
-            ticket.cdContato = int.Parse(txtCodContato.Text); //Codigo do Contato
-            ticket.idChamado = 1; //1 – Chamado por solicitante, 2 – Chamado por equipamento, 3 – Chamado por produto, 4 – Chamado por IC.
             ticket.titChamado = txtTitulo.Text; //Titulo do chamado
             ticket.dsChamado = txtDescricao.Text; //Descrição do chamado
-            ticket.tipoChamado = 8; //Suporte
-            ticket.cdCategoria = 70000338; //Código da categoria (AR - Administração de Receitas)
-            ticket.cdLocalidade = 12; //CAC
-            ticket.severidade = 12; //Media
-            ticket.animo = 4; //Normal
-            ticket.cdOrigem = 88; //WebService
+
+            ticket.cdCliente = parametros.Cliente.cdCliente; //Codigo do Cliente
+            ticket.cdContato = parametros.Contato.cdContato; //Codigo do Contato
+            ticket.cdLocalidade = parametros.Contato.cdLocalidade; //CAC
+
+            ticket.idChamado = parametros.Ticket.idChamado; //1 – Chamado por solicitante, 2 – Chamado por equipamento, 3 – Chamado por produto, 4 – Chamado por IC.
+            ticket.tipoChamado = parametros.Ticket.tipoChamado; //Suporte
+            ticket.cdCategoria = parametros.Ticket.cdCategoria; //Código da categoria (AR - Administração de Receitas)
+            ticket.cdSeveridade = parametros.Ticket.cdSeveridade; //Media
+            ticket.cdAnimo = parametros.Ticket.cdAnimo; //Normal
+            ticket.cdOrigem = parametros.Ticket.cdOrigem; //WebService
+
             ticket.anexo = arquivoAnexo; //Arquivo anexo
             ticket.dsAnexo = descAnexo; //Descrição do anexo
 

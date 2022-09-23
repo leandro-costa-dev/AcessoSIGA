@@ -93,6 +93,12 @@ namespace AcessoSIGA
                         "nmLocalidade VARCHAR(40), " +
                         "email VARCHAR(100), " +
                         "login VARCHAR(50), " +
+                        "idChamado INT, " +
+                        "tipoChamado INT, " +
+                        "cdCategoria INT, " +
+                        "cdSeveridade INT, " +
+                        "cdAnimo INT, " +
+                        "cdOrigem INT, " +                        
                         "servidor VARCHAR(100), " +
                         "banco VARCHAR(40), " +
                         "usuario VARCHAR(20), " +

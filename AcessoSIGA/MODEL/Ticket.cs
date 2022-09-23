@@ -23,9 +23,9 @@ namespace AcessoSIGA
         public string nmCategoria { get; set; } = string.Empty; //Nome da categoria
         public string nmResponsavel { get; set; } = string.Empty; //Nome do responsável
         public int cdLocalidade { get; set; } //Localidade do CRC do cliente
-        public int severidade { get; set; } //Severidade definido na tabela do SIGA
+        public int cdSeveridade { get; set; } //Severidade definido na tabela do SIGA
         public int cdOrigem { get; set; } //Tipo de origem definido na tabela do SIGA
-        public int animo { get; set; } //Animo do solicitante definido no SIGA
+        public int cdAnimo { get; set; } //Animo do solicitante definido no SIGA
         public string dataChamado { get; set; } = string.Empty; //Data abertura do chamado
         public int idTIpoPeriodo { get; set; } //1-data de abertura, 2-data de término, 3-data de previsão de resposta, 4-data de previsão de término.
         public string dtPeriodo1 { get; set; } = string.Empty; //YYYY-MM-DD
