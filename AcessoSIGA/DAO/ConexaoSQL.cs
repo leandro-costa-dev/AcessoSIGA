@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace AcessoSIGA
 {
-    public static class ConexaoSQL
+    public class ConexaoSQL
     {
         public static string servidor = @"LEANDRO-PC";
         public static string banco_master = "master";
@@ -16,7 +16,7 @@ namespace AcessoSIGA
         public static SqlConnection sqlConnection = new SqlConnection();
 
         //Abrir a conexão com banco de dados
-        public static SqlConnection ConectarBancoSQL(bool master)
+        public SqlConnection ConectarBancoSQL(bool master)
         {
             if (!sqlConnection.State.Equals(ConnectionState.Open))
             {
@@ -43,7 +43,7 @@ namespace AcessoSIGA
         }
 
         //Criar banco de dados
-        public static void CriarBancoSQL()
+        public void CriarBancoSQL()
         {
             if (!ConsultarBancoSQL(banco))
             {
@@ -72,7 +72,7 @@ namespace AcessoSIGA
         }
 
         //Criar tabelas no banco de dados
-        public static void CriarTabelasSQL()
+        public void CriarTabelasSQL()
         {
             if (!ConsultarTabelaSQL("SIGA", "parametros"))
             {
@@ -157,7 +157,7 @@ namespace AcessoSIGA
         }
 
         //Consultar se existe o banco de dados
-        public static bool ConsultarBancoSQL(string banco)
+        public bool ConsultarBancoSQL(string banco)
         {
             bool resultado = false;
             string sql = "SELECT * FROM MASTER..sysdatabases WHERE name ='" + banco + "'";
@@ -193,7 +193,7 @@ namespace AcessoSIGA
         }
 
         //Consultar se existe a tabela no banco de dados
-        public static bool ConsultarTabelaSQL(string banco, string tabela)
+        public bool ConsultarTabelaSQL(string banco, string tabela)
         {
             bool resultado = false;
             string sql = "SELECT* FROM " + banco + ".information_schema.tables WHERE TABLE_NAME = '" + tabela + "'";
@@ -229,7 +229,7 @@ namespace AcessoSIGA
         }
 
         //Verifica se existe informações na tabela
-        public static bool ExisteInformacoes(string tabelaBanco)
+        public bool ExisteInformacoes(string tabelaBanco)
         {
             bool resultado = false;
 
@@ -263,7 +263,7 @@ namespace AcessoSIGA
         }
 
         //Fechar conexão com banco de dados
-        public static void FecharConexaoSQL()
+        public void FecharConexaoSQL()
         {
             if (sqlConnection.State.Equals(ConnectionState.Open))
             {

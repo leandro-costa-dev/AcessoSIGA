@@ -101,17 +101,18 @@ namespace AcessoSIGA
             ConexaoSQL.usuario = txtUsuario.Text;
             ConexaoSQL.senha = txtSenha.Text;
 
-            ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+            conexaoSQL.ConectarBancoSQL(false);
 
             if (ConexaoSQL.sqlConnection.State.Equals(ConnectionState.Open))
             {
                 MessageBox.Show("Conexão realizada com sucesso! ", "Ok!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ConexaoSQL.FecharConexaoSQL();
+                conexaoSQL.FecharConexaoSQL();
             }
             else
             {
                 MessageBox.Show("Ocorreu erro na conexão. Verifique os dados informados! ", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ConexaoSQL.FecharConexaoSQL();
+                conexaoSQL.FecharConexaoSQL();
             }
         }
 

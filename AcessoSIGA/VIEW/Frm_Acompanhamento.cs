@@ -34,7 +34,7 @@ namespace AcessoSIGA
             ticket = chamadoDAO.ConsultaChamado(cdChamado);
 
             HistoricoDAO historicoDAO = new HistoricoDAO();
-            listaHistorico = historicoDAO.ConsultaHistorico(cdChamado);
+            listaHistorico = historicoDAO.ConsultaHistoricoChamado(cdChamado);
 
             lblChamado.Text = "CHAMADO Nº: " + cdChamado.ToString();
             lblData.Text = "DATA ABERTURA: " + ticket.dataChamado;

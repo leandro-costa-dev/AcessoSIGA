@@ -16,8 +16,9 @@ namespace AcessoSIGA
             if (ExisteChamado(t.cdChamado))
             {
                 //-------------UPDATE-----------------
+                ConexaoSQL conexaoSQL = new ConexaoSQL();
 
-                var con = ConexaoSQL.ConectarBancoSQL(false);
+                var con = conexaoSQL.ConectarBancoSQL(false);
                 var cmd = con.CreateCommand();
 
                 try
@@ -68,8 +69,9 @@ namespace AcessoSIGA
             else
             {
                 //-------------INSERT-----------------
+                ConexaoSQL conexaoSQL = new ConexaoSQL();
 
-                var con = ConexaoSQL.ConectarBancoSQL(false);
+                var con = conexaoSQL.ConectarBancoSQL(false);
                 var cmd = con.CreateCommand();
 
                 try
@@ -115,7 +117,9 @@ namespace AcessoSIGA
             SqlDataAdapter da = null;
             DataTable dt = new DataTable();
 
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             cmd.CommandText = "SELECT * FROM CHAMADO WHERE cdChamado=" + cdChamado;
@@ -149,7 +153,9 @@ namespace AcessoSIGA
             SqlDataAdapter da = null;
             DataTable dt = new DataTable();
 
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             try
@@ -187,7 +193,9 @@ namespace AcessoSIGA
             SqlDataAdapter da = null;
             DataTable dt = new DataTable();
 
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             try
@@ -234,7 +242,9 @@ namespace AcessoSIGA
             SqlDataAdapter da = null;
             DataTable dt = new DataTable();
 
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             try

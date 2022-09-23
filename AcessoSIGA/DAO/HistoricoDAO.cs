@@ -26,7 +26,9 @@ namespace AcessoSIGA
                         h.controle = 0; //Flag novo histórico não visualizado
                     }
 
-                    var con = ConexaoSQL.ConectarBancoSQL(false);
+                    ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+                    var con = conexaoSQL.ConectarBancoSQL(false);
                     var cmd = con.CreateCommand();
 
                     try
@@ -63,7 +65,9 @@ namespace AcessoSIGA
         //Atualiza o flag do histórico no banco de dados
         public void AtualizaHistorico(Historico h)
         {
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             try
@@ -98,7 +102,9 @@ namespace AcessoSIGA
             SqlDataAdapter da = null;
             DataTable dt = new DataTable();
 
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             cmd.CommandText = "SELECT * FROM HISTORICO WHERE cdChamado=" + cdChamado +
@@ -125,14 +131,62 @@ namespace AcessoSIGA
             return resultado;
         }
 
-        public List<Historico> ConsultaHistorico(int cdChamado)
+        public List<Historico> ConsultaHistorico()
         {
             List<Historico> lista = new List<Historico>();
 
             SqlDataAdapter da = null;
             DataTable dt = new DataTable();
 
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
+            var cmd = con.CreateCommand();
+
+            try
+            {
+                cmd.CommandText = "SELECT * FROM HISTORICO WHERE controle=0";
+
+                da = new SqlDataAdapter(cmd.CommandText, con);
+                da.Fill(dt);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    Historico historico = new Historico();
+
+                    historico.cdChamado = Convert.ToInt32(row["cdChamado"]);
+                    historico.cdAcompanhamento = Convert.ToInt32(row["cdAcompanhamento"]);
+                    historico.nmTipoacompanhamento = Convert.ToString(row["nmTipoacompanhamento"]);
+                    historico.dsAcompanhamento = Convert.ToString(row["dsAcompanhamento"]);
+                    historico.nmUsuario = Convert.ToString(row["nmUsuario"]);
+                    historico.dtAcompanhamento = Convert.ToString(row["dtAcompanhamento"]);
+                    historico.idPrivado = Convert.ToString(row["idPrivado"]);
+                    historico.controle = Convert.ToInt32(row["controle"]);
+
+                    lista.Add(historico);
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o histórico do chamado no banco de dados! " + ex.Message);                
+            }
+            finally
+            {
+                con.Close();
+            }
+            return lista;
+        }
+
+        public List<Historico> ConsultaHistoricoChamado(int cdChamado)
+        {
+            List<Historico> lista = new List<Historico>();
+
+            SqlDataAdapter da = null;
+            DataTable dt = new DataTable();
+
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             try
@@ -160,7 +214,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o histórico do chamado no banco de dados! " + ex.Message);                
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o histórico do chamado no banco de dados! " + ex.Message);
             }
             finally
             {

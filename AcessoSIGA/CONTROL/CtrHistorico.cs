@@ -35,37 +35,32 @@ namespace AcessoSIGA
 
                 //Verifica se existe novo registro e grava histórico do chamado 
                 historicoDAO.GravarHistorico(listaHistorico);
-            }            
+            }
         }
 
         //Retorna o historico se acompanhamento for diferente de rascunho
         // e se o histórico ainda não foi visualizado 
         public List<Historico> ConsultaNovoHistorico()
         {
-            List<Ticket> listaTicket = new List<Ticket>();          
             List<Historico> listaHistorico = new List<Historico>();
 
-            ChamadoDAO chamadoDAO = new ChamadoDAO();            
-            listaTicket = chamadoDAO.ConsultaChamadosAtivos();
+            HistoricoDAO historicoDAO = new HistoricoDAO();
+            List<Historico> lista = historicoDAO.ConsultaHistorico();
 
-            foreach (Ticket t in listaTicket)
+            foreach (Historico h in lista)
             {
-                HistoricoDAO historicoDAO = new HistoricoDAO();
-                List<Historico> lista = historicoDAO.ConsultaHistorico(t.cdChamado);     
+                if (h.cdAcompanhamento != 1 && h.controle == 0)
+                {
+                    ChamadoDAO chamadoDAO = new ChamadoDAO();
+                    Ticket ticket = chamadoDAO.ConsultaChamado(h.cdChamado);
 
-                foreach (Historico h in lista)
-                {                    
-                    if(h.cdAcompanhamento != 1 && h.controle == 0)
+                    ParametrosDAO parametrosDAO = new ParametrosDAO();
+                    Parametros parametros = parametrosDAO.ConsultarParametros();
+
+                    //Verificar se o contato do chamado é igual ao gravado no parametro
+                    if (ticket.cdContato == parametros.Contato.cdContato)
                     {
-                        Ticket ticket = chamadoDAO.ConsultaChamado(h.cdChamado);
-                        ParametrosDAO parametrosDAO = new ParametrosDAO();
-                        Parametros parametros = parametrosDAO.ConsultarParametros();
-
-                        //Verificar se o contato do chamado é igual ao gravado no parametro
-                        if(ticket.cdContato == parametros.Contato.cdContato)
-                        {
-                            listaHistorico.Add(h);
-                        }                                                
+                        listaHistorico.Add(h);
                     }
                 }
             }

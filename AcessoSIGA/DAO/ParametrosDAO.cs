@@ -13,10 +13,13 @@ namespace AcessoSIGA
         //-------------Gravar parâmetros do Sistema----------
         public void GravarParametros(Parametros p)
         {
-            if (ConexaoSQL.ExisteInformacoes("PARAMETROS"))
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+
+            if (conexaoSQL.ExisteInformacoes("PARAMETROS"))
             {
-                //--------UPDATE---------
-                var con = ConexaoSQL.ConectarBancoSQL(false);
+                //--------UPDATE---------              
+
+                var con = conexaoSQL.ConectarBancoSQL(false);
                 var cmd = con.CreateCommand();
 
                 try
@@ -83,7 +86,7 @@ namespace AcessoSIGA
             else
             {
                 //--------INSERT--------
-                var con = ConexaoSQL.ConectarBancoSQL(false);
+                var con = conexaoSQL.ConectarBancoSQL(false);
                 var cmd = con.CreateCommand();
 
                 try
@@ -136,8 +139,10 @@ namespace AcessoSIGA
 
             SqlDataAdapter da = null;
             DataTable dt = new DataTable();
-
-            var con = ConexaoSQL.ConectarBancoSQL(false);
+            
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+            
+            var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
             cmd.CommandText = "SELECT * FROM PARAMETROS";
