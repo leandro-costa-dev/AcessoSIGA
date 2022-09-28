@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Chamado));
             this.txtCodCliente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtNmCliente = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSelecionar = new System.Windows.Forms.Button();
             this.txtAnexo = new System.Windows.Forms.TextBox();
@@ -50,7 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtNmContato = new System.Windows.Forms.TextBox();
             this.txtCodContato = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -69,11 +69,11 @@
             // 
             // txtCodCliente
             // 
+            this.txtCodCliente.Enabled = false;
             this.txtCodCliente.Location = new System.Drawing.Point(84, 22);
             this.txtCodCliente.Name = "txtCodCliente";
             this.txtCodCliente.Size = new System.Drawing.Size(68, 23);
             this.txtCodCliente.TabIndex = 0;
-            this.txtCodCliente.Text = "2";
             // 
             // label1
             // 
@@ -84,13 +84,13 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Cliente:";
             // 
-            // textBox2
+            // txtNmCliente
             // 
-            this.textBox2.Location = new System.Drawing.Point(158, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(509, 23);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "GOVERNANCABRASIL S/A TECNOLOGIA E GESTAO EM SERVICOS";
+            this.txtNmCliente.Enabled = false;
+            this.txtNmCliente.Location = new System.Drawing.Point(158, 22);
+            this.txtNmCliente.Name = "txtNmCliente";
+            this.txtNmCliente.Size = new System.Drawing.Size(509, 23);
+            this.txtNmCliente.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -111,9 +111,9 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox6);
             this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.txtNmContato);
             this.groupBox1.Controls.Add(this.txtCodContato);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.txtNmCliente);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtCodCliente);
             this.groupBox1.Controls.Add(this.label1);
@@ -187,6 +187,7 @@
             // 
             // textBox10
             // 
+            this.textBox10.Enabled = false;
             this.textBox10.Location = new System.Drawing.Point(437, 152);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(230, 23);
@@ -204,6 +205,7 @@
             // 
             // textBox9
             // 
+            this.textBox9.Enabled = false;
             this.textBox9.Location = new System.Drawing.Point(437, 123);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(230, 23);
@@ -212,6 +214,7 @@
             // 
             // textBox8
             // 
+            this.textBox8.Enabled = false;
             this.textBox8.Location = new System.Drawing.Point(84, 152);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(230, 23);
@@ -229,11 +232,12 @@
             // 
             // textBox7
             // 
+            this.textBox7.Enabled = false;
             this.textBox7.Location = new System.Drawing.Point(84, 123);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(230, 23);
             this.textBox7.TabIndex = 13;
-            this.textBox7.Text = "PR-PTO";
+            this.textBox7.Text = "PR-CAC";
             // 
             // label4
             // 
@@ -255,6 +259,7 @@
             // 
             // textBox6
             // 
+            this.textBox6.Enabled = false;
             this.textBox6.Location = new System.Drawing.Point(437, 94);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(230, 23);
@@ -263,28 +268,29 @@
             // 
             // textBox5
             // 
+            this.textBox5.Enabled = false;
             this.textBox5.Location = new System.Drawing.Point(84, 94);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(230, 23);
             this.textBox5.TabIndex = 9;
             this.textBox5.Text = "Suporte";
             // 
-            // textBox3
+            // txtNmContato
             // 
-            this.textBox3.Location = new System.Drawing.Point(158, 51);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(509, 23);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.Tag = "";
-            this.textBox3.Text = "LEANDRO COSTA";
+            this.txtNmContato.Enabled = false;
+            this.txtNmContato.Location = new System.Drawing.Point(158, 51);
+            this.txtNmContato.Name = "txtNmContato";
+            this.txtNmContato.Size = new System.Drawing.Size(509, 23);
+            this.txtNmContato.TabIndex = 8;
+            this.txtNmContato.Tag = "";
             // 
             // txtCodContato
             // 
+            this.txtCodContato.Enabled = false;
             this.txtCodContato.Location = new System.Drawing.Point(84, 51);
             this.txtCodContato.Name = "txtCodContato";
             this.txtCodContato.Size = new System.Drawing.Size(68, 23);
             this.txtCodContato.TabIndex = 6;
-            this.txtCodContato.Text = "48";
             // 
             // label2
             // 
@@ -402,7 +408,7 @@
 
         private TextBox txtCodCliente;
         private Label label1;
-        private TextBox textBox2;
+        private TextBox txtNmCliente;
         private GroupBox groupBox1;
         private TextBox txtTitulo;
         private Label label8;
@@ -418,7 +424,7 @@
         private Label label3;
         private TextBox textBox6;
         private TextBox textBox5;
-        private TextBox textBox3;
+        private TextBox txtNmContato;
         private TextBox txtCodContato;
         private Label label2;
         private StatusStrip statusStrip1;

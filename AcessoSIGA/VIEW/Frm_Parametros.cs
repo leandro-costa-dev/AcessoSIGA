@@ -51,6 +51,10 @@ namespace AcessoSIGA
                 txtCdAnimo.Text = p.Ticket.cdAnimo.ToString();
                 txtCdOrigem.Text = p.Ticket.cdOrigem.ToString();
 
+                txtUrlWs.Text = p.urlWs.ToString();
+                txtUsuarioWs.Text = p.usuarioWs.ToString();
+                txtSenhaWs.Text = p.senhaWs.ToString();
+                txtEmpresaWs.Text = p.empresaWs.ToString();
                 txtServidor.Text = p.servidor.ToString();
                 txtBanco.Text = p.banco.ToString();
                 txtUsuario.Text = p.usuario.ToString();
@@ -149,6 +153,10 @@ namespace AcessoSIGA
             parametros.Cliente = cliente;
             parametros.Contato = contato;
             parametros.Ticket = ticket;
+            parametros.urlWs = txtUrlWs.Text;
+            parametros.usuarioWs = txtUsuarioWs.Text;
+            parametros.senhaWs = txtSenhaWs.Text;
+            parametros.empresaWs = int.Parse(txtEmpresaWs.Text);
             parametros.servidor = txtServidor.Text;
             parametros.banco = txtBanco.Text;
             parametros.usuario = txtUsuario.Text;

@@ -76,9 +76,8 @@ namespace AcessoSIGA
 
             return xml;            
         }
-
-        //revisar
-        public string XML_getTicket(Ticket ticket)
+        
+        public string XML_getTicket(Cliente cliente, Contato contato)
         {
             string xml;
 
@@ -89,13 +88,12 @@ namespace AcessoSIGA
             xmlWriter.WriteStartElement("wsqualitor");
             xmlWriter.WriteStartElement("contents");
             xmlWriter.WriteStartElement("data");
-            xmlWriter.WriteElementString("cdchamado", ticket.cdChamado.ToString());
-            xmlWriter.WriteElementString("cdcliente", ticket.cdCliente.ToString());
-            xmlWriter.WriteElementString("cdcontato", ticket.cdContato.ToString());
-            xmlWriter.WriteElementString("Idtipoperiodo", ticket.idTIpoPeriodo.ToString());
-            xmlWriter.WriteElementString("dtperiodo", ticket.dtPeriodo1);
-            xmlWriter.WriteElementString("dtperiodo2", ticket.dtPeriodo2);
-            xmlWriter.WriteElementString("cdlocalidade", ticket.cdLocalidade.ToString());
+            xmlWriter.WriteElementString("cdchamado", "");
+            xmlWriter.WriteElementString("cdcliente", cliente.cdCliente.ToString());
+            xmlWriter.WriteElementString("cdcontato", contato.cdContato.ToString());
+            xmlWriter.WriteElementString("Idtipoperiodo", "");
+            xmlWriter.WriteElementString("dtperiodo", "");
+            xmlWriter.WriteElementString("dtperiodo2", "");
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();

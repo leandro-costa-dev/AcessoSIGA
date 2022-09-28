@@ -19,6 +19,13 @@ namespace AcessoSIGA
 
         private void Frm_Chamado_Load(object sender, EventArgs e)
         {
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
+            Parametros p = parametrosDAO.ConsultarParametros();
+
+            txtCodCliente.Text = p.Cliente.cdCliente.ToString();
+            txtNmCliente.Text = p.Cliente.nmCliente;
+            txtCodContato.Text = p.Contato.cdContato.ToString();
+            txtNmContato.Text = p.Contato.nmContato;
 
         }
         private void btnGravar_Click(object sender, EventArgs e)

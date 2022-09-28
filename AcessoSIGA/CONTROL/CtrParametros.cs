@@ -29,9 +29,10 @@ namespace AcessoSIGA
                 Util.GravarLog("WS consulta empresa ", "XML de retorno vazio ou nulo!");
             }
             else
-            {               
+            {
                 //Lê XML de retorno e devolve os dados
-                cliente = RetornarXML.RetornarEmpresa(wsRetorno);
+                RetornarXML retornarXML = new RetornarXML();
+                cliente = retornarXML.RetornarEmpresa(wsRetorno);
             }
             return cliente;
         }
@@ -55,7 +56,8 @@ namespace AcessoSIGA
                 string wsRetorno = wService.RequisicaoPOST();
 
                 //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.RetornarContatoEmpresa(wsRetorno);
+                RetornarXML retornarXML = new RetornarXML();
+                contato = retornarXML.RetornarContatoEmpresa(wsRetorno);
             }
             else
             {
@@ -70,7 +72,8 @@ namespace AcessoSIGA
                 string wsRetorno = wService.RequisicaoPOST();
 
                 //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.RetornarContatoEmpresa(wsRetorno);
+                RetornarXML retornarXML = new RetornarXML();
+                contato = retornarXML.RetornarContatoEmpresa(wsRetorno);
             }
             return contato;
         }
@@ -97,7 +100,8 @@ namespace AcessoSIGA
             else
             {
                 //Lê XML de retorno e devolve os dados
-                contato = RetornarXML.RetornarDadosContato(wsRetorno);
+                RetornarXML retornarXML = new RetornarXML();
+                contato = retornarXML.RetornarDadosContato(wsRetorno);
             }
 
             return contato;
@@ -128,7 +132,8 @@ namespace AcessoSIGA
             else
             {
                 //Lê XML de retorno e devolve os dados
-                string token = RetornarXML.RetornarToken(wsRetorno);
+                RetornarXML retornarXML = new RetornarXML();
+                string token = retornarXML.RetornarToken(wsRetorno);
 
                 //Abre o navegador web com usuario logado                
                 Process.Start(new ProcessStartInfo("http://siga_hml.govbr.com.br/loginUsuario.php?authws=" + token) { UseShellExecute = true });

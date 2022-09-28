@@ -20,20 +20,24 @@ namespace AcessoSIGA
             conexaoSQL.CriarBancoSQL();
             conexaoSQL.CriarTabelasSQL();
 
-            //Executa thread de atualização do historico
-            Thread t1 = new Thread(AtualizarHistorico);
+            //Executa thread para atualizar todos os chamados do contato
+            Thread t1 = new Thread(AtualizaChamadosContato);
             t1.Start();
 
             //Executa thread para exibir as notificações
             Thread t2 = new Thread(ExibirNotificacao);
             t2.Start();
+
+            //Executa thread de atualização do historico
+            Thread t3 = new Thread(AtualizarHistorico);
+            t3.Start();
+
         }
 
         private void acessoSIGAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CtrParametros ctrParametros = new CtrParametros();
             ctrParametros.AcessoSigaContato();
-
         }
 
         private void acessoSIGAautenticaçãoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,7 +65,7 @@ namespace AcessoSIGA
         }
 
         private void AtualizarHistorico()
-        {                 
+        {
             while (executar)
             {
                 Thread.Sleep(5000); //Aguarda 5 segundos
@@ -105,6 +109,15 @@ namespace AcessoSIGA
 
                 }
             }
+        }
+
+        private void AtualizaChamadosContato()
+        {
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
+            Parametros p = parametrosDAO.ConsultarParametros();
+
+            CtrChamado ctrChamado = new CtrChamado();
+            ctrChamado.AtualizaChamadosContato(p.Cliente, p.Contato);
         }
 
         private void Frm_Principal_FormClosed(object sender, FormClosedEventArgs e)

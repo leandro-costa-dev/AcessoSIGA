@@ -98,7 +98,11 @@ namespace AcessoSIGA
                         "cdCategoria INT, " +
                         "cdSeveridade INT, " +
                         "cdAnimo INT, " +
-                        "cdOrigem INT, " +                        
+                        "cdOrigem INT, " +
+                        "urlWs VARCHAR(50), " +
+                        "usuarioWs VARCHAR(30), " +
+                        "senhaWs VARCHAR(30), " +
+                        "empresaWs INT, " +
                         "servidor VARCHAR(100), " +
                         "banco VARCHAR(40), " +
                         "usuario VARCHAR(20), " +

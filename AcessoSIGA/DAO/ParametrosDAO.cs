@@ -10,6 +10,8 @@ namespace AcessoSIGA
 {
     public class ParametrosDAO
     {
+        public static Semaphore threadPool = new Semaphore(1, 1);
+
         //-------------Gravar parâmetros do Sistema----------
         public void GravarParametros(Parametros p)
         {
@@ -40,6 +42,10 @@ namespace AcessoSIGA
                         "cdSeveridade = @cdSeveridade, " +
                         "cdAnimo = @cdAnimo, " +
                         "cdOrigem = @cdOrigem, " +
+                        "urlWs = @urlWs, " +
+                        "usuarioWs = @usuarioWs, " +
+                        "senhaWs = @senhaWs, " +
+                        "empresaWs = @empresaWs, " +
                         "servidor = @servidor, " +
                         "banco = @banco, " +
                         "usuario = @usuario, " +
@@ -62,6 +68,11 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@cdSeveridade", p.Ticket.cdSeveridade);
                     cmd.Parameters.AddWithValue("@cdAnimo", p.Ticket.cdAnimo);
                     cmd.Parameters.AddWithValue("@cdOrigem", p.Ticket.cdOrigem);
+
+                    cmd.Parameters.AddWithValue("@urlWs", p.urlWs);
+                    cmd.Parameters.AddWithValue("@usuarioWs", p.usuarioWs);
+                    cmd.Parameters.AddWithValue("@senhaWs", p.senhaWs);
+                    cmd.Parameters.AddWithValue("@empresaWs", p.empresaWs);
 
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);
                     cmd.Parameters.AddWithValue("@banco", p.banco);
@@ -91,8 +102,8 @@ namespace AcessoSIGA
 
                 try
                 {
-                    cmd.CommandText = "INSERT INTO PARAMETROS(cdCliente, nmCliente, cnpj, cdContato, nmContato, cdLocalidade, nmLocalidade, email, login, idChamado, tipoChamado, cdCategoria, cdSeveridade, cdAnimo, cdOrigem, servidor, banco, usuario, senha) " +
-                                                    "VALUES (@cdCliente, @nmCliente, @cnpj, @cdContato, @nmContato, @cdLocalidade, @nmLocalidade, @email, @login, @idChamado, @tipoChamado, @cdCategoria, @cdSeveridade, @cdAnimo, @cdOrigem, @servidor, @banco, @usuario, @senha)";
+                    cmd.CommandText = "INSERT INTO PARAMETROS(cdCliente, nmCliente, cnpj, cdContato, nmContato, cdLocalidade, nmLocalidade, email, login, idChamado, tipoChamado, cdCategoria, cdSeveridade, cdAnimo, cdOrigem, urlWs, usuarioWs, senhaWs, empresaWs, servidor, banco, usuario, senha) " +
+                                                    "VALUES (@cdCliente, @nmCliente, @cnpj, @cdContato, @nmContato, @cdLocalidade, @nmLocalidade, @email, @login, @idChamado, @tipoChamado, @cdCategoria, @cdSeveridade, @cdAnimo, @cdOrigem, @urlWs, @usuarioWs, @senhaWs, @empresaWs, @servidor, @banco, @usuario, @senha)";
 
                     cmd.Parameters.AddWithValue("@cdCliente", p.Cliente.cdCliente);
                     cmd.Parameters.AddWithValue("@nmCliente", p.Cliente.nmCliente);
@@ -111,6 +122,11 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@cdSeveridade", p.Ticket.cdSeveridade);
                     cmd.Parameters.AddWithValue("@cdAnimo", p.Ticket.cdAnimo);
                     cmd.Parameters.AddWithValue("@cdOrigem", p.Ticket.cdOrigem);
+
+                    cmd.Parameters.AddWithValue("@urlWs", p.urlWs);
+                    cmd.Parameters.AddWithValue("@usuarioWs", p.usuarioWs);
+                    cmd.Parameters.AddWithValue("@senhaWs", p.senhaWs);
+                    cmd.Parameters.AddWithValue("@empresaWs", p.empresaWs);
 
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);
                     cmd.Parameters.AddWithValue("@banco", p.banco);
@@ -135,6 +151,8 @@ namespace AcessoSIGA
 
         public Parametros ConsultarParametros()
         {
+            threadPool.WaitOne();
+
             Parametros parametros = new Parametros();
 
             SqlDataAdapter da = null;
@@ -176,6 +194,11 @@ namespace AcessoSIGA
                     ticket.cdAnimo = Convert.ToInt32(row["cdAnimo"]);
                     ticket.cdOrigem = Convert.ToInt32(row["cdOrigem"]);
 
+                    parametros.urlWs = Convert.ToString(row["urlWs"]);
+                    parametros.usuarioWs = Convert.ToString(row["usuarioWs"]);
+                    parametros.senhaWs = Convert.ToString(row["senhaWs"]);
+                    parametros.empresaWs = Convert.ToInt32(row["empresaWs"]);
+
                     parametros.servidor = Convert.ToString(row["servidor"]);
                     parametros.banco = Convert.ToString(row["banco"]);
                     parametros.usuario = Convert.ToString(row["usuario"]);
@@ -184,7 +207,6 @@ namespace AcessoSIGA
                     parametros.Cliente = cliente;
                     parametros.Contato = contato;
                     parametros.Ticket = ticket;
-
                 }
             }
             catch (Exception ex)
@@ -195,7 +217,8 @@ namespace AcessoSIGA
             {
                 con.Close();
             }
-            return parametros;
-        }
+            threadPool.Release();
+            return parametros;            
+        }        
     }
 }

@@ -1,45 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace AcessoSIGA
 {
-    //Acesso ao WebService no modo STATELESS
-    public class WService 
+    //Conexão com WebService no modo STATELESS
+    public class WService
     {
-        string UrlService = "http://siga_hml.govbr.com.br/ws/statelessws.php?";
-
-        string usuarioADM = "ws_siga";
-        string senhaADM = "bc@FLv4r";
-        string empresaADM = "2";
+        string url;
+        string usuarioADM;
+        string senhaADM;
+        int empresaADM;
 
         string operacao;
         string wsdl;
         string xml;
 
         public WService(string operacao, string wsdl, string xml)
-        {                       
+        {
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
+            Parametros p = parametrosDAO.ConsultarParametros();
+
+            this.url = p.urlWs;
+            this.usuarioADM = p.usuarioWs;
+            this.senhaADM = p.senhaWs;
+            this.empresaADM = p.empresaWs;
+
             this.operacao = operacao;
             this.wsdl = wsdl;
             this.xml = xml;
         }
+
+        //Requisição HttpWebRequest POST
         public string RequisicaoPOST()
         {
             string xmlRetorno = "";
 
-            //Dados requisição Auth
-            string dadosPOST = "user=" + usuarioADM + "&password=" + senhaADM + "&company=" + empresaADM +
-                "&wsdl_file=" + wsdl + "&operation=" + operacao + "&input_xml=" + xml;
+            //Parametros da requisição
+            string dadosPOST = "user=" + usuarioADM + 
+                               "&password=" + senhaADM + 
+                               "&company=" + empresaADM +
+                               "&wsdl_file=" + wsdl + 
+                               "&operation=" + operacao + 
+                               "&input_xml=" + xml;
 
             try
             {
                 var dados = Encoding.UTF8.GetBytes(dadosPOST);
 
-                var requisicaoWeb = HttpWebRequest.CreateHttp(UrlService);
+                var requisicaoWeb = HttpWebRequest.CreateHttp(url);
 
                 requisicaoWeb.Method = "POST";
                 requisicaoWeb.ContentType = "application/x-www-form-urlencoded";
@@ -71,7 +79,52 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                Util.GravarLog("Conexão WebService ", "Ocorreu erro na conexão com WebService! " + ex.Message);                               
+                Util.GravarLog("Conexão WebService HttpWebRequest ", "Ocorreu erro na conexão com WebService! " + ex.Message);
+            }
+            return xmlRetorno;
+        }
+
+        //HttpClient assync envio anexo
+        public async Task<string> PostAsync()
+        {
+            string xmlRetorno = "";
+
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+
+                String restCallURL = url;
+
+                HttpRequestMessage apiRequest = new HttpRequestMessage(HttpMethod.Post, restCallURL);
+                //apirequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
+                //apirequest.Headers.Add("authorization", "YOUR TOKEN");
+
+                MultipartFormDataContent postValues = new MultipartFormDataContent();
+                postValues.Add(new StringContent(usuarioADM), "user");
+                postValues.Add(new StringContent(senhaADM), "password");
+                postValues.Add(new StringContent(empresaADM.ToString()), "company");
+                postValues.Add(new StringContent(wsdl), "wsdl_file");
+                postValues.Add(new StringContent(operacao), "operation");
+                postValues.Add(new StringContent(xml), "input_xml");
+                //postValues.Add(new StreamContent(File.OpenRead("C:\\teste.docx")), "file", (new FileInfo("C:\\teste.docx").Name));
+                apiRequest.Content = postValues;
+
+                HttpResponseMessage apiCallResponse = await httpClient.SendAsync(apiRequest);
+
+                xmlRetorno = await apiCallResponse.Content.ReadAsStringAsync();
+
+                Stream stream = await apiCallResponse.Content.ReadAsStreamAsync();
+                byte[] doc = null;
+
+                //MemoryStream ms = new MemoryStream();
+                //stream.CopyTo(ms);
+                //doc = ms.ToArray();
+                //File.WriteAllBytes("D:\\Projetos\\rez.docx", doc);
+
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Conexão WebService HttpClient ", "Ocorreu erro na conexão com WebService! " + ex.Message);
             }
             return xmlRetorno;
         }

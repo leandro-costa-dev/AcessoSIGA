@@ -3,6 +3,7 @@ using System.Text;
 
 namespace AcessoSIGA
 {
+    
     public class CtrChamado
     {
         //Abertura de chamado via webservice
@@ -30,7 +31,8 @@ namespace AcessoSIGA
             {
                 //Lê XML de retorno e devolve os dados
                 Ticket ticket_ret = new Ticket();
-                ticket_ret = RetornarXML.RetornarChamado(wsRetorno);
+                RetornarXML retornarXML = new RetornarXML();
+                ticket_ret = retornarXML.RetornarChamado(wsRetorno);
 
                 //Atualiza dados do retorno do chamado
                 ticket.cdChamado = ticket_ret.cdChamado;
@@ -39,7 +41,7 @@ namespace AcessoSIGA
                 ticket.dataChamado = ticket_ret.dataChamado;
 
                 //Envia o anexo para o chamado aberto
-                EnviarAnexo(ticket);
+                EnviarAnexoAsync(ticket);
 
                 //Gravar chamado no banco de dados
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
@@ -50,7 +52,7 @@ namespace AcessoSIGA
         }
 
         //Enviar para webservice o arquivo anexo do chamado
-        public void EnviarAnexo(Ticket ticket)
+        public async Task EnviarAnexoAsync(Ticket ticket)
         {
             if (String.IsNullOrEmpty(ticket.anexo))
             {
@@ -69,23 +71,19 @@ namespace AcessoSIGA
                 WService wService = new WService(operacao, wsdl_file, xml);
 
                 //Envia a requisição POST e faz a leitura do XML de retorno
-                string wsRetorno = wService.RequisicaoPOST();
+                string wsRetorno = await wService.PostAsync();
             }
         }
 
-        //Consulta geral de chamados webservice
-        public List<Ticket> ConsultaChamados()
+        //Atualização geral de chamados do contato
+        public void AtualizaChamadosContato(Cliente cliente, Contato contato)
         {
-            List<Ticket> lista = new List<Ticket>();
-
-            Ticket ticket = new Ticket();         
-
             string operacao = "getTicket";
             string wsdl_file = "WSTicket.wsdl";
 
             //Gera o XML de envio para o webservice
             WSTicket wSTicket = new WSTicket();
-            string xml = wSTicket.XML_getTicket(ticket);
+            string xml = wSTicket.XML_getTicket(cliente, contato);
 
             //Instancia o webservice passando os dados
             WService wService = new WService(operacao, wsdl_file, xml);
@@ -95,48 +93,35 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
-                Util.GravarLog("WS consulta geral de chamados ", "XML de retorno vazio ou nulo!");
+                Util.GravarLog("WS atualização geral de chamados do contato ", "XML de retorno vazio ou nulo!");
             }
             else
             {
                 //Lê XML de retorno e devolve os dados
-                lista = RetornarXML.retornarListaChamados(wsRetorno);
+                List<Ticket> listaTicket = new List<Ticket>();
+                RetornarXML retornarXML = new RetornarXML();
+                listaTicket = retornarXML.retornarListaChamadosContato(wsRetorno);
+
+                List<Historico> listaHistorico = new List<Historico>();
+                CtrHistorico ctrHistorico = new CtrHistorico();
+
+                ChamadoDAO chamadoDAO = new ChamadoDAO();
+                HistoricoDAO historicoDAO = new HistoricoDAO();
+
+                foreach (Ticket t in listaTicket)
+                {
+                    Ticket ticket = new Ticket();
+                    
+                    listaHistorico = ctrHistorico.ConsultarHistoricoChamado(t.cdChamado);
+                    ticket = ConsultarDadosChamado(t.cdChamado);
+
+                    //Atualiza informações do chamado
+                    chamadoDAO.GravarChamado(ticket);
+
+                    //Verifica se existe novo registro e grava histórico do chamado 
+                    historicoDAO.GravarHistorico(listaHistorico);
+                }
             }
-            return lista;
-        }
-
-        //Consultar webservice de histórico do chamado informado
-        public List<Historico> ConsultarHistoricoChamado(int cdChamado)
-        {
-            List<Historico> lista = new List<Historico>();
-
-            Historico historico = new Historico();
-
-            Ticket ticket = new Ticket();
-
-            string operacao = "getTicketHistoryData";
-            string wsdl_file = "WSTicket.wsdl";
-
-            //Gera o XML de envio para o webservice
-            WSTicket wSTicket = new WSTicket();
-            string xml = wSTicket.XML_getTicketHistoryData(cdChamado);
-
-            //Instancia o webservice passando os dados
-            WService wService = new WService(operacao, wsdl_file, xml);
-
-            //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
-
-            if (String.IsNullOrEmpty(wsRetorno))
-            {
-                Util.GravarLog("WS consulta histórico do chamado ", "XML de retorno vazio ou nulo!");                
-            }
-            else
-            {
-                //Lê XML de retorno e devolve os dados
-                lista = RetornarXML.RetornarHistoricoChamado(wsRetorno);
-            }
-            return lista;
         }
 
         //Consulta webservice de dados adicionais do chamado informado
@@ -164,7 +149,8 @@ namespace AcessoSIGA
             else
             {
                 //Lê XML de retorno e devolve os dados
-                ticket = RetornarXML.RetornarDadosChamado(wsRetorno);
+                RetornarXML retornarXML = new RetornarXML();
+                ticket = retornarXML.RetornarDadosChamado(wsRetorno);
             }
             return ticket;
         }

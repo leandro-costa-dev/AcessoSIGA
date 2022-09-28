@@ -26,8 +26,8 @@ namespace AcessoSIGA
             Ticket ticket = new Ticket();
 
             foreach (Ticket t in listaTicket)
-            {
-                listaHistorico = ctrChamado.ConsultarHistoricoChamado(t.cdChamado);
+            {                
+                listaHistorico = ConsultarHistoricoChamado(t.cdChamado);
                 ticket = ctrChamado.ConsultarDadosChamado(t.cdChamado);
 
                 //Atualiza informações do chamado
@@ -36,6 +36,41 @@ namespace AcessoSIGA
                 //Verifica se existe novo registro e grava histórico do chamado 
                 historicoDAO.GravarHistorico(listaHistorico);
             }
+        }
+
+        //Consultar webservice de histórico do chamado informado
+        public List<Historico> ConsultarHistoricoChamado(int cdChamado)
+        {
+            List<Historico> lista = new List<Historico>();
+
+            Historico historico = new Historico();
+
+            Ticket ticket = new Ticket();
+
+            string operacao = "getTicketHistoryData";
+            string wsdl_file = "WSTicket.wsdl";
+
+            //Gera o XML de envio para o webservice
+            WSTicket wSTicket = new WSTicket();
+            string xml = wSTicket.XML_getTicketHistoryData(cdChamado);
+
+            //Instancia o webservice passando os dados
+            WService wService = new WService(operacao, wsdl_file, xml);
+
+            //Envia a requisição POST e faz a leitura do XML de retorno
+            string wsRetorno = wService.RequisicaoPOST();
+
+            if (String.IsNullOrEmpty(wsRetorno))
+            {
+                Util.GravarLog("WS consulta histórico do chamado ", "XML de retorno vazio ou nulo!");
+            }
+            else
+            {
+                //Lê XML de retorno e devolve os dados
+                RetornarXML retornarXML = new RetornarXML();
+                lista = retornarXML.RetornarHistoricoChamado(wsRetorno);
+            }
+            return lista;
         }
 
         //Retorna o historico se acompanhamento for diferente de rascunho
@@ -52,7 +87,9 @@ namespace AcessoSIGA
                 if (h.cdAcompanhamento != 1 && h.controle == 0)
                 {
                     ChamadoDAO chamadoDAO = new ChamadoDAO();
-                    Ticket ticket = chamadoDAO.ConsultaChamado(h.cdChamado);
+                    
+                    Ticket ticket = new Ticket();
+                    ticket = chamadoDAO.ConsultaChamado(h.cdChamado);
 
                     ParametrosDAO parametrosDAO = new ParametrosDAO();
                     Parametros parametros = parametrosDAO.ConsultarParametros();

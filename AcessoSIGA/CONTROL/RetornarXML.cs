@@ -5,7 +5,7 @@ namespace AcessoSIGA
 {
     public class RetornarXML
     {
-        public static string RetornarToken(string xml)
+        public string RetornarToken(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -43,7 +43,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do chamado
-        public static Ticket RetornarChamado(string xml)
+        public Ticket RetornarChamado(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -87,7 +87,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno dos detalhes do chamado
-        public static Ticket RetornarDadosChamado(string xml)
+        public Ticket RetornarDadosChamado(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -149,7 +149,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com lista de chamados do cliente e contato especificado
-        public static List<Ticket> retornarListaChamados(string xml)
+        public List<Ticket> retornarListaChamadosContato(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -195,7 +195,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com lista do histórico do chamado
-        public static List<Historico> RetornarHistoricoChamado(string xml)
+        public List<Historico> RetornarHistoricoChamado(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -257,7 +257,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com empresa localizada pelo CNPJ
-        public static Cliente RetornarEmpresa(string xml)
+        public Cliente RetornarEmpresa(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -297,7 +297,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do contato da empresa pelo login
-        public static Contato RetornarContatoEmpresa(string xml)
+        public Contato RetornarContatoEmpresa(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -342,7 +342,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do contato da empresa pelo login
-        public static Contato RetornarDadosContato(string xml)
+        public Contato RetornarDadosContato(string xml)
         {
             GravarXML gravarXML = new GravarXML();
             gravarXML.gravarXML_Retorno(xml);
@@ -389,7 +389,7 @@ namespace AcessoSIGA
         }
 
         //Lê o XML com retorno do anexo enviado
-        public static bool RetornarRespostaAnexo(string xml)
+        public bool RetornarRespostaAnexo(string xml)
         {
             bool resposta = false;
             string status = "";

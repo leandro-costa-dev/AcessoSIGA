@@ -10,9 +10,13 @@ namespace AcessoSIGA
 {
     public class ChamadoDAO
     {
+        public static Semaphore threadPool = new Semaphore(1, 1);
+
         //Grava/Atualiza chamado no banco de dados
         public void GravarChamado(Ticket t)
         {
+            threadPool.WaitOne();
+
             if (ExisteChamado(t.cdChamado))
             {
                 //-------------UPDATE-----------------
@@ -23,7 +27,7 @@ namespace AcessoSIGA
 
                 try
                 {
-                    cmd.CommandText =  "UPDATE CHAMADO SET " +                                        
+                    cmd.CommandText = "UPDATE CHAMADO SET " +
                                         "idChamado=@idChamado, " +
                                         "titChamado=@titChamado, " +
                                         "dsChamado=@dsChamado, " +
@@ -59,7 +63,7 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao atualizar as informações do chamado no banco de dados! " + ex.Message);                    
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao atualizar as informações do chamado no banco de dados! " + ex.Message);
                 }
                 finally
                 {
@@ -100,13 +104,14 @@ namespace AcessoSIGA
                 }
                 catch (Exception ex)
                 {
-                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao gravar chamado no banco de dados! " + ex.Message);                    
+                    Util.GravarLog("Banco de Dados ", "Ocorreu erro ao gravar chamado no banco de dados! " + ex.Message);
                 }
                 finally
                 {
                     con.Close();
-                }
+                }                
             }
+            threadPool.Release();
         }
 
         //Verifica no BD se existe chamado
@@ -136,7 +141,7 @@ namespace AcessoSIGA
             }
             catch (Exception ex)
             {
-                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o chamado no banco de dados! " + ex.Message);                
+                Util.GravarLog("Banco de Dados ", "Ocorreu erro ao consultar o chamado no banco de dados! " + ex.Message);
             }
             finally
             {
@@ -158,10 +163,10 @@ namespace AcessoSIGA
             var con = conexaoSQL.ConectarBancoSQL(false);
             var cmd = con.CreateCommand();
 
-            try
-            {               
-                cmd.CommandText = "SELECT * FROM CHAMADO WHERE sitChamado <> 7";                            
+            cmd.CommandText = "SELECT * FROM CHAMADO WHERE sitChamado <> 7";
 
+            try
+            {
                 da = new SqlDataAdapter(cmd.CommandText, con);
                 da.Fill(dt);
 
