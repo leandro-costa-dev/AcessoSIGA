@@ -167,7 +167,7 @@ namespace AcessoSIGA
             return xml;
         }
 
-        public string XML_addAttachment(Ticket ticket)
+        public string XML_addAttachment(Ticket ticket, Anexo anexo)
         {
             string xml;
 
@@ -179,9 +179,9 @@ namespace AcessoSIGA
             xmlWriter.WriteStartElement("contents");
             xmlWriter.WriteStartElement("data");
             xmlWriter.WriteElementString("cdchamado", ticket.cdChamado.ToString());
-            xmlWriter.WriteElementString("nmanexo", ticket.dsAnexo);
+            xmlWriter.WriteElementString("nmanexo", anexo.nmAnexo);
             xmlWriter.WriteElementString("idprivado", "N");
-            xmlWriter.WriteElementString("attachment", ticket.anexo);            
+            xmlWriter.WriteElementString("attachment", anexo.dsAnexo);            
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();

@@ -108,7 +108,7 @@ namespace AcessoSIGA
             ConexaoSQL conexaoSQL = new ConexaoSQL();
             conexaoSQL.ConectarBancoSQL(false);
 
-            if (ConexaoSQL.sqlConnection.State.Equals(ConnectionState.Open))
+            if (conexaoSQL.sqlConnection.State.Equals(ConnectionState.Open))
             {
                 MessageBox.Show("Conexão realizada com sucesso! ", "Ok!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 conexaoSQL.FecharConexaoSQL();

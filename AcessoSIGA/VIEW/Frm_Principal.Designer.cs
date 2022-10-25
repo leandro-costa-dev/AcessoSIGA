@@ -39,8 +39,6 @@
             this.ParametrosSIGAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ParametrosGeraisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tabelasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tipoDeChamadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -107,8 +105,7 @@
             // 
             this.ParametrosSIGAToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ParametrosGeraisToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.tabelasToolStripMenuItem});
+            this.toolStripSeparator1});
             this.ParametrosSIGAToolStripMenuItem.Name = "ParametrosSIGAToolStripMenuItem";
             this.ParametrosSIGAToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.ParametrosSIGAToolStripMenuItem.Text = "Parâmetros SIGA";
@@ -124,20 +121,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
-            // 
-            // tabelasToolStripMenuItem
-            // 
-            this.tabelasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tipoDeChamadoToolStripMenuItem});
-            this.tabelasToolStripMenuItem.Name = "tabelasToolStripMenuItem";
-            this.tabelasToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.tabelasToolStripMenuItem.Text = "Tabelas";
-            // 
-            // tipoDeChamadoToolStripMenuItem
-            // 
-            this.tipoDeChamadoToolStripMenuItem.Name = "tipoDeChamadoToolStripMenuItem";
-            this.tipoDeChamadoToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.tipoDeChamadoToolStripMenuItem.Text = "Tipo de Chamado";
             // 
             // ajudaToolStripMenuItem
             // 
@@ -204,8 +187,6 @@
         private ToolStripMenuItem ParametrosSIGAToolStripMenuItem;
         private ToolStripMenuItem ParametrosGeraisToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripMenuItem tabelasToolStripMenuItem;
-        private ToolStripMenuItem tipoDeChamadoToolStripMenuItem;
         private PictureBox pictureBox;
         private NotifyIcon notifyIcon1;
     }

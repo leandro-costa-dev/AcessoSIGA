@@ -38,6 +38,7 @@
             this.txtDescricao = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtDetalhes = new System.Windows.Forms.RichTextBox();
+            this.btnAnexo = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -66,7 +67,7 @@
             this.groupBox2.Controls.Add(this.listViewHistorico);
             this.groupBox2.Location = new System.Drawing.Point(6, 134);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(632, 285);
+            this.groupBox2.Size = new System.Drawing.Size(632, 254);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
@@ -80,7 +81,7 @@
             this.listViewHistorico.Location = new System.Drawing.Point(6, 16);
             this.listViewHistorico.MultiSelect = false;
             this.listViewHistorico.Name = "listViewHistorico";
-            this.listViewHistorico.Size = new System.Drawing.Size(620, 263);
+            this.listViewHistorico.Size = new System.Drawing.Size(620, 232);
             this.listViewHistorico.TabIndex = 0;
             this.listViewHistorico.UseCompatibleStateImageBehavior = false;
             this.listViewHistorico.View = System.Windows.Forms.View.Details;
@@ -94,7 +95,7 @@
             // clDesAcompanhamento
             // 
             this.clDesAcompanhamento.Text = "Descrição do Acompanhamento";
-            this.clDesAcompanhamento.Width = 480;
+            this.clDesAcompanhamento.Width = 460;
             // 
             // groupBox1
             // 
@@ -132,11 +133,22 @@
             this.txtDetalhes.TabIndex = 0;
             this.txtDetalhes.Text = "";
             // 
+            // btnAnexo
+            // 
+            this.btnAnexo.Location = new System.Drawing.Point(269, 394);
+            this.btnAnexo.Name = "btnAnexo";
+            this.btnAnexo.Size = new System.Drawing.Size(114, 23);
+            this.btnAnexo.TabIndex = 10;
+            this.btnAnexo.Text = "Visualizar Aneexos";
+            this.btnAnexo.UseVisualStyleBackColor = true;
+            this.btnAnexo.Click += new System.EventHandler(this.btnAnexo_Click);
+            // 
             // Frm_Acompanhamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 561);
+            this.Controls.Add(this.btnAnexo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblData);
             this.Controls.Add(this.lblChamado);
@@ -168,5 +180,6 @@
         private RichTextBox txtDescricao;
         private GroupBox groupBox3;
         private RichTextBox txtDetalhes;
+        private Button btnAnexo;
     }
 }

@@ -10,12 +10,12 @@ namespace AcessoSIGA
 {
     public class ChamadoDAO
     {
-        public static Semaphore threadPool = new Semaphore(1, 1);
+        //public static Semaphore threadPool = new Semaphore(1, 1);
 
         //Grava/Atualiza chamado no banco de dados
         public void GravarChamado(Ticket t)
         {
-            threadPool.WaitOne();
+            //threadPool.WaitOne();
 
             if (ExisteChamado(t.cdChamado))
             {
@@ -37,9 +37,7 @@ namespace AcessoSIGA
                                         "nmContato=@nmContato, " +
                                         "sitChamado=@cdSituacao, " +
                                         "nmSituacao=@nmSituacao, " +
-                                        "dataChamado=@dataChamado, " +
-                                        "anexo=@anexo, " +
-                                        "dsAnexo=@dsAnexo " +
+                                        "dataChamado=@dataChamado " +
                                         "WHERE cdChamado=@cdChamado";
 
                     cmd.Parameters.AddWithValue("@cdChamado", t.cdChamado);
@@ -53,8 +51,6 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@cdSituacao", t.cdSituacao);
                     cmd.Parameters.AddWithValue("@nmSituacao", t.nmSituacao);
                     cmd.Parameters.AddWithValue("@dataChamado", t.dataChamado);
-                    cmd.Parameters.AddWithValue("@anexo", t.anexo);
-                    cmd.Parameters.AddWithValue("@dsAnexo", t.dsAnexo);
 
                     cmd.ExecuteNonQuery();
 
@@ -80,8 +76,8 @@ namespace AcessoSIGA
 
                 try
                 {
-                    cmd.CommandText = "INSERT INTO CHAMADO(cdChamado, idChamado, titChamado, dsChamado, cdCliente, nmCliente, cdContato, nmContato, sitChamado, nmSituacao, dataChamado, anexo, dsAnexo)" +
-                                       "VALUES(@cdChamado, @idChamado, @titChamado, @dsChamado, @cdCliente, @nmCliente, @cdContato, @nmContato, @cdSituacao, @nmSituacao, @dataChamado, @anexo, @dsAnexo)";
+                    cmd.CommandText = "INSERT INTO CHAMADO(cdChamado, idChamado, titChamado, dsChamado, cdCliente, nmCliente, cdContato, nmContato, sitChamado, nmSituacao, dataChamado)" +
+                                       "VALUES(@cdChamado, @idChamado, @titChamado, @dsChamado, @cdCliente, @nmCliente, @cdContato, @nmContato, @cdSituacao, @nmSituacao, @dataChamado)";
 
                     cmd.Parameters.AddWithValue("@cdChamado", t.cdChamado);
                     cmd.Parameters.AddWithValue("@idChamado", t.idChamado);
@@ -94,8 +90,6 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@cdSituacao", t.cdSituacao);
                     cmd.Parameters.AddWithValue("@nmSituacao", t.nmSituacao);
                     cmd.Parameters.AddWithValue("@dataChamado", t.dataChamado);
-                    cmd.Parameters.AddWithValue("@anexo", t.anexo);
-                    cmd.Parameters.AddWithValue("@dsAnexo", t.dsAnexo);
 
                     cmd.ExecuteNonQuery();
 
@@ -111,7 +105,7 @@ namespace AcessoSIGA
                     con.Close();
                 }                
             }
-            threadPool.Release();
+            //threadPool.Release();
         }
 
         //Verifica no BD se existe chamado
@@ -223,8 +217,6 @@ namespace AcessoSIGA
                     ticket.cdSituacao = Convert.ToInt32(row["sitChamado"]);
                     ticket.nmSituacao = Convert.ToString(row["nmSituacao"]);
                     ticket.dataChamado = Convert.ToString(row["dataChamado"]);
-                    ticket.anexo = Convert.ToString(row["anexo"]);
-                    ticket.dsAnexo = Convert.ToString(row["dsAnexo"]);
 
                 }
             }
@@ -274,8 +266,6 @@ namespace AcessoSIGA
                     ticket.cdSituacao = Convert.ToInt32(row["sitChamado"]);
                     ticket.nmSituacao = Convert.ToString(row["nmSituacao"]);
                     ticket.dataChamado = Convert.ToString(row["dataChamado"]);
-                    ticket.anexo = Convert.ToString(row["anexo"]);
-                    ticket.dsAnexo = Convert.ToString(row["dsAnexo"]);
 
                     listaTicket.Add(ticket);
                 }

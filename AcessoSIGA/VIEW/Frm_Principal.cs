@@ -9,7 +9,7 @@ namespace AcessoSIGA
             InitializeComponent();
         }
 
-        bool executar = true; //Contrle execução da thread
+        bool executar = true; //Controle execução da thread
         private void Form1_Load(object sender, EventArgs e)
         {
             //Posicionar o botão na tela inicial
@@ -31,7 +31,6 @@ namespace AcessoSIGA
             //Executa thread de atualização do historico
             Thread t3 = new Thread(AtualizarHistorico);
             t3.Start();
-
         }
 
         private void acessoSIGAToolStripMenuItem_Click(object sender, EventArgs e)
@@ -84,7 +83,7 @@ namespace AcessoSIGA
         {
             while (executar)
             {
-                Thread.Sleep(10000);
+                Thread.Sleep(10000); //Aguardar 10 segundos
 
                 List<Historico> listHistorico = new List<Historico>();
 
@@ -113,11 +112,16 @@ namespace AcessoSIGA
 
         private void AtualizaChamadosContato()
         {
-            ParametrosDAO parametrosDAO = new ParametrosDAO();
-            Parametros p = parametrosDAO.ConsultarParametros();
+            while (executar)
+            {
+                ParametrosDAO parametrosDAO = new ParametrosDAO();
+                Parametros p = parametrosDAO.ConsultarParametros();
 
-            CtrChamado ctrChamado = new CtrChamado();
-            ctrChamado.AtualizaChamadosContato(p.Cliente, p.Contato);
+                CtrChamado ctrChamado = new CtrChamado();
+                ctrChamado.AtualizaChamadosContato(p.Cliente, p.Contato);
+
+                Thread.Sleep(300000); //Aguardar 5 minutos
+            }
         }
 
         private void Frm_Principal_FormClosed(object sender, FormClosedEventArgs e)

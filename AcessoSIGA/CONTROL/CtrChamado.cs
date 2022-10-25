@@ -7,7 +7,7 @@ namespace AcessoSIGA
     public class CtrChamado
     {
         //Abertura de chamado via webservice
-        public Ticket GravarChamados(Ticket ticket)
+        public async Task<Ticket> GravarChamados(Ticket ticket, Anexo anexo)
         {
             string operacao = "addTicketByEndUser";
             //string operacao = "addTicketByData";
@@ -40,39 +40,58 @@ namespace AcessoSIGA
                 ticket.nmSituacao = ticket_ret.nmSituacao;
                 ticket.dataChamado = ticket_ret.dataChamado;
 
-                //Envia o anexo para o chamado aberto
-                EnviarAnexoAsync(ticket);
-
                 //Gravar chamado no banco de dados
                 ChamadoDAO chamadoDAO = new ChamadoDAO();
                 chamadoDAO.GravarChamado(ticket);
-            }
+                
+                //Envia o anexo para o chamado caso possua
+                if (!String.IsNullOrEmpty(anexo.dsAnexo))
+                {                    
+                    Anexo anexo_ret = new Anexo();
+                    anexo_ret = await EnviarAnexoAsync(ticket, anexo);
 
+                    anexo.dtAnexo = anexo_ret.dtAnexo;
+                    anexo.cdChamado = anexo_ret.cdChamado;
+                    anexo.nrSequencia = anexo_ret.nrSequencia;
+
+                    //Gravar anexo no banco de dados
+                    AnexoDAO anexoDAO = new AnexoDAO();
+                    anexoDAO.GravarAnexo(anexo);
+                }
+            }
             return ticket;
         }
 
         //Enviar para webservice o arquivo anexo do chamado
-        public async Task EnviarAnexoAsync(Ticket ticket)
+        public async Task<Anexo> EnviarAnexoAsync(Ticket ticket, Anexo anexo)
         {
-            if (String.IsNullOrEmpty(ticket.anexo))
-            {
-                return;
-            }
-            else
+            if (!String.IsNullOrEmpty(anexo.dsAnexo))
             {
                 string operacao = "addAttachment";
                 string wsdl_file = "WSTicket.wsdl";
 
                 //Gera o XML de envio para o webservice
                 WSTicket wSTicket = new WSTicket();
-                string xml = wSTicket.XML_addAttachment(ticket);
+                string xml = wSTicket.XML_addAttachment(ticket, anexo);
 
                 //Instancia o webservice passando os dados
                 WService wService = new WService(operacao, wsdl_file, xml);
 
                 //Envia a requisição POST e faz a leitura do XML de retorno
                 string wsRetorno = await wService.PostAsync();
+
+                if (String.IsNullOrEmpty(wsRetorno))
+                {
+                    Util.GravarLog("WS envia anexo ", "XML de retorno vazio ou nulo!");
+                }
+                else
+                {
+                    //Lê XML de retorno e devolve os dados
+                    RetornarXML retornarXML = new RetornarXML();
+                    anexo = retornarXML.RetornarInclusaoAnexo(wsRetorno);
+                }                
             }
+            return anexo;
         }
 
         //Atualização geral de chamados do contato

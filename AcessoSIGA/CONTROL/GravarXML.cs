@@ -26,7 +26,7 @@ namespace AcessoSIGA
             string arquivo;
             string path = Util.CriarDiretorios();
 
-            arquivo = path + @"\XML\Envio\" + Util.LimparString(DateTime.Now.ToString()) + "-Envio.xml";
+            arquivo = path + @"\XML\Envio\" + Util.LimparString(DateTime.Now.ToString("ddMMyyyyHHmmssfffff")) + "-Envio.xml";
             try
             {
                 // Criar o documento XML
@@ -56,7 +56,7 @@ namespace AcessoSIGA
             string arquivo;
             string path = Util.CriarDiretorios();
 
-            arquivo = path + @"\XML\Retorno\" + Util.LimparString(DateTime.Now.ToString()) + "-Retorno.xml";
+            arquivo = path + @"\XML\Retorno\" + Util.LimparString(DateTime.Now.ToString("ddMMyyyyHHmmssfffff")) + "-Retorno.xml";
 
             try
             {

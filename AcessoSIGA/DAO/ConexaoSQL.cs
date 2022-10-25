@@ -13,7 +13,7 @@ namespace AcessoSIGA
         public static string usuario = "leandro";
         public static string senha = "12345678";
 
-        public static SqlConnection sqlConnection = new SqlConnection();
+        public SqlConnection sqlConnection = new SqlConnection();
 
         //Abrir a conexão com banco de dados
         public SqlConnection ConectarBancoSQL(bool master)
@@ -80,64 +80,79 @@ namespace AcessoSIGA
                 SqlCommand cmd_parametros = con.CreateCommand();
                 SqlCommand cmd_chamados = con.CreateCommand();
                 SqlCommand cmd_historico = con.CreateCommand();
+                SqlCommand cmd_anexo = con.CreateCommand();
 
                 try
                 {
-                    cmd_parametros.CommandText = ("CREATE TABLE PARAMETROS(" +
-                        "cdCliente INT, " +
-                        "nmCliente VARCHAR (100), " +
-                        "cnpj VARCHAR (14), " +
-                        "cdContato INT, " +
-                        "nmContato VARCHAR(100), " +
-                        "cdLocalidade INT, " +
-                        "nmLocalidade VARCHAR(40), " +
-                        "email VARCHAR(100), " +
-                        "login VARCHAR(50), " +
-                        "idChamado INT, " +
-                        "tipoChamado INT, " +
-                        "cdCategoria INT, " +
-                        "cdSeveridade INT, " +
-                        "cdAnimo INT, " +
-                        "cdOrigem INT, " +
-                        "urlWs VARCHAR(50), " +
-                        "usuarioWs VARCHAR(30), " +
-                        "senhaWs VARCHAR(30), " +
-                        "empresaWs INT, " +
-                        "servidor VARCHAR(100), " +
-                        "banco VARCHAR(40), " +
-                        "usuario VARCHAR(20), " +
-                        "senha VARCHAR(20));");
+                    cmd_parametros.CommandText = (@"CREATE TABLE PARAMETROS(
+                        cdCliente INT, 
+                        nmCliente VARCHAR (100), 
+                        cnpj VARCHAR (14), 
+                        cdContato INT, 
+                        nmContato VARCHAR(100), 
+                        cdLocalidade INT, 
+                        nmLocalidade VARCHAR(40), 
+                        email VARCHAR(100), 
+                        login VARCHAR(50), 
+                        idChamado INT, 
+                        tipoChamado INT, 
+                        cdCategoria INT, 
+                        cdSeveridade INT, 
+                        cdAnimo INT, 
+                        cdOrigem INT, 
+                        urlWs VARCHAR(50), 
+                        usuarioWs VARCHAR(30), 
+                        senhaWs VARCHAR(30), 
+                        empresaWs INT, 
+                        servidor VARCHAR(100), 
+                        banco VARCHAR(40), 
+                        usuario VARCHAR(20), 
+                        senha VARCHAR(20))");
 
-                    cmd_chamados.CommandText = ("CREATE TABLE CHAMADO(" +
-                        "cdChamado int NOT NULL PRIMARY KEY, " +
-                        "idChamado int NOT NULL, " +
-                        "titChamado VARCHAR (100), " +
-                        "dsChamado VARCHAR(500), " +
-                        "cdCliente INT, " +
-                        "nmCliente VARCHAR(100), " +
-                        "cdContato INT, " +
-                        "nmContato VARCHAR(100), " +
-                        "sitChamado VARCHAR(10), " +
-                        "nmSituacao VARCHAR(50), " +
-                        "dataChamado VARCHAR(20), " +
-                        "anexo NVARCHAR(MAX), " +
-                        "dsAnexo VARCHAR(100))");
+                    cmd_chamados.CommandText = (@"CREATE TABLE CHAMADO(
+                        cdChamado int NOT NULL PRIMARY KEY, 
+                        idChamado int NOT NULL, 
+                        titChamado VARCHAR (100), 
+                        dsChamado VARCHAR(500), 
+                        cdCliente INT, 
+                        nmCliente VARCHAR(100), 
+                        cdContato INT, 
+                        nmContato VARCHAR(100), 
+                        sitChamado VARCHAR(10), 
+                        nmSituacao VARCHAR(50), 
+                        dataChamado VARCHAR(20))");
 
+                    cmd_historico.CommandText = (@"CREATE TABLE HISTORICO(
+                        id INT IDENTITY(1, 1) PRIMARY KEY, 
+                        cdChamado INT NOT NULL, 
+                        cdAcompanhamento INT NOT NULL, 
+                        nmTipoacompanhamento VARCHAR(100), 
+                        dsAcompanhamento VARCHAR(500), 
+                        nmUsuario VARCHAR(100), 
+                        dtAcompanhamento VARCHAR(50), 
+                        idPrivado VARCHAR(10), 
+                        controle VARCHAR(2), 
+                        CONSTRAINT fk_cdChamado FOREIGN KEY(cdChamado) 
+                        REFERENCES CHAMADO(cdChamado) 
+                        ON DELETE CASCADE 
+                        ON UPDATE CASCADE)");
 
-                    cmd_historico.CommandText = ("CREATE TABLE HISTORICO(" +
-                        "id INT IDENTITY(1, 1) PRIMARY KEY, " +
-                        "cdChamado INT NOT NULL, " +
-                        "cdAcompanhamento INT NOT NULL, " +
-                        "nmTipoacompanhamento VARCHAR(100), " +
-                        "dsAcompanhamento VARCHAR(500), " +
-                        "nmUsuario VARCHAR(100), " +
-                        "dtAcompanhamento VARCHAR(50), " +
-                        "idPrivado VARCHAR(10), " +
-                        "controle VARCHAR(2), " +
-                        "CONSTRAINT fk_cdChamado FOREIGN KEY(cdChamado) " +
-                        "REFERENCES CHAMADO(cdChamado) " +
-                        "ON DELETE CASCADE " +
-                        "ON UPDATE CASCADE)");
+                    cmd_anexo.CommandText = (@"CREATE TABLE ANEXO(
+                        id INT IDENTITY(1, 1) PRIMARY KEY, 
+                        cdChamado INT NOT NULL, 
+                        nrSequencia INT NOT NULL, 
+                        nmAnexo VARCHAR(100), 
+                        dsAnexo VARCHAR(MAX), 
+                        dtAnexo VARCHAR(20), 
+                        cdUsuario INT, 
+                        nmUsuario VARCHAR(50), 
+                        vlTamanho VARCHAR(20), 
+                        cdSituacao INT, 
+                        idPrivado CHAR(1), 
+                        CONSTRAINT fk_anexoChamado FOREIGN KEY(cdChamado) 
+                        REFERENCES CHAMADO(cdChamado) 
+                        ON DELETE CASCADE 
+                        ON UPDATE CASCADE)");
 
                     cmd_parametros.ExecuteNonQuery();
                     Console.WriteLine("Tabela parâmetros criada com sucesso!");
@@ -147,6 +162,9 @@ namespace AcessoSIGA
 
                     cmd_historico.ExecuteNonQuery();
                     Console.WriteLine("Tabela historico criada com sucesso!");
+
+                    cmd_anexo.ExecuteNonQuery();
+                    Console.WriteLine("Tabela anexo criada com sucesso!");
 
                 }
                 catch (Exception ex)

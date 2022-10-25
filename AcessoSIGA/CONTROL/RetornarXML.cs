@@ -430,5 +430,46 @@ namespace AcessoSIGA
             }
             return resposta;
         }
+
+        //Lê o XML de retorno do anexo
+        public Anexo RetornarInclusaoAnexo(string xml)
+        {
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
+            Anexo anexo = new Anexo();
+
+            try
+            {
+                XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
+                XmlReaderSettings settings = new XmlReaderSettings();
+
+                settings.IgnoreComments = true;
+                settings.IgnoreProcessingInstructions = true;
+                settings.IgnoreWhitespace = true;
+
+                while (xmlReader.Read())
+                {
+                    if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dataitem")
+                    {
+                        while (xmlReader.Read())
+                        {
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "dtoperacao")
+                                anexo.dtAnexo = xmlReader.ReadElementContentAsString();
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "cdchamado")
+                                anexo.cdChamado = int.Parse(xmlReader.ReadElementContentAsString());
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "nrsequencia")
+                                anexo.nrSequencia = int.Parse(xmlReader.ReadElementContentAsString());
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do anexo! " + ex.Message);
+            }
+            return anexo;
+        }
     }
 }

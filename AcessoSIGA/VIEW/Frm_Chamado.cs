@@ -11,7 +11,8 @@ namespace AcessoSIGA
     public partial class Frm_Chamado : Form
     {
         string arquivoAnexo = ""; //Variavel do arquivo anexo em base 64
-        string descAnexo = ""; //Descrição do anexo
+        string nomeAnexo = ""; //Descrição do anexo
+
         public Frm_Chamado()
         {
             InitializeComponent();
@@ -28,9 +29,11 @@ namespace AcessoSIGA
             txtNmContato.Text = p.Contato.nmContato;
 
         }
-        private void btnGravar_Click(object sender, EventArgs e)
+        private async void btnGravar_Click(object sender, EventArgs e)
         {
             Ticket ticket = new Ticket();
+            Anexo anexo = new Anexo();
+
             ParametrosDAO parametrosDAO = new ParametrosDAO();
             Parametros parametros = parametrosDAO.ConsultarParametros();
 
@@ -49,11 +52,11 @@ namespace AcessoSIGA
             ticket.cdAnimo = parametros.Ticket.cdAnimo; //Normal
             ticket.cdOrigem = parametros.Ticket.cdOrigem; //WebService
 
-            ticket.anexo = arquivoAnexo; //Arquivo anexo
-            ticket.dsAnexo = descAnexo; //Descrição do anexo
+            anexo.dsAnexo = arquivoAnexo; //Arquivo anexo
+            anexo.nmAnexo = nomeAnexo; //Nome do arquivo anexo
 
             CtrChamado ctrChamado = new CtrChamado();
-            ticket = ctrChamado.GravarChamados(ticket);
+            ticket = await ctrChamado.GravarChamados(ticket, anexo);
 
             if (ticket.cdChamado > 0)
             {
@@ -89,7 +92,7 @@ namespace AcessoSIGA
                 openFileDialog.ShowDialog(this);
                 string strFn = openFileDialog.FileName;
 
-                descAnexo = openFileDialog.SafeFileName;
+                nomeAnexo = openFileDialog.SafeFileName;
 
                 txtAnexo.Text = strFn;
 

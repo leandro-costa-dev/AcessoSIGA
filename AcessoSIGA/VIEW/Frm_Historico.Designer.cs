@@ -148,7 +148,7 @@
             // clTitulo
             // 
             this.clTitulo.Text = "Titulo do Chamado";
-            this.clTitulo.Width = 440;
+            this.clTitulo.Width = 450;
             // 
             // clSituacao
             // 
