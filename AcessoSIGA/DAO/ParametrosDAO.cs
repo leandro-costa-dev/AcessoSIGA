@@ -36,6 +36,7 @@ namespace AcessoSIGA
                         "nmLocalidade = @nmLocalidade, " +
                         "email = @email, " +
                         "login = @login, " +
+                        "senhaContato = @senhaContato, " +
                         "idChamado = @idChamado, " +
                         "tipoChamado = @tipoChamado, " +
                         "cdCategoria = @cdCategoria, " +
@@ -49,7 +50,7 @@ namespace AcessoSIGA
                         "servidor = @servidor, " +
                         "banco = @banco, " +
                         "usuario = @usuario, " +
-                        "senha = @senha";
+                        "senhaBanco = @senhaBanco";
 
                     cmd.Parameters.AddWithValue("@cdCliente", p.Cliente.cdCliente);
                     cmd.Parameters.AddWithValue("@nmCliente", p.Cliente.nmCliente);
@@ -61,6 +62,7 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@nmLocalidade", p.Contato.nmLocalidade);
                     cmd.Parameters.AddWithValue("@email", p.Contato.email);
                     cmd.Parameters.AddWithValue("@login", p.Contato.login);
+                    cmd.Parameters.AddWithValue("@senhaContato", p.Contato.senhaContato);
 
                     cmd.Parameters.AddWithValue("@idChamado", p.Ticket.idChamado);
                     cmd.Parameters.AddWithValue("@tipoChamado", p.Ticket.tipoChamado);
@@ -77,7 +79,7 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);
                     cmd.Parameters.AddWithValue("@banco", p.banco);
                     cmd.Parameters.AddWithValue("@usuario", p.usuario);
-                    cmd.Parameters.AddWithValue("@senha", p.senha);
+                    cmd.Parameters.AddWithValue("@senhaBanco", p.senhaBanco);
 
                     cmd.ExecuteNonQuery();
 
@@ -102,8 +104,8 @@ namespace AcessoSIGA
 
                 try
                 {
-                    cmd.CommandText = "INSERT INTO PARAMETROS(cdCliente, nmCliente, cnpj, cdContato, nmContato, cdLocalidade, nmLocalidade, email, login, idChamado, tipoChamado, cdCategoria, cdSeveridade, cdAnimo, cdOrigem, urlWs, usuarioWs, senhaWs, empresaWs, servidor, banco, usuario, senha) " +
-                                                    "VALUES (@cdCliente, @nmCliente, @cnpj, @cdContato, @nmContato, @cdLocalidade, @nmLocalidade, @email, @login, @idChamado, @tipoChamado, @cdCategoria, @cdSeveridade, @cdAnimo, @cdOrigem, @urlWs, @usuarioWs, @senhaWs, @empresaWs, @servidor, @banco, @usuario, @senha)";
+                    cmd.CommandText = "INSERT INTO PARAMETROS(cdCliente, nmCliente, cnpj, cdContato, nmContato, cdLocalidade, nmLocalidade, email, login, senhaContato, idChamado, tipoChamado, cdCategoria, cdSeveridade, cdAnimo, cdOrigem, urlWs, usuarioWs, senhaWs, empresaWs, servidor, banco, usuario, senhaBanco) " +
+                                                    "VALUES (@cdCliente, @nmCliente, @cnpj, @cdContato, @nmContato, @cdLocalidade, @nmLocalidade, @email, @login, @senhaContato, @idChamado, @tipoChamado, @cdCategoria, @cdSeveridade, @cdAnimo, @cdOrigem, @urlWs, @usuarioWs, @senhaWs, @empresaWs, @servidor, @banco, @usuario, @senhaBanco)";
 
                     cmd.Parameters.AddWithValue("@cdCliente", p.Cliente.cdCliente);
                     cmd.Parameters.AddWithValue("@nmCliente", p.Cliente.nmCliente);
@@ -115,6 +117,7 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@nmLocalidade", p.Contato.nmLocalidade);
                     cmd.Parameters.AddWithValue("@email", p.Contato.email);
                     cmd.Parameters.AddWithValue("@login", p.Contato.login);
+                    cmd.Parameters.AddWithValue("@senhaContato", p.Contato.senhaContato);
 
                     cmd.Parameters.AddWithValue("@idChamado", p.Ticket.idChamado);
                     cmd.Parameters.AddWithValue("@tipoChamado", p.Ticket.tipoChamado);
@@ -131,7 +134,7 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);
                     cmd.Parameters.AddWithValue("@banco", p.banco);
                     cmd.Parameters.AddWithValue("@usuario", p.usuario);
-                    cmd.Parameters.AddWithValue("@senha", p.senha);
+                    cmd.Parameters.AddWithValue("@senhaBanco", p.senhaBanco);
 
                     cmd.ExecuteNonQuery();
 
@@ -186,6 +189,7 @@ namespace AcessoSIGA
                     contato.nmLocalidade = Convert.ToString(row["nmLocalidade"]);
                     contato.email = Convert.ToString(row["email"]);
                     contato.login = Convert.ToString(row["login"]);
+                    contato.senhaContato = Convert.ToString(row["senhaContato"]);
 
                     ticket.idChamado = Convert.ToInt32(row["idChamado"]);
                     ticket.tipoChamado = Convert.ToInt32(row["tipoChamado"]);
@@ -202,7 +206,7 @@ namespace AcessoSIGA
                     parametros.servidor = Convert.ToString(row["servidor"]);
                     parametros.banco = Convert.ToString(row["banco"]);
                     parametros.usuario = Convert.ToString(row["usuario"]);
-                    parametros.senha = Convert.ToString(row["senha"]);
+                    parametros.senhaBanco = Convert.ToString(row["senhaBanco"]);
 
                     parametros.Cliente = cliente;
                     parametros.Contato = contato;

@@ -94,6 +94,7 @@ namespace AcessoSIGA
                         nmLocalidade VARCHAR(40), 
                         email VARCHAR(100), 
                         login VARCHAR(50), 
+                        senhaContato VARCHAR(50), 
                         idChamado INT, 
                         tipoChamado INT, 
                         cdCategoria INT, 
@@ -106,7 +107,7 @@ namespace AcessoSIGA
                         empresaWs INT, 
                         servidor VARCHAR(100), 
                         banco VARCHAR(40), 
-                        usuario VARCHAR(20), 
+                        usuarioBanco VARCHAR(20), 
                         senha VARCHAR(20))");
 
                     cmd_chamados.CommandText = (@"CREATE TABLE CHAMADO(

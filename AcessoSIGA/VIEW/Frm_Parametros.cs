@@ -43,6 +43,7 @@ namespace AcessoSIGA
                 txtLocalidade.Text = p.Contato.nmLocalidade;
                 txtEmail.Text = p.Contato.email.ToString();
                 txtLoginContato.Text = p.Contato.login.ToString();
+                txtSenhaContato.Text = p.Contato.senhaContato.ToString();
 
                 txtIdChamado.Text = p.Ticket.idChamado.ToString();
                 txtTipoChamado.Text = p.Ticket.tipoChamado.ToString();
@@ -57,8 +58,8 @@ namespace AcessoSIGA
                 txtEmpresaWs.Text = p.empresaWs.ToString();
                 txtServidor.Text = p.servidor.ToString();
                 txtBanco.Text = p.banco.ToString();
-                txtUsuario.Text = p.usuario.ToString();
-                txtSenha.Text = p.senha.ToString();
+                txtUsuarioBanco.Text = p.usuario.ToString();
+                txtSenhaBanco.Text = p.senhaBanco.ToString();
             }
         }
 
@@ -102,8 +103,8 @@ namespace AcessoSIGA
         {
             ConexaoSQL.banco = txtBanco.Text;
             ConexaoSQL.servidor = txtServidor.Text;
-            ConexaoSQL.usuario = txtUsuario.Text;
-            ConexaoSQL.senha = txtSenha.Text;
+            ConexaoSQL.usuario = txtUsuarioBanco.Text;
+            ConexaoSQL.senha = txtSenhaBanco.Text;
 
             ConexaoSQL conexaoSQL = new ConexaoSQL();
             conexaoSQL.ConectarBancoSQL(false);
@@ -140,6 +141,7 @@ namespace AcessoSIGA
             contato.nmLocalidade = txtLocalidade.Text;
             contato.email = txtEmail.Text;
             contato.login = txtLoginContato.Text;
+            contato.senhaContato = txtSenhaContato.Text;
 
             Ticket ticket = new Ticket();
             ticket.idChamado = int.Parse(txtIdChamado.Text);
@@ -159,8 +161,8 @@ namespace AcessoSIGA
             parametros.empresaWs = int.Parse(txtEmpresaWs.Text);
             parametros.servidor = txtServidor.Text;
             parametros.banco = txtBanco.Text;
-            parametros.usuario = txtUsuario.Text;
-            parametros.senha = txtSenha.Text;
+            parametros.usuario = txtUsuarioBanco.Text;
+            parametros.senhaBanco = txtSenhaBanco.Text;
 
             ParametrosDAO parametrosDAO = new ParametrosDAO();
             parametrosDAO.GravarParametros(parametros);
@@ -173,8 +175,9 @@ namespace AcessoSIGA
 
             if (String.IsNullOrEmpty(txtCodCliente.Text) || String.IsNullOrEmpty(txtNomeCliente.Text) ||
                 String.IsNullOrEmpty(txtCodContato.Text) || String.IsNullOrEmpty(txtNomeContato.Text) ||
+                String.IsNullOrEmpty(txtSenhaContato.Text) || String.IsNullOrEmpty(txtLocalidade.Text) ||
                 String.IsNullOrEmpty(txtServidor.Text) || String.IsNullOrEmpty(txtBanco.Text) ||
-                String.IsNullOrEmpty(txtUsuario.Text) || String.IsNullOrEmpty(txtSenha.Text))
+                String.IsNullOrEmpty(txtUsuarioBanco.Text) || String.IsNullOrEmpty(txtSenhaBanco.Text))
             {                
                 situacao = true;
             }

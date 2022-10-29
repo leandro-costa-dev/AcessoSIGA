@@ -18,6 +18,6 @@ namespace AcessoSIGA
         public string servidor { get; set; } = string.Empty; //Caminho de acesso a base de dados
         public string banco { get; set; } = string.Empty; //Nome da base de dados
         public string usuario { get; set; } = string.Empty; //Usuario de acesso ao SQL
-        public string senha { get; set; } = string.Empty; //Senha de acesso ao SQL
+        public string senhaBanco { get; set; } = string.Empty; //Senha de acesso ao SQL
     }
 }

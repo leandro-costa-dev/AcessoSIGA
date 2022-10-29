@@ -72,17 +72,19 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtIdChamado = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txtSenha = new System.Windows.Forms.MaskedTextBox();
+            this.txtSenhaBanco = new System.Windows.Forms.MaskedTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.txtUsuarioBanco = new System.Windows.Forms.TextBox();
             this.txtBanco = new System.Windows.Forms.TextBox();
             this.txtServidor = new System.Windows.Forms.TextBox();
             this.btnTestarConexao = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSalvar = new System.Windows.Forms.ToolStripButton();
+            this.txtSenhaContato = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -177,7 +179,7 @@
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(237, 234);
+            this.btnConsultar.Location = new System.Drawing.Point(233, 263);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(75, 23);
             this.btnConsultar.TabIndex = 0;
@@ -187,6 +189,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtSenhaContato);
+            this.groupBox2.Controls.Add(this.label21);
             this.groupBox2.Controls.Add(this.txtEmail);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtCodContato);
@@ -196,7 +200,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(13, 102);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(509, 126);
+            this.groupBox2.Size = new System.Drawing.Size(509, 155);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Acesso SIGA";
@@ -266,7 +270,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(564, 303);
+            this.tabControl1.Size = new System.Drawing.Size(564, 325);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -278,7 +282,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(556, 275);
+            this.tabPage1.Size = new System.Drawing.Size(556, 297);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Login SIGA";
             // 
@@ -290,7 +294,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(556, 275);
+            this.tabPage3.Size = new System.Drawing.Size(556, 297);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Chamado SIGA";
             // 
@@ -496,30 +500,30 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.txtSenha);
+            this.tabPage2.Controls.Add(this.txtSenhaBanco);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.txtUsuario);
+            this.tabPage2.Controls.Add(this.txtUsuarioBanco);
             this.tabPage2.Controls.Add(this.txtBanco);
             this.tabPage2.Controls.Add(this.txtServidor);
             this.tabPage2.Controls.Add(this.btnTestarConexao);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(556, 275);
+            this.tabPage2.Size = new System.Drawing.Size(556, 297);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Conexão Banco";
             // 
-            // txtSenha
+            // txtSenhaBanco
             // 
-            this.txtSenha.Location = new System.Drawing.Point(86, 148);
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.PasswordChar = '*';
-            this.txtSenha.Size = new System.Drawing.Size(154, 23);
-            this.txtSenha.TabIndex = 3;
-            this.txtSenha.Text = "12345678";
+            this.txtSenhaBanco.Location = new System.Drawing.Point(86, 148);
+            this.txtSenhaBanco.Name = "txtSenhaBanco";
+            this.txtSenhaBanco.PasswordChar = '*';
+            this.txtSenhaBanco.Size = new System.Drawing.Size(154, 23);
+            this.txtSenhaBanco.TabIndex = 3;
+            this.txtSenhaBanco.Text = "12345678";
             // 
             // label9
             // 
@@ -557,13 +561,13 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "Servidor:";
             // 
-            // txtUsuario
+            // txtUsuarioBanco
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(86, 119);
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(154, 23);
-            this.txtUsuario.TabIndex = 2;
-            this.txtUsuario.Text = "leandro";
+            this.txtUsuarioBanco.Location = new System.Drawing.Point(86, 119);
+            this.txtUsuarioBanco.Name = "txtUsuarioBanco";
+            this.txtUsuarioBanco.Size = new System.Drawing.Size(154, 23);
+            this.txtUsuarioBanco.TabIndex = 2;
+            this.txtUsuarioBanco.Text = "leandro";
             // 
             // txtBanco
             // 
@@ -611,11 +615,28 @@
             this.btnSalvar.Text = "toolStripButton1";
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
+            // txtSenhaContato
+            // 
+            this.txtSenhaContato.Location = new System.Drawing.Point(63, 109);
+            this.txtSenhaContato.Name = "txtSenhaContato";
+            this.txtSenhaContato.PasswordChar = '*';
+            this.txtSenhaContato.Size = new System.Drawing.Size(172, 23);
+            this.txtSenhaContato.TabIndex = 7;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(19, 112);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(42, 15);
+            this.label21.TabIndex = 8;
+            this.label21.Text = "Senha:";
+            // 
             // Frm_Parametros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 331);
+            this.ClientSize = new System.Drawing.Size(564, 353);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -668,14 +689,14 @@
         private Button btnTestarConexao;
         private ToolStrip toolStrip1;
         private ToolStripButton btnSalvar;
-        private TextBox txtUsuario;
+        private TextBox txtUsuarioBanco;
         private TextBox txtBanco;
         private TextBox txtServidor;
         private Label label9;
         private Label label8;
         private Label label7;
         private Label label6;
-        private MaskedTextBox txtSenha;
+        private MaskedTextBox txtSenhaBanco;
         private Label label10;
         private TextBox txtLocalidade;
         private TextBox txtCdLocalidade;
@@ -702,5 +723,7 @@
         private TextBox txtUsuarioWs;
         private Label label17;
         private TextBox txtUrlWs;
+        private TextBox txtSenhaContato;
+        private Label label21;
     }
 }

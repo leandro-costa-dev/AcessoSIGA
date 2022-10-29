@@ -16,6 +16,7 @@ namespace AcessoSIGA
         public string nmLocalidade { get; set; } = string.Empty;
         public string cpfCnpj { get; set; } = string.Empty;
         public string login { get; set; } = string.Empty;
+        public string senhaContato { get; set; } = string.Empty;
         public string telefone { get; set; } = string.Empty;
         public string email { get; set; } = string.Empty;
     }
