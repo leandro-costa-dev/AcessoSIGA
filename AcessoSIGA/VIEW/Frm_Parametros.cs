@@ -69,6 +69,7 @@ namespace AcessoSIGA
         {
             if (String.IsNullOrEmpty(txtCpfCnpj.Text))
             {
+
                 MessageBox.Show("O campo CPF/CNPJ deve ser preenchido! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
