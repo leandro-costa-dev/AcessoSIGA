@@ -15,11 +15,6 @@ namespace AcessoSIGA
             //Posicionar o botão na tela inicial
             pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
 
-            //Criar banco e tabelas se não existir
-            ConexaoSQL conexaoSQL = new ConexaoSQL();
-            conexaoSQL.CriarBancoSQL();
-            conexaoSQL.CriarTabelasSQL();
-
             //Executa thread para atualizar todos os chamados do contato
             Thread t1 = new Thread(AtualizaChamadosContato);
             t1.Start();

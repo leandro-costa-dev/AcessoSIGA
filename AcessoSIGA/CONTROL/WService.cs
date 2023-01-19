@@ -15,6 +15,7 @@ namespace AcessoSIGA
         string wsdl;
         string xml;
 
+        //Construtor geral para envio das requisições POST com e sem XML
         public WService(string operacao, string wsdl, string xml)
         {
             ParametrosDAO parametrosDAO = new ParametrosDAO();
@@ -30,8 +31,8 @@ namespace AcessoSIGA
             this.xml = xml;
         }
 
-        //Requisição HttpWebRequest POST
-        public string RequisicaoPOST()
+        //Requisição HttpWebRequest POST com XML
+        public string RequisicaoPOST_XML()
         {
             string xmlRetorno = "";
 
@@ -42,6 +43,61 @@ namespace AcessoSIGA
                                "&wsdl_file=" + wsdl + 
                                "&operation=" + operacao + 
                                "&input_xml=" + xml;
+
+            try
+            {
+                var dados = Encoding.UTF8.GetBytes(dadosPOST);
+
+                var requisicaoWeb = HttpWebRequest.CreateHttp(url);
+
+                requisicaoWeb.Method = "POST";
+                requisicaoWeb.ContentType = "application/x-www-form-urlencoded";
+                requisicaoWeb.ContentLength = dados.Length;
+                requisicaoWeb.UserAgent = "RequisicaoWeb";
+
+                //Grava dados POST para o stream
+                using (var stream = requisicaoWeb.GetRequestStream())
+                {
+                    stream.Write(dados, 0, dados.Length);
+                    stream.Close();
+                }
+
+                //Obtem a resposta da requisição
+                using (var resposta = requisicaoWeb.GetResponse())
+                {
+                    Stream streamDados = resposta.GetResponseStream();
+
+                    Encoding encode = Encoding.GetEncoding("utf-8");
+
+                    StreamReader reader = new StreamReader(streamDados, encode);
+                    xmlRetorno = reader.ReadToEnd();
+
+                    streamDados.Close();
+                    resposta.Close();
+
+                    return xmlRetorno;
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Conexão WebService HttpWebRequest ", "Ocorreu erro na conexão com WebService! " + ex.Message);
+            }
+            return xmlRetorno;
+        }
+
+
+        //Requisição HttpWebRequest POST sem XML
+        public string RequisicaoPOST_PARAM()
+        {
+            string xmlRetorno = "";
+
+            //Parametros da requisição
+            string dadosPOST = "user=" + usuarioADM +
+                               "&password=" + senhaADM +
+                               "&company=" + empresaADM +
+                               "&wsdl_file=" + wsdl +
+                               "&operation=" + operacao +
+                               "" + xml;
 
             try
             {

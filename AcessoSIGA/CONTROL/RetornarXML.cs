@@ -388,6 +388,49 @@ namespace AcessoSIGA
             return contato;
         }
 
+        //Lê o XML com retorno da validação da senha do contato
+        public bool RetornarValidacaoContato(string xml)
+        {
+            bool resposta = false;
+            string status = "";
+
+            GravarXML gravarXML = new GravarXML();
+            gravarXML.gravarXML_Retorno(xml);
+
+            try
+            {
+                XmlReader xmlReader = XmlReader.Create(new StringReader(xml));
+                XmlReaderSettings settings = new XmlReaderSettings();
+
+                settings.IgnoreComments = true;
+                settings.IgnoreProcessingInstructions = true;
+                settings.IgnoreWhitespace = true;
+
+                while (xmlReader.Read())
+                {
+                    if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "response_status")
+                    {
+                        while (xmlReader.Read())
+                        {
+                            if (xmlReader.NodeType == XmlNodeType.Element && xmlReader.Name == "status")
+                                status = xmlReader.ReadElementContentAsString();
+                        }
+                    }
+                }
+
+                if (status == "1")
+                {
+                    resposta = true;
+                }
+                return resposta;
+            }
+            catch (Exception ex)
+            {
+                Util.GravarLog("Retornar XML ", "Ocorreu erro ao obter o XML do anexo! " + ex.Message);
+            }
+            return resposta;
+        }
+
         //Lê o XML com retorno do anexo enviado
         public bool RetornarRespostaAnexo(string xml)
         {

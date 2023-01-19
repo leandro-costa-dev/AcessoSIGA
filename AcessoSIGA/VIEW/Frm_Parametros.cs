@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace AcessoSIGA
 {
     public partial class Frm_Parametros : Form
     {
+        bool loginValido = false;
         public Frm_Parametros()
         {
             InitializeComponent();
@@ -75,6 +77,11 @@ namespace AcessoSIGA
                 MessageBox.Show("O campo Login ou e-mail devem ser preenchidos! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            else if (String.IsNullOrEmpty(txtSenhaContato.Text))
+            {
+                MessageBox.Show("O campo senha do contato deve ser preenchido! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             Cliente cliente = new Cliente();
             Contato contato = new Contato();            
@@ -82,6 +89,7 @@ namespace AcessoSIGA
             cliente.cnpj = txtCpfCnpj.Text;
             contato.login = txtLoginContato.Text;
             contato.email = txtEmail.Text;
+            contato.senhaContato = txtSenhaContato.Text;
 
             CtrParametros ctrParametros = new CtrParametros();
             cliente = ctrParametros.ConsultarEmpresa(cliente);
@@ -97,6 +105,17 @@ namespace AcessoSIGA
             contato = ctrParametros.BuscarDadosContato(cliente, contato);
             txtCdLocalidade.Text = contato.cdLocalidade.ToString();
             txtLocalidade.Text = contato.nmLocalidade;
+
+            //Verifica se o login e senha são válidos
+            //if (ctrParametros.ValidarSenhaContato(cliente, contato))
+            //{
+            //    loginValido = true;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Login ou senha do contato são inválidos. Verifique! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
         }
             private void btnTestarConexao_Click(object sender, EventArgs e)
@@ -123,11 +142,22 @@ namespace AcessoSIGA
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (verificarCampos())
+            if (VerificarCampos())
             {
                 MessageBox.Show("Todos os campos devem ser preenchidos! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            //Criar banco e tabelas se não existir
+            ConexaoSQL.banco = txtBanco.Text;
+            ConexaoSQL.servidor = txtServidor.Text;
+            ConexaoSQL.usuario = txtUsuarioBanco.Text;
+            ConexaoSQL.senha = txtSenhaBanco.Text;
+
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+            conexaoSQL.CriarBancoSQL();
+            conexaoSQL.CriarTabelasSQL();
+            //-------------------------------------------
 
             Cliente cliente = new Cliente();
             cliente.cdCliente = int.Parse(txtCodCliente.Text);
@@ -164,12 +194,23 @@ namespace AcessoSIGA
             parametros.usuario = txtUsuarioBanco.Text;
             parametros.senhaBanco = txtSenhaBanco.Text;
 
-            ParametrosDAO parametrosDAO = new ParametrosDAO();
-            parametrosDAO.GravarParametros(parametros);
+            //Verifica se o login e senha são válidos e grava os parâmetros
+            if (loginValido)
+            {
+                //Salva os parâmetros
+                ParametrosDAO parametrosDAO = new ParametrosDAO();
+                parametrosDAO.GravarParametros(parametros);
 
+                MessageBox.Show("Parâmetros gravados com sucesso! ", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {                
+                MessageBox.Show("Não foí possível validar as credencias de login do contato. ", "Erro ao gravar os parâmetros!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }            
         }
 
-        private bool verificarCampos()
+        private bool VerificarCampos()
         {
             bool situacao = false;
 

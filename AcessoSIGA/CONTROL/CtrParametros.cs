@@ -22,7 +22,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
+            string wsRetorno = wService.RequisicaoPOST_XML();
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
@@ -53,7 +53,7 @@ namespace AcessoSIGA
                 WService wService = new WService(operacao, wsdl_file, xml);
 
                 //Envia a requisição POST e faz a leitura do XML de retorno
-                string wsRetorno = wService.RequisicaoPOST();
+                string wsRetorno = wService.RequisicaoPOST_XML();
 
                 //Lê XML de retorno e devolve os dados
                 RetornarXML retornarXML = new RetornarXML();
@@ -69,7 +69,7 @@ namespace AcessoSIGA
                 WService wService = new WService(operacao, wsdl_file, xml);
 
                 //Envia a requisição POST e faz a leitura do XML de retorno
-                string wsRetorno = wService.RequisicaoPOST();
+                string wsRetorno = wService.RequisicaoPOST_XML();
 
                 //Lê XML de retorno e devolve os dados
                 RetornarXML retornarXML = new RetornarXML();
@@ -91,7 +91,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
+            string wsRetorno = wService.RequisicaoPOST_XML();
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
@@ -105,6 +105,34 @@ namespace AcessoSIGA
             }
 
             return contato;
+        }
+
+        public bool ValidarSenhaContato(Cliente cliente, Contato contato)
+        {
+            bool resposta = false;
+
+            string operacao = "verifyCustomerContactPassword";
+            string wsdl_file = "WSGeneral.wsdl";
+            string xml = "&customerid="+ cliente.cdCliente +"&contactid="+ contato.cdContato +"&contactpass="+ contato.senhaContato;
+
+            //Instancia o webservice passando os dados
+            WService wService = new WService(operacao, wsdl_file, xml);
+
+            //Envia a requisição POST e faz a leitura do XML de retorno
+            string wsRetorno = wService.RequisicaoPOST_PARAM();
+
+            if (String.IsNullOrEmpty(wsRetorno))
+            {
+                Util.GravarLog("WS consulta dados do contato ", "XML de retorno vazio ou nulo!");
+            }
+            else
+            {
+                //Lê XML de retorno e devolve os dados
+                RetornarXML retornarXML = new RetornarXML();
+                resposta = retornarXML.RetornarValidacaoContato(wsRetorno);                
+            }
+
+            return resposta;
         }
 
         public void AcessoSigaContato()
@@ -123,7 +151,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
+            string wsRetorno = wService.RequisicaoPOST_XML();
 
             if (String.IsNullOrEmpty(wsRetorno))
             {

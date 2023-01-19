@@ -34,9 +34,6 @@ namespace AcessoSIGA
             xmlWriter.WriteElementString("cdcomplexidade", "");
             xmlWriter.WriteElementString("cdanimo", ticket.cdAnimo.ToString());
             xmlWriter.WriteElementString("idfca", "");
-            xmlWriter.WriteStartElement("faturamento");
-            xmlWriter.WriteElementString("idtipofaturamento", "1");
-            xmlWriter.WriteEndElement();
             xmlWriter.WriteElementString("vlcustoprevisto", "");
             xmlWriter.WriteElementString("vlcustorealizado", "");
             xmlWriter.WriteElementString("cdperfilchamado", "");

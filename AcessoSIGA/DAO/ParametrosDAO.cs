@@ -81,9 +81,7 @@ namespace AcessoSIGA
                     cmd.Parameters.AddWithValue("@usuario", p.usuario);
                     cmd.Parameters.AddWithValue("@senhaBanco", p.senhaBanco);
 
-                    cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Configurações gravadas com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cmd.ExecuteNonQuery();                    
 
                 }
                 catch (Exception ex)

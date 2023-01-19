@@ -21,7 +21,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
+            string wsRetorno = wService.RequisicaoPOST_XML();
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
@@ -108,7 +108,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
+            string wsRetorno = wService.RequisicaoPOST_XML();
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
@@ -159,7 +159,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST();
+            string wsRetorno = wService.RequisicaoPOST_XML();
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
