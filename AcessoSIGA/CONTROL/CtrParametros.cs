@@ -113,13 +113,13 @@ namespace AcessoSIGA
 
             string operacao = "verifyCustomerContactPassword";
             string wsdl_file = "WSGeneral.wsdl";
-            string xml = "&customerid="+ cliente.cdCliente +"&contactid="+ contato.cdContato +"&contactpass="+ contato.senhaContato;
+            string xml = "";
 
             //Instancia o webservice passando os dados
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST_PARAM();
+            string wsRetorno = wService.RequisicaoPOST_LOGIN(cliente.cdCliente, contato.cdContato, contato.senhaContato);
 
             if (String.IsNullOrEmpty(wsRetorno))
             {
