@@ -15,7 +15,7 @@ namespace AcessoSIGA
         string wsdl;
         string xml;
 
-        //Construtor geral para envio das requisições POST com e sem XML
+        //Construtor geral para envio das requisições POST com XML
         public WService(string operacao, string wsdl, string xml)
         {
             ParametrosDAO parametrosDAO = new ParametrosDAO();
@@ -32,7 +32,7 @@ namespace AcessoSIGA
         }
 
 
-        //Requisição HttpWebRequest POST com XML
+        //Requisição POST com XML
         public string RequisicaoPOST_XML()
         {
             string xmlRetorno = "";
@@ -87,7 +87,7 @@ namespace AcessoSIGA
         }
 
 
-        //Requisição HttpWebRequest POST validar login
+        //Requisição POST para validar login
         public string RequisicaoPOST_LOGIN(int cdCliente, int cdContato, string senhaContato)
         {
             string xmlRetorno = "";
@@ -143,7 +143,7 @@ namespace AcessoSIGA
             return xmlRetorno;
         }
 
-        //HttpClient assync envio anexo
+        //HttpClient assync para envio do anexo
         public async Task<string> PostAsync()
         {
             string xmlRetorno = "";
