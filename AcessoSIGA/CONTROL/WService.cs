@@ -31,6 +31,7 @@ namespace AcessoSIGA
             this.xml = xml;
         }
 
+
         //Requisição HttpWebRequest POST com XML
         public string RequisicaoPOST_XML()
         {
@@ -86,8 +87,8 @@ namespace AcessoSIGA
         }
 
 
-        //Requisição HttpWebRequest POST sem XML
-        public string RequisicaoPOST_PARAM()
+        //Requisição HttpWebRequest POST validar login
+        public string RequisicaoPOST_LOGIN(int cdCliente, int cdContato, string senhaContato)
         {
             string xmlRetorno = "";
 
@@ -97,7 +98,9 @@ namespace AcessoSIGA
                                "&company=" + empresaADM +
                                "&wsdl_file=" + wsdl +
                                "&operation=" + operacao +
-                               "" + xml;
+                               "customerid" + cdCliente +
+                               "contactid" + cdContato +
+                               "contactpass" + senhaContato;
 
             try
             {
