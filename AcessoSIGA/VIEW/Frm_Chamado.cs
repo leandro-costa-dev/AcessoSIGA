@@ -23,10 +23,19 @@ namespace AcessoSIGA
             ParametrosDAO parametrosDAO = new ParametrosDAO();
             Parametros p = parametrosDAO.ConsultarParametros();
 
-            txtCodCliente.Text = p.Cliente.cdCliente.ToString();
-            txtNmCliente.Text = p.Cliente.nmCliente;
-            txtCodContato.Text = p.Contato.cdContato.ToString();
-            txtNmContato.Text = p.Contato.nmContato;
+            try
+            {
+                txtCodCliente.Text = p.Cliente?.cdCliente.ToString();
+                txtNmCliente.Text = p.Cliente?.nmCliente;
+                txtCodContato.Text = p.Contato?.cdContato.ToString();
+                txtNmContato.Text = p.Contato?.nmContato;
+            }
+            catch (Exception ex)
+            {
+
+                Util.GravarLog("Abertura de Chamados ", "Ocorreu erro ao consultar as informações no banco de dados! " + ex.Message);
+            }
+
 
         }
         private async void btnGravar_Click(object sender, EventArgs e)

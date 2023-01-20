@@ -246,7 +246,7 @@ namespace AcessoSIGA
 
             try
             {
-                cmd.CommandText = "SELECT * FROM CHAMADO WHERE cdContato=" + p.Contato.cdContato;
+                cmd.CommandText = "SELECT * FROM CHAMADO WHERE cdContato=" + p.Contato?.cdContato;
 
                 da = new SqlDataAdapter(cmd.CommandText, con);
                 da.Fill(dt);

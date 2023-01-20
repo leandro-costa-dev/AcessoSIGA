@@ -12,20 +12,38 @@ namespace AcessoSIGA
         bool executar = true; //Controle execução da thread
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Posicionar o botão na tela inicial
-            pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
+            if (CriarBancoTabelas())
+            {
+                //Posicionar o botão na tela inicial
+                pictureBox.Location = new Point(this.Width - 100, this.Height - 140);
 
-            //Executa thread para atualizar todos os chamados do contato
-            Thread t1 = new Thread(AtualizaChamadosContato);
-            t1.Start();
+                //Executa thread para atualizar todos os chamados do contato
+                Thread t1 = new Thread(AtualizaChamadosContato);
+                t1.Start();
 
-            //Executa thread para exibir as notificações
-            Thread t2 = new Thread(ExibirNotificacao);
-            t2.Start();
+                //Executa thread para exibir as notificações
+                Thread t2 = new Thread(ExibirNotificacao);
+                t2.Start();
 
-            //Executa thread de atualização do historico
-            Thread t3 = new Thread(AtualizarHistorico);
-            t3.Start();
+                //Executa thread de atualização do historico
+                Thread t3 = new Thread(AtualizarHistorico);
+                t3.Start();
+            }        
+        }
+
+        //Criar banco e tabelas se não existir
+        public bool CriarBancoTabelas()
+        {
+            bool resultado = false;
+
+            ConexaoSQL conexaoSQL = new ConexaoSQL();
+            if (conexaoSQL.CriarBancoSQL())
+                resultado = true;
+
+            if(conexaoSQL.CriarTabelasSQL())
+                resultado = true;
+
+            return resultado;
         }
 
         private void acessoSIGAToolStripMenuItem_Click(object sender, EventArgs e)

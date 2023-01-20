@@ -57,7 +57,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnGravar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnNovo = new System.Windows.Forms.ToolStripButton();
             this.btnHistorico = new System.Windows.Forms.ToolStripButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtDescricao = new System.Windows.Forms.RichTextBox();
@@ -314,7 +313,6 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnGravar,
             this.toolStripSeparator1,
-            this.btnNovo,
             this.btnHistorico});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -337,17 +335,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnNovo
-            // 
-            this.btnNovo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnNovo.Image = ((System.Drawing.Image)(resources.GetObject("btnNovo.Image")));
-            this.btnNovo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(23, 22);
-            this.btnNovo.Text = "toolStripButton2";
-            this.btnNovo.ToolTipText = "Novo";
-            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btnHistorico
             // 
@@ -431,7 +418,6 @@
         private ToolStrip toolStrip1;
         private ToolStripButton btnGravar;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton btnNovo;
         private GroupBox groupBox2;
         private RichTextBox txtDescricao;
         private ToolStripButton btnHistorico;

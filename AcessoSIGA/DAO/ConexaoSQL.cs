@@ -7,6 +7,7 @@ namespace AcessoSIGA
 {
     public class ConexaoSQL
     {
+
         public static string servidor = @"LEANDRO-PC";
         public static string banco_master = "master";
         public static string banco = "SIGA";
@@ -43,8 +44,10 @@ namespace AcessoSIGA
         }
 
         //Criar banco de dados
-        public void CriarBancoSQL()
+        public bool CriarBancoSQL()
         {
+            bool resultado = false;
+
             if (!ConsultarBancoSQL(banco))
             {
                 string sql = "CREATE DATABASE " + banco;
@@ -58,6 +61,7 @@ namespace AcessoSIGA
                 {
                     cmd.ExecuteNonQuery();
                     Console.WriteLine("Banco de dados criado com sucesso!");
+                    resultado = true;
                 }
                 catch (Exception ex)
                 {
@@ -68,12 +72,14 @@ namespace AcessoSIGA
                     con.Close();
                 }
             }
-
+            return resultado;
         }
 
         //Criar tabelas no banco de dados
-        public void CriarTabelasSQL()
+        public bool CriarTabelasSQL()
         {
+            bool resultado = false;
+
             if (!ConsultarTabelaSQL("SIGA", "parametros"))
             {
                 SqlConnection con = ConectarBancoSQL(false);
@@ -108,7 +114,7 @@ namespace AcessoSIGA
                         servidor VARCHAR(100), 
                         banco VARCHAR(40), 
                         usuarioBanco VARCHAR(20), 
-                        senha VARCHAR(20))");
+                        senhaBanco VARCHAR(20))");
 
                     cmd_chamados.CommandText = (@"CREATE TABLE CHAMADO(
                         cdChamado int NOT NULL PRIMARY KEY, 
@@ -167,6 +173,8 @@ namespace AcessoSIGA
                     cmd_anexo.ExecuteNonQuery();
                     Console.WriteLine("Tabela anexo criada com sucesso!");
 
+                    resultado = true;
+
                 }
                 catch (Exception ex)
                 {
@@ -177,6 +185,7 @@ namespace AcessoSIGA
                     con.Close();
                 }
             }
+            return resultado;
         }
 
         //Consultar se existe o banco de dados

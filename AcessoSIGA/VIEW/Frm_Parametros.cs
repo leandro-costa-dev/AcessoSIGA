@@ -26,7 +26,7 @@ namespace AcessoSIGA
 
         private void carregarParametros()
         {
-            ParametrosDAO parametrosDAO = new ParametrosDAO();            
+            ParametrosDAO parametrosDAO = new ParametrosDAO();
             Parametros p = parametrosDAO.ConsultarParametros();
 
             if (p.Cliente == null)
@@ -60,66 +60,15 @@ namespace AcessoSIGA
                 txtEmpresaWs.Text = p.empresaWs.ToString();
                 txtServidor.Text = p.servidor.ToString();
                 txtBanco.Text = p.banco.ToString();
-                txtUsuarioBanco.Text = p.usuario.ToString();
+                txtUsuarioBanco.Text = p.usuarioBanco.ToString();
                 txtSenhaBanco.Text = p.senhaBanco.ToString();
             }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtCpfCnpj.Text))
-            {
-
-                MessageBox.Show("O campo CPF/CNPJ deve ser preenchido! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else if (String.IsNullOrEmpty(txtLoginContato.Text) && String.IsNullOrEmpty(txtEmail.Text))
-            {
-                MessageBox.Show("O campo Login ou e-mail devem ser preenchidos! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else if (String.IsNullOrEmpty(txtSenhaContato.Text))
-            {
-                MessageBox.Show("O campo senha do contato deve ser preenchido! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            Cliente cliente = new Cliente();
-            Contato contato = new Contato();            
-
-            cliente.cnpj = txtCpfCnpj.Text;
-            contato.login = txtLoginContato.Text;
-            contato.email = txtEmail.Text;
-            contato.senhaContato = txtSenhaContato.Text;
-
-            CtrParametros ctrParametros = new CtrParametros();
-            cliente = ctrParametros.ConsultarEmpresa(cliente);
-            txtCodCliente.Text = cliente.cdCliente.ToString();
-            txtNomeCliente.Text = cliente.nmCliente;
-
-            contato = ctrParametros.BuscarContato(cliente, contato);
-            txtCodContato.Text = contato.cdContato.ToString();
-            txtNomeContato.Text = contato.nmContato;
-            txtEmail.Text = contato.email;
-            txtLoginContato.Text = contato.login;
-
-            contato = ctrParametros.BuscarDadosContato(cliente, contato);
-            txtCdLocalidade.Text = contato.cdLocalidade.ToString();
-            txtLocalidade.Text = contato.nmLocalidade;
-
-            //Verifica se o login e senha são válidos
-            //if (ctrParametros.ValidarSenhaContato(cliente, contato))
-            //{
-            //    loginValido = true;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Login ou senha do contato são inválidos. Verifique! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
-
         }
-            private void btnTestarConexao_Click(object sender, EventArgs e)
+        private void btnTestarConexao_Click(object sender, EventArgs e)
         {
             ConexaoSQL.banco = txtBanco.Text;
             ConexaoSQL.servidor = txtServidor.Text;
@@ -143,86 +92,141 @@ namespace AcessoSIGA
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (VerificarCampos())
+            GravarParametros();
+        }
+
+        private void GravarParametros()
+        {
+            if (VerificarCampos() && ValidarInformacoes())
             {
-                MessageBox.Show("Todos os campos devem ser preenchidos! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                ConexaoSQL.banco = txtBanco.Text;
+                ConexaoSQL.servidor = txtServidor.Text;
+                ConexaoSQL.usuario = txtUsuarioBanco.Text;
+                ConexaoSQL.senha = txtSenhaBanco.Text;
 
-            //Criar banco e tabelas se não existir
-            ConexaoSQL.banco = txtBanco.Text;
-            ConexaoSQL.servidor = txtServidor.Text;
-            ConexaoSQL.usuario = txtUsuarioBanco.Text;
-            ConexaoSQL.senha = txtSenhaBanco.Text;
+                Cliente cliente = new Cliente();
+                cliente.cdCliente = int.Parse(txtCodCliente.Text);
+                cliente.nmCliente = txtNomeCliente.Text;
+                cliente.cnpj = txtCpfCnpj.Text;
 
-            ConexaoSQL conexaoSQL = new ConexaoSQL();
-            conexaoSQL.CriarBancoSQL();
-            conexaoSQL.CriarTabelasSQL();
-            //-------------------------------------------
+                Contato contato = new Contato();
+                contato.cdContato = int.Parse(txtCodContato.Text);
+                contato.nmContato = txtNomeContato.Text;
+                contato.cdLocalidade = int.Parse(txtCdLocalidade.Text);
+                contato.nmLocalidade = txtLocalidade.Text;
+                contato.email = txtEmail.Text;
+                contato.login = txtLoginContato.Text;
+                contato.senhaContato = txtSenhaContato.Text;
 
-            Cliente cliente = new Cliente();
-            cliente.cdCliente = int.Parse(txtCodCliente.Text);
-            cliente.nmCliente = txtNomeCliente.Text;
-            cliente.cnpj = txtCpfCnpj.Text;
+                Ticket ticket = new Ticket();
+                ticket.idChamado = int.Parse(txtIdChamado.Text);
+                ticket.tipoChamado = int.Parse(txtTipoChamado.Text);
+                ticket.cdCategoria = int.Parse(txtCdCategoria.Text);
+                ticket.cdSeveridade = int.Parse(txtCdSeveridade.Text);
+                ticket.cdAnimo = int.Parse(txtCdAnimo.Text);
+                ticket.cdOrigem = int.Parse(txtCdOrigem.Text);
 
-            Contato contato = new Contato();
-            contato.cdContato = int.Parse(txtCodContato.Text);
-            contato.nmContato = txtNomeContato.Text;
-            contato.cdLocalidade = int.Parse(txtCdLocalidade.Text);
-            contato.nmLocalidade = txtLocalidade.Text;
-            contato.email = txtEmail.Text;
-            contato.login = txtLoginContato.Text;
-            contato.senhaContato = txtSenhaContato.Text;
+                Parametros parametros = new Parametros();
+                parametros.Cliente = cliente;
+                parametros.Contato = contato;
+                parametros.Ticket = ticket;
+                parametros.urlWs = txtUrlWs.Text;
+                parametros.usuarioWs = txtUsuarioWs.Text;
+                parametros.senhaWs = txtSenhaWs.Text;
+                parametros.empresaWs = int.Parse(txtEmpresaWs.Text);
+                parametros.servidor = txtServidor.Text;
+                parametros.banco = txtBanco.Text;
+                parametros.usuarioBanco = txtUsuarioBanco.Text;
+                parametros.senhaBanco = txtSenhaBanco.Text;
 
-            Ticket ticket = new Ticket();
-            ticket.idChamado = int.Parse(txtIdChamado.Text);
-            ticket.tipoChamado = int.Parse(txtTipoChamado.Text);
-            ticket.cdCategoria = int.Parse(txtCdCategoria.Text);
-            ticket.cdSeveridade = int.Parse(txtCdSeveridade.Text);
-            ticket.cdAnimo = int.Parse(txtCdAnimo.Text);
-            ticket.cdOrigem = int.Parse(txtCdOrigem.Text);
-
-            Parametros parametros = new Parametros();
-            parametros.Cliente = cliente;
-            parametros.Contato = contato;
-            parametros.Ticket = ticket;
-            parametros.urlWs = txtUrlWs.Text;
-            parametros.usuarioWs = txtUsuarioWs.Text;
-            parametros.senhaWs = txtSenhaWs.Text;
-            parametros.empresaWs = int.Parse(txtEmpresaWs.Text);
-            parametros.servidor = txtServidor.Text;
-            parametros.banco = txtBanco.Text;
-            parametros.usuario = txtUsuarioBanco.Text;
-            parametros.senhaBanco = txtSenhaBanco.Text;
-
-            //Verifica se o login e senha são válidos e grava os parâmetros
-            if (loginValido)
-            {
-                //Salva os parâmetros
+                //Grava os parâmetros
                 ParametrosDAO parametrosDAO = new ParametrosDAO();
                 parametrosDAO.GravarParametros(parametros);
 
                 MessageBox.Show("Parâmetros gravados com sucesso! ", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
             }
-            else
-            {                
-                MessageBox.Show("Não foí possível validar as credencias de login do contato. ", "Erro ao gravar os parâmetros!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }            
         }
 
         private bool VerificarCampos()
         {
-            bool situacao = false;
+            bool situacao = true;
 
-            if (String.IsNullOrEmpty(txtCodCliente.Text) || String.IsNullOrEmpty(txtNomeCliente.Text) ||
-                String.IsNullOrEmpty(txtCodContato.Text) || String.IsNullOrEmpty(txtNomeContato.Text) ||
-                String.IsNullOrEmpty(txtSenhaContato.Text) || String.IsNullOrEmpty(txtLocalidade.Text) ||
-                String.IsNullOrEmpty(txtServidor.Text) || String.IsNullOrEmpty(txtBanco.Text) ||
-                String.IsNullOrEmpty(txtUsuarioBanco.Text) || String.IsNullOrEmpty(txtSenhaBanco.Text))
-            {                
-                situacao = true;
+            if (String.IsNullOrEmpty(txtEmail.Text) && String.IsNullOrEmpty(txtLoginContato.Text))
+            {
+                MessageBox.Show("O campo e-mail ou login devem ser preenchidos!", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                situacao = false;
             }
+            else if (String.IsNullOrEmpty(txtCpfCnpj.Text) || String.IsNullOrEmpty(txtCdLocalidade.Text) ||
+                     String.IsNullOrEmpty(txtCdAnimo.Text) || String.IsNullOrEmpty(txtCdCategoria.Text) ||
+                     String.IsNullOrEmpty(txtCdOrigem.Text) || String.IsNullOrEmpty(txtCdSeveridade.Text) ||
+                     String.IsNullOrEmpty(txtIdChamado.Text) || String.IsNullOrEmpty(txtTipoChamado.Text) ||
+                     String.IsNullOrEmpty(txtUrlWs.Text) || String.IsNullOrEmpty(txtUsuarioWs.Text) ||
+                     String.IsNullOrEmpty(txtSenhaWs.Text) || String.IsNullOrEmpty(txtEmpresaWs.Text) ||
+                     String.IsNullOrEmpty(txtServidor.Text) || String.IsNullOrEmpty(txtBanco.Text) ||
+                     String.IsNullOrEmpty(txtUsuarioBanco.Text) || String.IsNullOrEmpty(txtSenhaBanco.Text))
+            {
+                MessageBox.Show("Há campos de prenchimento obrigatório não informados!", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                situacao = false;
+            }          
+
+            return situacao;
+        }
+
+        //valida as informações do cliente e contato informadas
+        private bool ValidarInformacoes()
+        {
+            bool situacao = true;
+
+            Cliente cliente = new Cliente();
+            Contato contato = new Contato();
+
+            cliente.cnpj = txtCpfCnpj.Text;
+            contato.login = txtLoginContato.Text;
+            contato.email = txtEmail.Text;
+            contato.senhaContato = txtSenhaContato.Text;
+
+            CtrParametros ctrParametros = new CtrParametros();
+            cliente = ctrParametros.ConsultarEmpresa(cliente);
+            txtCodCliente.Text = cliente.cdCliente.ToString();
+            txtNomeCliente.Text = cliente.nmCliente;
+
+            contato = ctrParametros.BuscarContato(cliente, contato);
+            txtCodContato.Text = contato.cdContato.ToString();
+            txtNomeContato.Text = contato.nmContato;
+            txtEmail.Text = contato.email;
+            txtLoginContato.Text = contato.login;
+
+            contato = ctrParametros.BuscarDadosContato(cliente, contato);
+            txtCdLocalidade.Text = contato.cdLocalidade.ToString();
+            txtLocalidade.Text = contato.nmLocalidade;
+
+            if (!VerificaLogin())
+            {
+                MessageBox.Show("Não foí possível validar as credencias de login do contato. ", "Credenciais inválidas, verifique!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                situacao = false;
+            }
+
+            return situacao;
+        }
+
+        //Verifica se o login e senha são válidos
+        private bool VerificaLogin()
+        {
+            bool situacao = true;
+
+            //Verifica se o login e senha são válidos
+            //if (ctrParametros.ValidarSenhaContato(cliente, contato))
+            //{
+            //    loginValido = true;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Login ou senha do contato são inválidos. Verifique! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
             return situacao;
         }
     }

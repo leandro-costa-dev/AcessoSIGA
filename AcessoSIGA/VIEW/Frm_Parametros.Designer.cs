@@ -37,8 +37,9 @@
             this.txtNomeCliente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCpfCnpj = new System.Windows.Forms.TextBox();
-            this.btnConsultar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtSenhaContato = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCodContato = new System.Windows.Forms.TextBox();
@@ -83,8 +84,6 @@
             this.btnTestarConexao = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnSalvar = new System.Windows.Forms.ToolStripButton();
-            this.txtSenhaContato = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -140,6 +139,7 @@
             // 
             // txtLocalidade
             // 
+            this.txtLocalidade.Enabled = false;
             this.txtLocalidade.Location = new System.Drawing.Point(338, 48);
             this.txtLocalidade.Name = "txtLocalidade";
             this.txtLocalidade.Size = new System.Drawing.Size(157, 23);
@@ -177,16 +177,6 @@
             this.txtCpfCnpj.Size = new System.Drawing.Size(135, 23);
             this.txtCpfCnpj.TabIndex = 2;
             // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Location = new System.Drawing.Point(233, 263);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(75, 23);
-            this.btnConsultar.TabIndex = 0;
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.UseVisualStyleBackColor = true;
-            this.btnConsultar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txtSenhaContato);
@@ -204,6 +194,23 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Acesso SIGA";
+            // 
+            // txtSenhaContato
+            // 
+            this.txtSenhaContato.Location = new System.Drawing.Point(63, 109);
+            this.txtSenhaContato.Name = "txtSenhaContato";
+            this.txtSenhaContato.PasswordChar = '*';
+            this.txtSenhaContato.Size = new System.Drawing.Size(172, 23);
+            this.txtSenhaContato.TabIndex = 7;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(19, 112);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(42, 15);
+            this.label21.TabIndex = 8;
+            this.label21.Text = "Senha:";
             // 
             // txtEmail
             // 
@@ -270,19 +277,18 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(564, 325);
+            this.tabControl1.Size = new System.Drawing.Size(564, 296);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.btnConsultar);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(556, 297);
+            this.tabPage1.Size = new System.Drawing.Size(556, 268);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Login SIGA";
             // 
@@ -615,28 +621,11 @@
             this.btnSalvar.Text = "toolStripButton1";
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
-            // txtSenhaContato
-            // 
-            this.txtSenhaContato.Location = new System.Drawing.Point(63, 109);
-            this.txtSenhaContato.Name = "txtSenhaContato";
-            this.txtSenhaContato.PasswordChar = '*';
-            this.txtSenhaContato.Size = new System.Drawing.Size(172, 23);
-            this.txtSenhaContato.TabIndex = 7;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(19, 112);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(42, 15);
-            this.label21.TabIndex = 8;
-            this.label21.Text = "Senha:";
-            // 
             // Frm_Parametros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 353);
+            this.ClientSize = new System.Drawing.Size(564, 326);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -671,7 +660,6 @@
         private Label label1;
         private GroupBox groupBox1;
         private TextBox txtCodCliente;
-        private Button btnConsultar;
         private TextBox txtNomeCliente;
         private Label label2;
         private TextBox txtCpfCnpj;

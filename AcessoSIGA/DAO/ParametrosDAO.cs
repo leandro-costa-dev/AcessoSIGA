@@ -49,7 +49,7 @@ namespace AcessoSIGA
                         "empresaWs = @empresaWs, " +
                         "servidor = @servidor, " +
                         "banco = @banco, " +
-                        "usuario = @usuario, " +
+                        "usuarioBanco = @usuarioBanco, " +
                         "senhaBanco = @senhaBanco";
 
                     cmd.Parameters.AddWithValue("@cdCliente", p.Cliente.cdCliente);
@@ -78,7 +78,7 @@ namespace AcessoSIGA
 
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);
                     cmd.Parameters.AddWithValue("@banco", p.banco);
-                    cmd.Parameters.AddWithValue("@usuario", p.usuario);
+                    cmd.Parameters.AddWithValue("@usuarioBanco", p.usuarioBanco);
                     cmd.Parameters.AddWithValue("@senhaBanco", p.senhaBanco);
 
                     cmd.ExecuteNonQuery();                    
@@ -102,8 +102,8 @@ namespace AcessoSIGA
 
                 try
                 {
-                    cmd.CommandText = "INSERT INTO PARAMETROS(cdCliente, nmCliente, cnpj, cdContato, nmContato, cdLocalidade, nmLocalidade, email, login, senhaContato, idChamado, tipoChamado, cdCategoria, cdSeveridade, cdAnimo, cdOrigem, urlWs, usuarioWs, senhaWs, empresaWs, servidor, banco, usuario, senhaBanco) " +
-                                                    "VALUES (@cdCliente, @nmCliente, @cnpj, @cdContato, @nmContato, @cdLocalidade, @nmLocalidade, @email, @login, @senhaContato, @idChamado, @tipoChamado, @cdCategoria, @cdSeveridade, @cdAnimo, @cdOrigem, @urlWs, @usuarioWs, @senhaWs, @empresaWs, @servidor, @banco, @usuario, @senhaBanco)";
+                    cmd.CommandText = "INSERT INTO PARAMETROS(cdCliente, nmCliente, cnpj, cdContato, nmContato, cdLocalidade, nmLocalidade, email, login, senhaContato, idChamado, tipoChamado, cdCategoria, cdSeveridade, cdAnimo, cdOrigem, urlWs, usuarioWs, senhaWs, empresaWs, servidor, banco, usuarioBanco, senhaBanco) " +
+                                                    "VALUES (@cdCliente, @nmCliente, @cnpj, @cdContato, @nmContato, @cdLocalidade, @nmLocalidade, @email, @login, @senhaContato, @idChamado, @tipoChamado, @cdCategoria, @cdSeveridade, @cdAnimo, @cdOrigem, @urlWs, @usuarioWs, @senhaWs, @empresaWs, @servidor, @banco, @usuarioBanco, @senhaBanco)";
 
                     cmd.Parameters.AddWithValue("@cdCliente", p.Cliente.cdCliente);
                     cmd.Parameters.AddWithValue("@nmCliente", p.Cliente.nmCliente);
@@ -131,7 +131,7 @@ namespace AcessoSIGA
 
                     cmd.Parameters.AddWithValue("@servidor", p.servidor);
                     cmd.Parameters.AddWithValue("@banco", p.banco);
-                    cmd.Parameters.AddWithValue("@usuario", p.usuario);
+                    cmd.Parameters.AddWithValue("@usuarioBanco", p.usuarioBanco);
                     cmd.Parameters.AddWithValue("@senhaBanco", p.senhaBanco);
 
                     cmd.ExecuteNonQuery();
@@ -203,7 +203,7 @@ namespace AcessoSIGA
 
                     parametros.servidor = Convert.ToString(row["servidor"]);
                     parametros.banco = Convert.ToString(row["banco"]);
-                    parametros.usuario = Convert.ToString(row["usuario"]);
+                    parametros.usuarioBanco = Convert.ToString(row["usuarioBanco"]);
                     parametros.senhaBanco = Convert.ToString(row["senhaBanco"]);
 
                     parametros.Cliente = cliente;

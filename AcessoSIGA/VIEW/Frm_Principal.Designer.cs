@@ -38,7 +38,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ParametrosSIGAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ParametrosGeraisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -85,29 +84,28 @@
             // acessoSIGAToolStripMenuItem
             // 
             this.acessoSIGAToolStripMenuItem.Name = "acessoSIGAToolStripMenuItem";
-            this.acessoSIGAToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.acessoSIGAToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.acessoSIGAToolStripMenuItem.Text = "Acesso SIGA (Site)";
             this.acessoSIGAToolStripMenuItem.Click += new System.EventHandler(this.acessoSIGAToolStripMenuItem_Click);
             // 
             // acessoSIGAautenticaçãoToolStripMenuItem
             // 
             this.acessoSIGAautenticaçãoToolStripMenuItem.Name = "acessoSIGAautenticaçãoToolStripMenuItem";
-            this.acessoSIGAautenticaçãoToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.acessoSIGAautenticaçãoToolStripMenuItem.Text = "Acesso SIGA (autenticação)";
+            this.acessoSIGAautenticaçãoToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.acessoSIGAautenticaçãoToolStripMenuItem.Text = "Abertura de Chamados SIGA";
             this.acessoSIGAautenticaçãoToolStripMenuItem.Click += new System.EventHandler(this.acessoSIGAautenticaçãoToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(215, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(221, 6);
             // 
             // ParametrosSIGAToolStripMenuItem
             // 
             this.ParametrosSIGAToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ParametrosGeraisToolStripMenuItem,
-            this.toolStripSeparator1});
+            this.ParametrosGeraisToolStripMenuItem});
             this.ParametrosSIGAToolStripMenuItem.Name = "ParametrosSIGAToolStripMenuItem";
-            this.ParametrosSIGAToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.ParametrosSIGAToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.ParametrosSIGAToolStripMenuItem.Text = "Parâmetros SIGA";
             // 
             // ParametrosGeraisToolStripMenuItem
@@ -116,11 +114,6 @@
             this.ParametrosGeraisToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.ParametrosGeraisToolStripMenuItem.Text = "Parâmetros Gerais";
             this.ParametrosGeraisToolStripMenuItem.Click += new System.EventHandler(this.ParametrosGeraisToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
             // ajudaToolStripMenuItem
             // 
@@ -186,7 +179,6 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem ParametrosSIGAToolStripMenuItem;
         private ToolStripMenuItem ParametrosGeraisToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator1;
         private PictureBox pictureBox;
         private NotifyIcon notifyIcon1;
     }
