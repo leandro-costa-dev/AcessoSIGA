@@ -119,7 +119,7 @@ namespace AcessoSIGA
             WService wService = new WService(operacao, wsdl_file, xml);
 
             //Envia a requisição POST e faz a leitura do XML de retorno
-            string wsRetorno = wService.RequisicaoPOST_LOGIN(cliente.cdCliente, contato.cdContato, contato.senhaContato);
+            string wsRetorno = wService.RequisicaoPOST_LOGIN(cliente.cdCliente, contato.login, contato.senhaContato);
 
             if (String.IsNullOrEmpty(wsRetorno))
             {

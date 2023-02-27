@@ -88,7 +88,7 @@ namespace AcessoSIGA
 
 
         //Requisição POST para validar login
-        public string RequisicaoPOST_LOGIN(int cdCliente, int cdContato, string senhaContato)
+        public string RequisicaoPOST_LOGIN(int cdCliente, string login, string senhaContato)
         {
             string xmlRetorno = "";
 
@@ -98,9 +98,9 @@ namespace AcessoSIGA
                                "&company=" + empresaADM +
                                "&wsdl_file=" + wsdl +
                                "&operation=" + operacao +
-                               "customerid" + cdCliente +
-                               "contactid" + cdContato +
-                               "contactpass" + senhaContato;
+                               "&customerid=" + cdCliente +
+                               "&contactid=" + login +
+                               "&contactpass=" + senhaContato;
 
             try
             {

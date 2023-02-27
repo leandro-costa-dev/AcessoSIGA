@@ -12,8 +12,7 @@ using System.Windows.Forms;
 namespace AcessoSIGA
 {
     public partial class Frm_Parametros : Form
-    {
-        bool loginValido = false;
+    {       
         public Frm_Parametros()
         {
             InitializeComponent();
@@ -192,17 +191,25 @@ namespace AcessoSIGA
             txtCodCliente.Text = cliente.cdCliente.ToString();
             txtNomeCliente.Text = cliente.nmCliente;
 
-            contato = ctrParametros.BuscarContato(cliente, contato);
+            var dadosLoginContato = ctrParametros.BuscarContato(cliente, contato);
+            contato.cdContato = dadosLoginContato.cdContato;
+            contato.nmContato = dadosLoginContato.nmContato;
+            contato.email = dadosLoginContato.email;
+            contato.login = dadosLoginContato.login;
+
+            var dadosLocalidadeContato = ctrParametros.BuscarDadosContato(cliente, contato);
+            contato.cdLocalidade = dadosLocalidadeContato.cdLocalidade;
+            contato.nmLocalidade = dadosLocalidadeContato.nmLocalidade;
+
             txtCodContato.Text = contato.cdContato.ToString();
             txtNomeContato.Text = contato.nmContato;
             txtEmail.Text = contato.email;
-            txtLoginContato.Text = contato.login;
-
-            contato = ctrParametros.BuscarDadosContato(cliente, contato);
+            txtLoginContato.Text = contato.login;           
             txtCdLocalidade.Text = contato.cdLocalidade.ToString();
             txtLocalidade.Text = contato.nmLocalidade;
 
-            if (!VerificaLogin())
+
+            if (!VerificaLogin(cliente, contato))
             {
                 MessageBox.Show("Não foí possível validar as credencias de login do contato. ", "Credenciais inválidas, verifique!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 situacao = false;
@@ -212,20 +219,20 @@ namespace AcessoSIGA
         }
 
         //Verifica se o login e senha são válidos
-        private bool VerificaLogin()
+        private bool VerificaLogin(Cliente cliente, Contato contato)
         {
-            bool situacao = true;
+            bool situacao = false;
 
-            //Verifica se o login e senha são válidos
-            //if (ctrParametros.ValidarSenhaContato(cliente, contato))
-            //{
-            //    loginValido = true;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Login ou senha do contato são inválidos. Verifique! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+            CtrParametros ctrParametros = new CtrParametros();
+            
+            if (ctrParametros.ValidarSenhaContato(cliente, contato))
+            {
+                situacao = true;
+            }
+            else
+            {
+                MessageBox.Show("Login ou senha do contato são inválidos. Verifique! ", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);           
+            }
 
             return situacao;
         }
