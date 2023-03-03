@@ -2,8 +2,7 @@
 using System.Text;
 
 namespace AcessoSIGA
-{
-    
+{    
     public class CtrChamado
     {
         //Abertura de chamado via webservice
